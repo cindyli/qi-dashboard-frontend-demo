@@ -12,11 +12,20 @@ fluid.defaults("gpii.qualityInfrastructure.frontEnd.lineChart", {
 
 // Callback function for backend JSONP endpoint
 gpii.qualityInfrastructure.frontEnd.createCommitsPanel = function(qualityInfrastructureCommitResponse) {
-    // var summary = qualityInfrastructureCommitResponse.summary;
+    var summary = qualityInfrastructureCommitResponse.summary;
     var events = qualityInfrastructureCommitResponse.events;
     var commitData = gpii.qualityInfrastructure.frontEnd.transformEventsData(events);
 
-    gpii.qualityInfrastructure.frontEnd.lineChart(".gpiic-commits", {
+    var commitsSummaryPanel = gpii.qualityInfrastructure.frontEnd.commitsSummaryPanel(".gpiic-commits-summary", {
+        model: {
+            timeOfLastCommit: summary.timeOfLastCommit,
+            mostFrequentCommitterTotalCommits: "Largest # of",
+            mostFrequentCommitter: summary.mostFrequentCommitter,
+            totalCommits: summary.totalCommits
+        }
+    });
+
+    gpii.qualityInfrastructure.frontEnd.lineChart(".gpiic-commits-graph", {
             model: {
                 dataSet: commitData
             }
@@ -24,11 +33,17 @@ gpii.qualityInfrastructure.frontEnd.createCommitsPanel = function(qualityInfrast
 };
 
 gpii.qualityInfrastructure.frontEnd.createContributionsPanel = function(qualityInfrastructureContributionsResponse) {
-    // var summary = qualityInfrastructureCommitResponse.summary;
+    var summary = qualityInfrastructureContributionsResponse.summary;
     var events = qualityInfrastructureContributionsResponse.events;
     var contribData = gpii.qualityInfrastructure.frontEnd.transformEventsData(events);
 
-    gpii.qualityInfrastructure.frontEnd.lineChart(".gpiic-contributors", {
+    var contributorsSummaryPanel = gpii.qualityInfrastructure.frontEnd.contributorsSummaryPanel(".gpiic-contributors-summary", {
+        model: {
+            numberOfContributors: summary.numberOfContributors
+        }
+    });
+
+    gpii.qualityInfrastructure.frontEnd.lineChart(".gpiic-contributors-graph", {
             model: {
                 dataSet: contribData
             }
