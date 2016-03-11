@@ -1,0 +1,18 @@
+body {
+    padding-left:2em;
+    
+}
+
+.gpii-panel {
+    width:1200px;
+}
+
+.gpii-summary {
+    width:30%;
+    float: left;
+}
+
+.gpii-graph {
+    width:70%;
+    float:left;
+}

@@ -25,45 +25,56 @@
         <script type="text/javascript" src="../src/js/contributorsSummaryPanel.js"></script>
 
         <script type="text/javascript" src="src/js/qi-frontend-demo.js"></script>
-
+        <link rel="stylesheet" type="text/css" href="src/css/qi-frontend-demo.css" />
 
         <title>QI Frontend Demo</title>
     </head>
 
     <body>
 
-        <div class="gpiic-commits-summary"></div>
-
-        <div class="gpiic-commits-graph"></div>
-
-        <div class="gpiic-contributors-summary"></div>
-
-        <div class="gpiic-contributors-graph"></div>
-
-
         <script>
             var params={};window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(str,key,value){params[key] = value;});
-
             var repo = params.repo;
-
-            var commitsCallback = "gpii.qualityInfrastructure.frontEnd.createCommitsPanel";
-
-            var contributorsCallback = "gpii.qualityInfrastructure.frontEnd.createContributionsPanel";
 
             // Static examples, good for fast testing
             var sampleCommitsScriptSrc = "../src/js/sampleCommitsCallback.js";
             var sampleContributorsScriptSrc = "../src/js/sampleContributorsCallback.js";
+            // Set true to use static example
+            var staticMode = true;
+
+
+            var heading = document.createElement('h1');
+            heading.innerHTML = (staticMode === true) ? "gpii/universal" : repo;
+            document.write(heading.outerHTML);
+        </script>
+
+        <div class="gpii-commits gpii-panel">
+            <div class="gpiic-commits-summary gpii-summary"></div>
+            <div class="gpiic-commits-graph gpii-graph"></div>
+        </div>
+
+        <div class="gpii-contributors gpii-panel">
+            <div class="gpiic-contributors-summary gpii-summary"></div>
+            <div class="gpiic-contributors-graph gpii-graph"></div>
+        </div>
+
+        <script>
+            var commitsCallback = "gpii.qualityInfrastructure.frontEnd.createCommitsPanel";
+
+            var contributorsCallback = "gpii.qualityInfrastructure.frontEnd.createContributionsPanel";
+
+
 
             var commitsEndpoint = "http://localhost:3000/a/" + repo + "/commits?callback="+commitsCallback
 
             var contributorsEndpoint = "http://localhost:3000/a/" + repo + "/contributors?callback="+contributorsCallback
 
             var commitsCallbackScript = document.createElement('script');
-            commitsCallbackScript.src = commitsEndpoint;
+            commitsCallbackScript.src = (staticMode === true) ? sampleCommitsScriptSrc : commitsEndpoint;
             document.write(commitsCallbackScript.outerHTML);
 
             var contributorsCallbackScript = document.createElement('script');
-            contributorsCallbackScript.src = contributorsEndpoint;
+            contributorsCallbackScript.src = (staticMode === true) ? sampleContributorsScriptSrc : contributorsEndpoint;
             document.write(contributorsCallbackScript.outerHTML);
         </script>
 
