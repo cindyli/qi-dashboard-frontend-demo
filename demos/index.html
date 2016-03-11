@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../src/lib/infusion/src/lib/normalize/css/normalize.css" />
+        <link rel="stylesheet" type="text/css" href="../src/lib/infusion/src/framework/core/css/fluid.css" />
+        <link rel="stylesheet" type="text/css" href="../src/lib/infusion/src/components/overviewPanel/css/OverviewPanel.css" />
+        <link rel="stylesheet" type="text/css" href="../src/lib/infusion/src/components/inlineEdit/css/InlineEdit.css" />
+
+        <script type="text/javascript" src="../src/lib/infusion/infusion-custom.js"></script>
+        <script type="text/javascript" src="../src/lib/ext/d3/d3.js"></script>
+
+        <script type="text/javascript" src="../src/lib/ext/chartAuthoring/src/js/valueBinding.js"></script>
+        <script type="text/javascript" src="../src/lib/ext/chartAuthoring/src/js/percentage.js"></script>
+        <script type="text/javascript" src="../src/lib/ext/chartAuthoring/src/js/transformations.js"></script>
+        <script type="text/javascript" src="../src/lib/ext/chartAuthoring/src/js/templateInjection.js"></script>
+        <script type="text/javascript" src="../src/lib/ext/chartAuthoring/src/js/d3ViewComponent.js"></script>
+        <script type="text/javascript" src="../src/lib/ext/chartAuthoring/src/js/totalRelaying.js"></script>
+        <script type="text/javascript" src="../src/lib/ext/chartAuthoring/src/js/d3Utils.js"></script>
+        <script type="text/javascript" src="../src/lib/ext/chartAuthoring/src/js/utils.js"></script>
+        <script type="text/javascript" src="../src/lib/ext/chartAuthoring/src/js/line.js"></script>
+
+        <script type="text/javascript" src="src/js/qi-frontend-demo.js"></script>
+
+
+        <title>QI Frontend Demo</title>
+    </head>
+
+    <body>
+
+        <h2>Commits</h2>
+        <div class="gpiic-commits"></div>
+
+        <h2>Contributors</h2>
+        <div class="gpiic-contributors"></div>
+
+        <script type="text/javascript" src="http://localhost:3000/a/gpii/universal/commits?callback=gpii.qualityInfrastructure.frontEnd.createCommitsPanel"></script>
+
+        <script type="text/javascript" src="http://localhost:3000/a/gpii/universal/contributors?callback=gpii.qualityInfrastructure.frontEnd.createContributionsPanel"></script>
+
+    </body>
+</html>
