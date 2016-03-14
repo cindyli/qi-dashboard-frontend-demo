@@ -12,6 +12,7 @@
         },
         model: {
             // timeOfLastCommit: date,
+            // mostFrequentCommitterTotalCommits: number
             // mostFrequentCommitter: string,
             // totalCommits: number
         },
