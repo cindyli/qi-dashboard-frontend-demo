@@ -19,7 +19,7 @@ gpii.qualityInfrastructure.frontEnd.createCommitsPanel = function(qualityInfrast
     var commitsSummaryPanel = gpii.qualityInfrastructure.frontEnd.commitsSummaryPanel(".gpiic-commits-summary", {
         model: {
             timeOfLastCommit: summary.timeOfLastCommit,
-            mostFrequentCommitterTotalCommits: "Largest # of",
+            mostFrequentCommitterTotalCommits: summary.mostFrequentCommitterTotalCommits,
             mostFrequentCommitter: summary.mostFrequentCommitter,
             totalCommits: summary.totalCommits
         }

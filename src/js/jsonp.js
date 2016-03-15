@@ -13,8 +13,7 @@
             // Callback parameter of the JSONP service
             callbackParameter: "callback",
             // Allow browser caching of response
-            allowCache: true,
-            callbackFunction: "gpii.qualityInfrastructure.frontEnd.jsonp.storeResult"
+            allowCache: true
 
         },
         listeners: {
@@ -36,15 +35,20 @@
         }
     });
 
+    gpii.qualityInfrastructure.frontEnd.jsonp.storeResult = function (that, result) {
+        that.applier.change("jsonpData", result);
+        that.events.onJSONPLoaded.fire();
+    };
+
     gpii.qualityInfrastructure.frontEnd.jsonp.loadJSONP = function (that) {
         var jsonpURL = that.options.jsonpOptions.url;
         var callbackParameter = that.options.jsonpOptions.callbackParameter;
         var allowCache = that.options.jsonpOptions.allowCache;
-        var callbackFunction = that.options.jsonpOptions.callbackFunction;
 
-        gpii.qualityInfrastructure.frontEnd.jsonp.storeResult = function (result) {
-            that.applier.change("jsonpData", result);
-            that.events.onJSONPLoaded.fire();
+        // Used in testing when using fake JSONP; otherwise we rely on the
+        // `success` anonymous function below
+        gpii.qualityInfrastructure.frontEnd.jsonp.storeResultStatic = function(result) {
+            gpii.qualityInfrastructure.frontEnd.jsonp.storeResult(that, result);
         };
 
         // Load JSONP
@@ -53,7 +57,9 @@
             dataType: "jsonp",
             jsonp: callbackParameter,
             cache: allowCache,
-            jsonpCallback: callbackFunction
+            success: function (result) {
+                gpii.qualityInfrastructure.frontEnd.jsonp.storeResult(that, result);
+            }
         });
     };
 

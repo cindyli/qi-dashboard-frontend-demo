@@ -68,7 +68,7 @@
 
             var contributorsEndpoint = "http://localhost:3000/a/" + repo + "/contributors"
 
-            gpii.qualityInfrastructure.frontEnd.jsonp({
+            var commitsPanel = gpii.qualityInfrastructure.frontEnd.jsonp({
                 jsonpOptions: {
                     url: commitsEndpoint
                 },
@@ -81,7 +81,7 @@
                 }
                 });
 
-            gpii.qualityInfrastructure.frontEnd.jsonp({
+            var contributorsPanel = gpii.qualityInfrastructure.frontEnd.jsonp({
                 jsonpOptions: {
                     url: contributorsEndpoint,
                 },

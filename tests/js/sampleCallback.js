@@ -1,1 +1,1 @@
-/**/ typeof gpii.qualityInfrastructure.frontEnd.jsonp.storeResult === 'function' && gpii.qualityInfrastructure.frontEnd.jsonp.storeResult({message: "Hello World!"});
+/**/ typeof gpii.qualityInfrastructure.frontEnd.jsonp.storeResultStatic === 'function' && gpii.qualityInfrastructure.frontEnd.jsonp.storeResultStatic({message: "Hello World!"});
