@@ -1,2 +1,4 @@
 **/lib/**
 node_modules/**
+src/js/sampleCommitsCallback.js
+src/js/sampleContributorsCallback.js
