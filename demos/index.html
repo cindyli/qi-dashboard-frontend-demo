@@ -23,6 +23,7 @@
 
         <script type="text/javascript" src="../src/js/commitsSummaryPanel.js"></script>
         <script type="text/javascript" src="../src/js/contributorsSummaryPanel.js"></script>
+        <script type="text/javascript" src="../src/js/jsonp.js"></script>
 
         <script type="text/javascript" src="src/js/qi-frontend-demo.js"></script>
         <link rel="stylesheet" type="text/css" href="src/css/qi-frontend-demo.css" />
@@ -40,7 +41,7 @@
             var sampleCommitsScriptSrc = "../src/js/sampleCommitsCallback.js";
             var sampleContributorsScriptSrc = "../src/js/sampleContributorsCallback.js";
             // Set true to use static example
-            var staticMode = true;
+            var staticMode = false;
 
 
             var heading = document.createElement('h1');
@@ -59,23 +60,41 @@
         </div>
 
         <script>
-            var commitsCallback = "gpii.qualityInfrastructure.frontEnd.createCommitsPanel";
+            // var commitsEndpoint = "http://localhost:3000/a/" + repo + "/commits?callback="+commitsCallback
 
-            var contributorsCallback = "gpii.qualityInfrastructure.frontEnd.createContributionsPanel";
+            var commitsEndpoint = "http://localhost:3000/a/" + repo + "/commits"
+
+            // var contributorsEndpoint = "http://localhost:3000/a/" + repo + "/contributors?callback="+contributorsCallback
+
+            var contributorsEndpoint = "http://localhost:3000/a/" + repo + "/contributors"
+
+            gpii.qualityInfrastructure.frontEnd.jsonp({
+                jsonpOptions: {
+                    url: commitsEndpoint
+                },
+                modelListeners: {
+                    jsonpData: {
+                        funcName: "gpii.qualityInfrastructure.frontEnd.createCommitsPanel",
+                        args: "{that}.model.jsonpData",
+                        excludeSource: "init"
+                    }
+                }
+                });
+
+            gpii.qualityInfrastructure.frontEnd.jsonp({
+                jsonpOptions: {
+                    url: contributorsEndpoint,
+                },
+                modelListeners: {
+                    jsonpData: {
+                        funcName: "gpii.qualityInfrastructure.frontEnd.createContributionsPanel",
+                        args: "{that}.model.jsonpData",
+                        excludeSource: "init"
+                    }
+                }
+                });
 
 
-
-            var commitsEndpoint = "http://localhost:3000/a/" + repo + "/commits?callback="+commitsCallback
-
-            var contributorsEndpoint = "http://localhost:3000/a/" + repo + "/contributors?callback="+contributorsCallback
-
-            var commitsCallbackScript = document.createElement('script');
-            commitsCallbackScript.src = (staticMode === true) ? sampleCommitsScriptSrc : commitsEndpoint;
-            document.write(commitsCallbackScript.outerHTML);
-
-            var contributorsCallbackScript = document.createElement('script');
-            contributorsCallbackScript.src = (staticMode === true) ? sampleContributorsScriptSrc : contributorsEndpoint;
-            document.write(contributorsCallbackScript.outerHTML);
         </script>
 
         <!-- Hits the backend service -->
