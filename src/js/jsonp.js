@@ -2,6 +2,10 @@
 
     "use strict";
 
+    // A simple component that loads JSONP via Ajax and
+    // stores the result in its model, firing an event
+    // after doing so
+
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.jsonp", {
         gradeNames: ["fluid.modelComponent"],
         jsonpOptions: {
@@ -9,7 +13,8 @@
             // Callback parameter of the JSONP service
             callbackParameter: "callback",
             // Allow browser caching of response
-            allowCache: true
+            allowCache: true,
+            callbackFunction: "gpii.qualityInfrastructure.frontEnd.jsonp.storeResult"
 
         },
         listeners: {
@@ -35,6 +40,12 @@
         var jsonpURL = that.options.jsonpOptions.url;
         var callbackParameter = that.options.jsonpOptions.callbackParameter;
         var allowCache = that.options.jsonpOptions.allowCache;
+        var callbackFunction = that.options.jsonpOptions.callbackFunction;
+
+        gpii.qualityInfrastructure.frontEnd.jsonp.storeResult = function (result) {
+            that.applier.change("jsonpData", result);
+            that.events.onJSONPLoaded.fire();
+        };
 
         // Load JSONP
         $.ajax({
@@ -42,10 +53,7 @@
             dataType: "jsonp",
             jsonp: callbackParameter,
             cache: allowCache,
-            success: function (result) {
-                that.applier.change("jsonpData", result);
-                that.events.onJSONPLoaded.fire();
-            }
+            jsonpCallback: callbackFunction
         });
     };
 
