@@ -7,7 +7,9 @@
         jsonpOptions: {
             url: "",
             // Callback parameter of the JSONP service
-            callbackParameter: "callback"
+            callbackParameter: "callback",
+            // Allow browser caching of response
+            allowCache: true
 
         },
         listeners: {
@@ -19,11 +21,10 @@
             loadJSONP: {
                 funcName: "gpii.qualityInfrastructure.frontEnd.jsonp.loadJSONP",
                 args: ["{that}"]
-            },
-            // performCallback: {
-            //     funcName: "",
-            //     args: ["{that}"]
-            // }
+            }
+        },
+        events: {
+            onJSONPLoaded: null
         },
         model: {
             // jsonpData: JSON
@@ -33,17 +34,19 @@
     gpii.qualityInfrastructure.frontEnd.jsonp.loadJSONP = function (that) {
         var jsonpURL = that.options.jsonpOptions.url;
         var callbackParameter = that.options.jsonpOptions.callbackParameter;
+        var allowCache = that.options.jsonpOptions.allowCache;
 
         // Load JSONP
         $.ajax({
             url: jsonpURL,
             dataType: "jsonp",
             jsonp: callbackParameter,
-            cache: true,
+            cache: allowCache,
             success: function (result) {
                 that.applier.change("jsonpData", result);
+                that.events.onJSONPLoaded.fire();
             }
-        })
-    }
+        });
+    };
 
 })(jQuery, fluid);
