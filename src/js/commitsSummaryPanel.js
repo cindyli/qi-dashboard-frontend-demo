@@ -24,7 +24,7 @@
         },
         resources: {
             template: {
-                resourceText: "<h2>Commits</h2><p>Last commit made <span class=\"gpiic-commitsSummary-timeOfLastCommits\">2 days ago</span>.</p><p><span class=\"gpiic-commitsSummary-mostFrequentCommitterTotalCommits\">Highest # of</span> commits made by <span class=\"gpiic-commitsSummary-mostFrequentCommitter\">dhh</span>.</p><p>Total commits: <span class=\"gpiic-commitsSummary-totalCommits\">52,512</span></p>"
+                resourceText: "<h2>Commits</h2><p>Last commit made <span class=\"gpiic-commitsSummary-timeOfLastCommits\"></span>.</p><p><span class=\"gpiic-commitsSummary-mostFrequentCommitterTotalCommits\"></span> commits made by <span class=\"gpiic-commitsSummary-mostFrequentCommitter\"></span>.</p><p>Total commits: <span class=\"gpiic-commitsSummary-totalCommits\"></span></p>"
             }
         }
     });

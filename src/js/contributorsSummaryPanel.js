@@ -15,7 +15,7 @@
         },
         resources: {
             template: {
-                resourceText: "<h2>Contributors</h2><p><span class=\"gpiic-commitsSummary-numberOfContributors\">###</span> People have contributed.</p>"
+                resourceText: "<h2>Contributors</h2><p><span class=\"gpiic-commitsSummary-numberOfContributors\"></span> People have contributed.</p>"
             }
         }
     });
