@@ -29,4 +29,22 @@
         }
     });
 
+    // Given two dates, returns the number of elapsed days between them
+    gpii.qualityInfrastructure.frontEnd.commitsSummaryPanel.getDaysBetween = function (olderDate, newerDate) {
+        olderDate = Date.parse(olderDate);
+        newerDate = Date.parse(newerDate);
+
+        // Elapsed time in milliseconds between olderDate and newerDate
+        var elapsedTime = newerDate - olderDate;
+
+        var elapsedTimeInDays = gpii.qualityInfrastructure.frontEnd.commitsSummaryPanel.millisecondsToDays(elapsedTime);
+
+        return elapsedTimeInDays;
+    };
+
+    // Given a measure in milliseonds, returns it in days
+    gpii.qualityInfrastructure.frontEnd.commitsSummaryPanel.millisecondsToDays = function (milliseconds) {
+        var elapsedDays = Math.floor(milliseconds / 1000 / 60 / 60 / 24);         return elapsedDays;
+    };
+
 })(jQuery, fluid);
