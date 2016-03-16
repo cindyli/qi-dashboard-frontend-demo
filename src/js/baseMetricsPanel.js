@@ -27,7 +27,7 @@
                 }
             },
             graph: {
-                type: "gpii.qualityInfrastructure.frontEnd.lineChart",
+                type: "floe.chartAuthoring.lineChart.chart",
                 container: "{baseMetricsPanel}.dom.graph",
                 createOnEvent: "{baseMetricsPanel}.events.onServiceResponseReady",
                 options: {
