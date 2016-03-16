@@ -26,6 +26,11 @@
         <script type="text/javascript" src="../src/js/contributorsSummaryPanel.js"></script>
         <script type="text/javascript" src="../src/js/jsonp.js"></script>
 
+        <script type="text/javascript" src="../src/js/baseMetricsPanel.js"></script>
+        <script type="text/javascript" src="../src/js/commitsMetricsPanel.js"></script>
+        <script type="text/javascript" src="../src/js/contributorsMetricsPanel.js"></script>
+
+
         <script type="text/javascript" src="src/js/qi-frontend-demo.js"></script>
         <link rel="stylesheet" type="text/css" href="src/css/qi-frontend-demo.css" />
 
@@ -50,58 +55,45 @@
             document.write(heading.outerHTML);
         </script>
 
-        <div class="gpii-commits gpii-panel">
-            <div class="gpiic-commits-summary gpii-summary"></div>
-            <div class="gpiic-commits-graph gpii-graph"></div>
-        </div>
+        <div class="gpiic-commits gpii-panel"></div>
 
-        <div class="gpii-contributors gpii-panel">
-            <div class="gpiic-contributors-summary gpii-summary"></div>
-            <div class="gpiic-contributors-graph gpii-graph"></div>
-        </div>
+        <div class="gpiic-contributors gpii-panel"></div>
 
         <script>
-            // var commitsEndpoint = "http://localhost:3000/a/" + repo + "/commits?callback="+commitsCallback
-
             var commitsEndpoint = "http://localhost:3000/a/" + repo + "/commits"
-
-            // var contributorsEndpoint = "http://localhost:3000/a/" + repo + "/contributors?callback="+contributorsCallback
 
             var contributorsEndpoint = "http://localhost:3000/a/" + repo + "/contributors"
 
-            var commitsPanel = gpii.qualityInfrastructure.frontEnd.jsonp({
-                jsonpOptions: {
-                    url: commitsEndpoint
-                },
-                modelListeners: {
-                    jsonpData: {
-                        funcName: "gpii.qualityInfrastructure.frontEnd.createCommitsPanel",
-                        args: "{that}.model.jsonpData",
-                        excludeSource: "init"
+            $(document).ready(function () {
+                var commitsMetricsPanel = gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel(".gpiic-commits", {
+                    components: {
+                        jsonpLoader: {
+                            type: "gpii.qualityInfrastructure.frontEnd.jsonp",
+                            options: {
+                                jsonpOptions: {
+                                    url: commitsEndpoint
+                                }
+                            }
+                        }
                     }
-                }
                 });
 
-            var contributorsPanel = gpii.qualityInfrastructure.frontEnd.jsonp({
-                jsonpOptions: {
-                    url: contributorsEndpoint,
-                },
-                modelListeners: {
-                    jsonpData: {
-                        funcName: "gpii.qualityInfrastructure.frontEnd.createContributionsPanel",
-                        args: "{that}.model.jsonpData",
-                        excludeSource: "init"
+                var contributorsPanel = gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel(".gpiic-contributors", {
+                    components: {
+                        jsonpLoader: {
+                            type: "gpii.qualityInfrastructure.frontEnd.jsonp",
+                            options: {
+                                jsonpOptions: {
+                                    url: contributorsEndpoint
+                                }
+                            }
+                        }
                     }
-                }
                 });
 
+            });
 
         </script>
-
-        <!-- Hits the backend service -->
-        <!-- <script type="text/javascript" src="http://localhost:3000/a/gpii/universal/commits?callback=gpii.qualityInfrastructure.frontEnd.createCommitsPanel"></script>
-
-        <script type="text/javascript" src="http://localhost:3000/a/gpii/universal/contributors?callback=gpii.qualityInfrastructure.frontEnd.createContributionsPanel"></script> -->
 
     </body>
 </html>
