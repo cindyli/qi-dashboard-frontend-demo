@@ -4,6 +4,11 @@
 
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel", {
         gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseMetricsPanel"],
+        resources: {
+            template: {
+                resourceText: "<div class=\"gpiic-metricsPanel-summary\"><h2>Loading Commits Metrics...</h2></div><div class=\"gpiic-metricsPanel-graph\"></div>"
+            }
+        },
         components: {
             summary: {
                 type: "gpii.qualityInfrastructure.frontEnd.commitsSummaryPanel",
