@@ -15,13 +15,13 @@ https://raw.githubusercontent.com/fluid-project/chartAuthoring/master/LICENSE.tx
 
     fluid.registerNamespace("gpii.tests");
 
-    fluid.defaults("gpii.tests.baseMetricsPanelTest", {
+    fluid.defaults("gpii.tests.commitsMetricsPanelTest", {
         gradeNames: ["fluid.test.testEnvironment"],
         components: {
-            baseMetricsPanel: {
-                type: "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel",
-                container: ".gpiic-baseMetricsPanelTest",
-                createOnEvent: "{baseMetricsPanelTester}.events.onTestCaseStart",
+            commitsMetricsPanel: {
+                type: "gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel",
+                container: ".gpiic-commitsMetricsPanelTest",
+                createOnEvent: "{commitsMetricsPanelTester}.events.onTestCaseStart",
                 options: {
                     components: {
                         jsonpLoader: {
@@ -34,40 +34,53 @@ https://raw.githubusercontent.com/fluid-project/chartAuthoring/master/LICENSE.tx
                     }
                 }
             },
-            baseMetricsPanelTester: {
-                type: "gpii.tests.baseMetricsPanelTester"
+            commitsMetricsPanelTester: {
+                type: "gpii.tests.commitsMetricsPanelTester"
             }
         }
     });
 
-    fluid.defaults("gpii.tests.baseMetricsPanelTester", {
+    fluid.defaults("gpii.tests.commitsMetricsPanelTester", {
         gradeNames: ["fluid.test.testCaseHolder"],
         modules: [{
-            name: "Test Base Metrics Panel component",
+            name: "Test Commits Metrics Panel component",
             tests: [{
                 name: "Service response behaviour",
-                expect: 2,
+                expect: 7,
                 sequence: [{
-                    listener: "gpii.tests.baseMetricsPanelTester.verifyServiceResponse",
-                    args: ["{baseMetricsPanel}"],
+                    listener: "gpii.tests.commitsMetricsPanelTester.verifyServiceResponse",
+                    args: ["{commitsMetricsPanel}"],
                     spec: {priority: "last"},
-                    event: "{baseMetricsPanelTest baseMetricsPanel}.events.onServiceResponseReady"
+                    event: "{commitsMetricsPanelTest commitsMetricsPanel}.events.onServiceResponseReady"
                 }]
             }
             ]
         }]
     });
 
-    gpii.tests.baseMetricsPanelTester.verifyServiceResponse = function (that) {
+    gpii.tests.commitsMetricsPanelTester.verifyServiceResponse = function (that) {
         jqUnit.assertNotNull("Events from service response was relayed to model.events", that.model.events);
 
         jqUnit.assertEquals("model.events has expected length", 1514, that.model.events.length);
+
+        var expectedSummaryFields = [
+            "mostFrequentCommitter",
+            "mostFrequentCommitterTotalCommits",
+            "timeOfLastCommit",
+            "totalCommits"
+        ];
+
+        jqUnit.assertNotNull("Summary from service response was relayed to model.summary", that.model.summary);
+
+        fluid.each(expectedSummaryFields, function (expectedField) {
+            jqUnit.assertNotNull("model.summary." + expectedField + " exists", that.model.summary[expectedField]);
+        });
 
     };
 
     $(document).ready(function () {
         fluid.test.runTests([
-            "gpii.tests.baseMetricsPanelTest"
+            "gpii.tests.commitsMetricsPanelTest"
         ]);
     });
 
