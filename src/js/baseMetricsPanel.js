@@ -55,7 +55,6 @@
         that.applier.change("summary", summary);
         that.applier.change("events", events);
         that.events.onServiceResponseReady.fire();
-        console.log(that);
     };
 
     // Transforms events data into the style expected by the line chart component
