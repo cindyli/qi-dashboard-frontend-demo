@@ -3,3 +3,5 @@ node_modules/**
 src/js/sampleCommitsCallback.js
 src/js/sampleContributorsCallback.js
 tests/js/sampleCallback.js
+tests/js/sampleCommitsCallback.js
+tests/js/sampleContributorsCallback.js
