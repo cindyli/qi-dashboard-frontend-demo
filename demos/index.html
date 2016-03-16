@@ -66,7 +66,6 @@
                 var commitsMetricsPanel = gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel(".gpiic-commits", {
                     components: {
                         jsonpLoader: {
-                            type: "gpii.qualityInfrastructure.frontEnd.jsonp",
                             options: {
                                 jsonpOptions: {
                                     url: commitsEndpoint
@@ -79,7 +78,6 @@
                 var contributorsPanel = gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel(".gpiic-contributors", {
                     components: {
                         jsonpLoader: {
-                            type: "gpii.qualityInfrastructure.frontEnd.jsonp",
                             options: {
                                 jsonpOptions: {
                                     url: contributorsEndpoint
