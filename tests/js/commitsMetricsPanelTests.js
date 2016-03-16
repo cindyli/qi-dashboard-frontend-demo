@@ -70,10 +70,10 @@ https://raw.githubusercontent.com/fluid-project/chartAuthoring/master/LICENSE.tx
             "totalCommits"
         ];
 
-        jqUnit.assertNotNull("Summary from service response was relayed to model.summary", that.model.summary);
+        jqUnit.assertNotUndefined("Summary from service response was relayed to model.summary", that.model.summary);
 
         fluid.each(expectedSummaryFields, function (expectedField) {
-            jqUnit.assertNotNull("model.summary." + expectedField + " exists", that.model.summary[expectedField]);
+            jqUnit.assertNotUndefined("model.summary." + expectedField + " exists", that.model.summary[expectedField]);
         });
 
     };
