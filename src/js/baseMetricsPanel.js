@@ -13,6 +13,10 @@
                 resourceText: "<div class=\"gpiic-metricsPanel-summary\"></div><div class=\"gpiic-metricsPanel-graph\"></div>"
             }
         },
+        model: {
+            // events: the events data from the service,
+            // currentEventsDataView: filtered events
+        },
         components: {
             jsonpLoader: {
                 type: "gpii.qualityInfrastructure.frontEnd.jsonp",
@@ -32,7 +36,7 @@
                 createOnEvent: "{baseMetricsPanel}.events.onServiceResponseReady",
                 options: {
                     model: {
-                        dataSet: "{baseMetricsPanel}.model.events"
+                        dataSet: "{baseMetricsPanel}.model.currentEventsDataView"
                     }
                 }
             }
@@ -54,6 +58,7 @@
         var events = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.transformEventsData(that.jsonpLoader.model.jsonpData.events);
         that.applier.change("summary", summary);
         that.applier.change("events", events);
+        that.applier.change("currentEventsDataView", gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsDataByDaysBack(that.model.events, new Date(), 180));
         that.events.onServiceResponseReady.fire();
     };
 
@@ -65,6 +70,37 @@
                 "value": event.value
             };
         });
+    };
+
+    // Given eventsData and date strings in YYYY-MM-DD / Dates for an end date
+    // and start date, filter the events data to only have data between (and
+    // including) those dates
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsData = function(eventsData, earlierDate, laterDate) {
+        var filteredEvents = fluid.copy(eventsData);
+        earlierDate = (typeof earlierDate.getMonth === "function") ? earlierDate : Date.parse(earlierDate);
+        laterDate = (typeof laterDate.getMonth === "function") ? laterDate : Date.parse(laterDate);
+
+        fluid.remove_if(filteredEvents, function (currentEvent) {
+            var currentEventDate = Date.parse(currentEvent.date);
+            var isBetweenDates = (currentEventDate >= earlierDate && currentEventDate <= laterDate);
+            return !isBetweenDates;
+        });
+
+        return filteredEvents;
+    };
+
+    // Given eventsData, a startDate and an integer representing the number of
+    // days back, filters the eventsData to only the range from the days back
+    // from the startDate
+
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsDataByDaysBack = function(eventsData, startDate, daysBack) {
+        startDate = (typeof startDate.getMonth === "function") ? startDate : Date.parse(startDate);
+
+        var daysBackDate = new Date();
+        daysBackDate.setDate(startDate.getDate() - daysBack);
+
+        return gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsData(eventsData, daysBackDate, startDate);
+
     };
 
 })(jQuery, fluid);

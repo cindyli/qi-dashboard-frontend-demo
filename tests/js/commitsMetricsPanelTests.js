@@ -15,7 +15,7 @@ https://raw.githubusercontent.com/fluid-project/chartAuthoring/master/LICENSE.tx
 
     fluid.registerNamespace("gpii.tests");
 
-    jqUnit.test("Test getDaysAgo functionality", function () {
+    jqUnit.test("Test getDaysAgo functionality of commitsSummaryPanel", function () {
 
         jqUnit.expect(2);
 
@@ -31,7 +31,7 @@ https://raw.githubusercontent.com/fluid-project/chartAuthoring/master/LICENSE.tx
 
     });
 
-    jqUnit.test("Test getDaysBetween functionality", function () {
+    jqUnit.test("Test getDaysBetween functionality commitsSummaryPanel", function () {
 
         jqUnit.expect(1);
 
