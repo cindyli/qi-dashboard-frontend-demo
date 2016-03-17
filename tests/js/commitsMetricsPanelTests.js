@@ -17,9 +17,25 @@ https://raw.githubusercontent.com/fluid-project/chartAuthoring/master/LICENSE.tx
 
     jqUnit.test("Test getDaysAgo functionality", function () {
 
+        jqUnit.expect(2);
+
+        var today = new Date();
+
+        var sevenDaysAgo = new Date();
+
+        sevenDaysAgo.setDate(today.getDate() - 7);
+
+        jqUnit.assertEquals("Calculation of 'days back' when the day to calculate back to is the same as the current day results in the 'today' response", "today", gpii.qualityInfrastructure.frontEnd.commitsSummaryPanel.getDaysAgo(today));
+
+        jqUnit.assertEquals("String when the day to calculate back to is seven days ago is as expected", "7 days ago", gpii.qualityInfrastructure.frontEnd.commitsSummaryPanel.getDaysAgo(sevenDaysAgo));
+
+    });
+
+    jqUnit.test("Test getDaysBetween functionality", function () {
+
         jqUnit.expect(1);
-        
-        jqUnit.assertEquals("There should be 7 days between 2016-03-09 and 2016-03-16", 7, gpii.qualityInfrastructure.frontEnd.commitsSummaryPanel.getDaysBetween("2016-03-09", "2016-03-16"));
+
+        jqUnit.assertEquals("There should be 7 days between 2016-03-09 and 2016-03-16", 7, gpii.qualityInfrastructure.frontEnd.commitsSummaryPanel.getDaysBetween(Date.parse("2016-03-09"), Date.parse("2016-03-16")));
     });
 
     fluid.defaults("gpii.tests.commitsMetricsPanelTest", {
