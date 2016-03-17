@@ -19,6 +19,14 @@
                         numberOfContributors: "{contributorsMetricsPanel}.model.summary.numberOfContributors"
                     }
                 }
+            },
+            graph: {
+                options: {
+                    lineOptions: {
+                        interpolation: "cardinal",
+                        addArea: true
+                    }
+                }
             }
         }
     });
