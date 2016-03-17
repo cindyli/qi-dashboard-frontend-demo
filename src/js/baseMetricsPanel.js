@@ -16,6 +16,18 @@
         model: {
             // events: the events data from the service,
             // currentEventsDataView: filtered events
+            // Set to something else to change the metrics end date
+            // defaults to current day
+            currentEventsDataViewSettings: {
+                metricsEndDate: new Date(),
+                // Change to change number of days back
+                // ignored if metricsStartDate is set
+                daysBack: 180
+                // set to a date or date string to explicitly configure the
+                // metrics start date
+                // overrides daysBack
+                // metricsStartDate: Date or date string
+            }
         },
         components: {
             jsonpLoader: {
@@ -50,16 +62,43 @@
                 "funcName": "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.convertServiceResponse",
                 "args": ["{that}"]
             }
+        },
+        modelListeners: {
+            currentEventsDataViewSettings: {
+                funcName: "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataView",
+                excludeSource: "init",
+                args: "{that}"
+            }
         }
     });
 
     gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.convertServiceResponse = function (that) {
-        var summary = that.jsonpLoader.model.jsonpData.summary;
-        var events = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.transformEventsData(that.jsonpLoader.model.jsonpData.events);
+        var summary = that.jsonpLoader.model.jsonpData.summary,
+            events = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.transformEventsData(that.jsonpLoader.model.jsonpData.events);
+
         that.applier.change("summary", summary);
         that.applier.change("events", events);
-        that.applier.change("currentEventsDataView", gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsDataByDaysBack(that.model.events, new Date(), 180));
+
+        gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataView(that);
+
         that.events.onServiceResponseReady.fire();
+    };
+
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataView = function (that) {
+        var events = that.model.events,
+            metricsEndDate = that.model.currentEventsDataViewSettings.metricsEndDate,
+            daysBack = that.model.currentEventsDataViewSettings.daysBack,
+            metricsStartDate = that.model.currentEventsDataViewSettings.metricsStartDate;
+
+        var filteredEvents;
+
+        if(metricsStartDate !== undefined) {
+            filteredEvents = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsData(events, metricsStartDate, metricsEndDate);
+        } else {
+            filteredEvents = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsDataByDaysBack(events, metricsEndDate, daysBack);
+        }
+
+        that.applier.change("currentEventsDataView", filteredEvents);
     };
 
     // Transforms events data into the style expected by the line chart component
@@ -78,13 +117,26 @@
         return (isDateObject);
     };
 
+    // Tries to return a valid Date object from whatever is passed to it
+    // (typically, this will be an existing Date object or a date string)
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getWorkableDate = function (dateToAttempt) {
+
+        // Try these first
+        var firstAttempt =  gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.isDateObject(dateToAttempt) ? dateToAttempt : Date.parse(dateToAttempt);
+
+        // a NaN response is probably because Date.parse is rather crap
+        return isNaN(firstAttempt) ? firstAttempt : new Date(dateToAttempt);
+    };
+
     // Given eventsData and date strings in YYYY-MM-DD / Dates for an end date
     // and start date, filter the events data to only have data between (and
     // including) those dates
     gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsData = function(eventsData, earlierDate, laterDate) {
         var filteredEvents = fluid.copy(eventsData);
-        earlierDate = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.isDateObject(earlierDate) ? earlierDate : Date.parse(earlierDate);
-        laterDate = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.isDateObject(laterDate) ? laterDate : Date.parse(laterDate);
+
+        earlierDate = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getWorkableDate(earlierDate);
+
+        laterDate = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getWorkableDate(laterDate);
 
         fluid.remove_if(filteredEvents, function (currentEvent) {
             var currentEventDate = Date.parse(currentEvent.date);
@@ -101,7 +153,7 @@
 
     gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsDataByDaysBack = function(eventsData, startDate, daysBack) {
 
-        startDate = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.isDateObject(startDate) ? startDate : new Date(startDate);
+        startDate = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getWorkableDate(startDate);
 
         var daysBackDate = new Date(startDate);
         daysBackDate.setDate(- daysBack);
