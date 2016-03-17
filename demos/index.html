@@ -87,25 +87,33 @@
                     }
                 });
 
-                var dayZooms = [30, 60, 180, 365, 730, 1040, 2080];
+                // var dayZooms = [30, 60, 180, 365, 730, 1040, 2080];
 
+                var originalMetricsEndDate = fluid.copy( contributorsPanel.model.currentEventsDataViewSettings.metricsEndDate);
                 var nextMetricsEndDate;
 
                 alterZoom = function() {
+                    try {
+                        var currentMetricsEndDate = contributorsPanel.model.currentEventsDataViewSettings.metricsEndDate;
 
-                    var currentMetricsEndDate = contributorsPanel.model.currentEventsDataViewSettings.metricsEndDate;
+                        console.log(currentMetricsEndDate);
+                        nextMetricsEndDate = new Date(currentMetricsEndDate);
 
-                    console.log(currentMetricsEndDate);
-                    nextMetricsEndDate = new Date(currentMetricsEndDate);
+                        nextMetricsEndDate.setDate(currentMetricsEndDate.getDate() - 30);
 
-                    nextMetricsEndDate.setDate(currentMetricsEndDate.getDate() - 30);
+                        console.log(nextMetricsEndDate);
 
-                    console.log(nextMetricsEndDate);
+                        commitsMetricsPanel.applier.change("currentEventsDataViewSettings.metricsEndDate", nextMetricsEndDate);
 
-                    commitsMetricsPanel.applier.change("currentEventsDataViewSettings.metricsEndDate", nextMetricsEndDate);
+                        contributorsPanel.applier.change("currentEventsDataViewSettings.metricsEndDate", nextMetricsEndDate);
+                    }
+                    catch(e) {
+                        console.log(e);
+                        commitsMetricsPanel.applier.change("currentEventsDataViewSettings.metricsEndDate", originalMetricsEndDate);
 
-                    contributorsPanel.applier.change("currentEventsDataViewSettings.metricsEndDate", nextMetricsEndDate);
+                        contributorsPanel.applier.change("currentEventsDataViewSettings.metricsEndDate", originalMetricsEndDate);
 
+                    }
                     // console.log("alterZoom");
                     // console.log(dayZooms);
                     // var zoom = dayZooms.shift();
