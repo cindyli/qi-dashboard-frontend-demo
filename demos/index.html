@@ -87,7 +87,41 @@
                     }
                 });
 
+                var dayZooms = [30, 60, 180, 365, 730, 1040, 2080];
+
+                var nextMetricsEndDate;
+
+                alterZoom = function() {
+
+                    var currentMetricsEndDate = contributorsPanel.model.currentEventsDataViewSettings.metricsEndDate;
+
+                    console.log(currentMetricsEndDate);
+                    nextMetricsEndDate = new Date(currentMetricsEndDate);
+
+                    nextMetricsEndDate.setDate(currentMetricsEndDate.getDate() - 30);
+
+                    console.log(nextMetricsEndDate);
+
+                    commitsMetricsPanel.applier.change("currentEventsDataViewSettings.metricsEndDate", nextMetricsEndDate);
+
+                    contributorsPanel.applier.change("currentEventsDataViewSettings.metricsEndDate", nextMetricsEndDate);
+
+                    // console.log("alterZoom");
+                    // console.log(dayZooms);
+                    // var zoom = dayZooms.shift();
+                    // commitsMetricsPanel.applier.change("currentEventsDataViewSettings.daysBack", zoom);
+                    //
+                    // contributorsPanel.applier.change("currentEventsDataViewSettings.daysBack", zoom);
+                    //
+                    // dayZooms.push(zoom);
+
+                }
+
+                var timeoutID = window.setInterval(alterZoom, 3000);
+
             });
+
+
 
         </script>
 
