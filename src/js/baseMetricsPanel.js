@@ -72,13 +72,19 @@
         });
     };
 
+    // Tests to determine whether or not something is a Date object
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.isDateObject = function (dateToTest) {
+        var isDateObject = (typeof dateToTest.getMonth === "function");
+        return (isDateObject);
+    };
+
     // Given eventsData and date strings in YYYY-MM-DD / Dates for an end date
     // and start date, filter the events data to only have data between (and
     // including) those dates
     gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsData = function(eventsData, earlierDate, laterDate) {
         var filteredEvents = fluid.copy(eventsData);
-        earlierDate = (typeof earlierDate.getMonth === "function") ? earlierDate : Date.parse(earlierDate);
-        laterDate = (typeof laterDate.getMonth === "function") ? laterDate : Date.parse(laterDate);
+        earlierDate = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.isDateObject(earlierDate) ? earlierDate : Date.parse(earlierDate);
+        laterDate = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.isDateObject(laterDate) ? laterDate : Date.parse(laterDate);
 
         fluid.remove_if(filteredEvents, function (currentEvent) {
             var currentEventDate = Date.parse(currentEvent.date);
@@ -94,10 +100,11 @@
     // from the startDate
 
     gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsDataByDaysBack = function(eventsData, startDate, daysBack) {
-        startDate = (typeof startDate.getMonth === "function") ? startDate : Date.parse(startDate);
 
-        var daysBackDate = new Date();
-        daysBackDate.setDate(startDate.getDate() - daysBack);
+        startDate = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.isDateObject(startDate) ? startDate : new Date(startDate);
+
+        var daysBackDate = new Date(startDate);
+        daysBackDate.setDate(- daysBack);
 
         return gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsData(eventsData, daysBackDate, startDate);
 
