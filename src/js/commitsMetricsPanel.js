@@ -33,6 +33,14 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                         totalCommits: "{commitsMetricsPanel}.model.summary.totalCommits"
                     }
                 }
+            },
+            graph: {
+                options: {
+                    model: {
+                        svgTitle: "Commits line chart",
+                        svgDescription: "A line chart showing statistics for commits"
+                    }
+                }
             }
         }
     });

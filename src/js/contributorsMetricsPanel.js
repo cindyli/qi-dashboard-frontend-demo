@@ -14,7 +14,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     "use strict";
 
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel.graph", {
-        gradeNames: ["floe.chartAuthoring.lineChart.timeSeriesSingleDataSet", "floe.chartAuthoring.lineChart.timeSeries.area"]
+        gradeNames: ["floe.chartAuthoring.lineChart.timeSeriesSingleDataSet", "floe.chartAuthoring.lineChart.timeSeries.area"],
+        model: {
+            svgTitle: "Contributors line chart",
+            svgDescription: "A line chart showing statistics for contributors"
+        }
     });
 
 
