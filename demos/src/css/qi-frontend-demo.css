@@ -7,13 +7,13 @@ body {
     width:1200px;
 }
 
-.gpii-summary {
-    width:30%;
+.gpiic-metricsPanel-summary {
+    width: 25%;
     float: left;
 }
 
-.gpii-graph {
-    width:70%;
+.gpii-metricsPanel-graph {
+    width: 75%;
     float:left;
 }
 
