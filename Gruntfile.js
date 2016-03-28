@@ -87,6 +87,13 @@ module.exports = function (grunt) {
                 src: ["src/lib/infusion/infusion-custom.js"],
                 dest: "dist/infusion-with-license.js"
             },
+            infusionNoJQueryWithLicense: {
+                options: {
+                    banner: licenseWrapper("Infusion", "src/lib/infusion/infusion-LICENSE.txt")
+                },
+                src: ["src/lib/infusion/infusion-custom-noJquery.js"],
+                dest: "dist/infusion-noJquery-with-license.js"
+            },
             dist: {
                 src: ["dist/d3-with-license.js",
                  "dist/infusion-with-license.js",
@@ -94,6 +101,15 @@ module.exports = function (grunt) {
                  "dist/chartAuthoring-with-license.js",
                 "src/js/*.js"],
                 dest: "dist/qi-frontend-full.js",
+                nonull: true
+            },
+            distNoJquery: {
+                src: ["dist/d3-with-license.js",
+                 "dist/infusion-noJquery-with-license.js",
+                 "dist/flocking-with-license.js",
+                 "dist/chartAuthoring-with-license.js",
+                "src/js/*.js"],
+                dest: "dist/qi-frontend-noJquery.js",
                 nonull: true
             }
         },
@@ -109,6 +125,10 @@ module.exports = function (grunt) {
             distUglify: {
                 src: "dist/qi-frontend-full.js",
                 dest: "dist/qi-frontend-full.min.js"
+            },
+            distNoJQueryUglify: {
+                src: "dist/qi-frontend-noJquery.js",
+                dest: "dist/qi-frontend-noJquery.min.js"
             }
         }
     });
