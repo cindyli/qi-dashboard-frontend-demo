@@ -1,6 +1,6 @@
 body {
     padding-left:2em;
-    
+
 }
 
 .gpii-panel {
@@ -15,4 +15,19 @@ body {
 .gpii-graph {
     width:70%;
     float:left;
+}
+
+.floec-ca-lineChart-y-axis line {
+  stroke: black;
+  opacity: 0.2;
+}
+
+.floec-ca-lineChart-y-axis text, .floec-ca-lineChart-x-axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
+
+.floec-ca-lineChart-chartLine-area {
+    opacity: 0.2;
+    fill: black;
 }
