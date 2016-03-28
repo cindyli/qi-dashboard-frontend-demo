@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../src/lib/infusion/src/lib/normalize/css/normalize.css" />
+        <link rel="stylesheet" type="text/css" href="../src/lib/infusion/src/framework/core/css/fluid.css" />
+
+        <!-- include a separate version of jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+        <!-- include the noJquery version of the dependencies -->
+        <script src="../dist/qi-frontend-noJquery.min.js"></script>
+
+        <script src="src/js/qi-frontend-demo.js"></script>
+        <link rel="stylesheet" type="text/css" href="src/css/qi-frontend-demo.css" />
+
+        <title>QI Frontend Demo</title>
+    </head>
+
+    <body>
+
+        <script>
+            var params={};window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(str,key,value){params[key] = value;});
+            var repoFromURL = params.repo;
+
+            var heading = document.createElement('h1');
+            heading.innerHTML = repoFromURL;
+            document.write(heading.outerHTML);
+        </script>
+
+        <div class="gpiic-commits gpii-panel"></div>
+
+        <div class="gpiic-contributors gpii-panel"></div>
+
+        <script>
+
+            var demoPanelsConfig = {
+                repo: repoFromURL,
+                commitsContainer: ".gpiic-commits",
+                contributorsContainer: ".gpiic-contributors"
+            }
+
+
+            $(document).ready(function () {
+                var panels = gpii.qualityInfrastructure.frontEnd.createPanels(demoPanelsConfig);
+
+                // Uncomment this to enable the animation
+                // gpii.qualityInfrastructure.frontEnd.demo.animate(panels.commitsPanel, panels.contributorsPanel);
+
+            });
+
+
+        </script>
+
+    </body>
+</html>
