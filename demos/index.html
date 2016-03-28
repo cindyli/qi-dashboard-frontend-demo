@@ -27,10 +27,10 @@
 
         <script>
             var params={};window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(str,key,value){params[key] = value;});
-            var repo = params.repo;
+            var repoFromURL = params.repo;
 
             var heading = document.createElement('h1');
-            heading.innerHTML = repo;
+            heading.innerHTML = repoFromURL;
             document.write(heading.outerHTML);
         </script>
 
@@ -39,78 +39,21 @@
         <div class="gpiic-contributors gpii-panel"></div>
 
         <script>
-            var commitsEndpoint = "http://localhost:3000/a/" + repo + "/commits"
 
-            var contributorsEndpoint = "http://localhost:3000/a/" + repo + "/contributors"
+            var demoPanelsConfig = {
+                repo: repoFromURL,
+                commitsContainer: ".gpiic-commits",
+                contributorsContainer: ".gpiic-contributors"
+            }
+
 
             $(document).ready(function () {
-                var commitsMetricsPanel = gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel(".gpiic-commits", {
-                    components: {
-                        jsonpLoader: {
-                            options: {
-                                jsonpOptions: {
-                                    url: commitsEndpoint
-                                }
-                            }
-                        }
-                    }
-                });
+                var panels = gpii.qualityInfrastructure.frontEnd.createPanels(demoPanelsConfig);
 
-                var contributorsPanel = gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel(".gpiic-contributors", {
-                    components: {
-                        jsonpLoader: {
-                            options: {
-                                jsonpOptions: {
-                                    url: contributorsEndpoint
-                                }
-                            }
-                        }
-                    }
-                });
-
-                // var dayZooms = [30, 60, 180, 365, 730, 1040, 2080];
-
-                var originalMetricsEndDate = fluid.copy( contributorsPanel.model.currentEventsDataViewSettings.metricsEndDate);
-                var nextMetricsEndDate;
-
-                alterZoom = function() {
-                    try {
-                        var currentMetricsEndDate = contributorsPanel.model.currentEventsDataViewSettings.metricsEndDate;
-
-                        console.log(currentMetricsEndDate);
-                        nextMetricsEndDate = new Date(currentMetricsEndDate);
-
-                        nextMetricsEndDate.setDate(currentMetricsEndDate.getDate() - 30);
-
-                        console.log(nextMetricsEndDate);
-
-                        commitsMetricsPanel.applier.change("currentEventsDataViewSettings.metricsEndDate", nextMetricsEndDate);
-
-                        contributorsPanel.applier.change("currentEventsDataViewSettings.metricsEndDate", nextMetricsEndDate);
-                    }
-                    catch(e) {
-                        console.log(e);
-                        commitsMetricsPanel.applier.change("currentEventsDataViewSettings.metricsEndDate", originalMetricsEndDate);
-
-                        contributorsPanel.applier.change("currentEventsDataViewSettings.metricsEndDate", originalMetricsEndDate);
-
-                    }
-                    // console.log("alterZoom");
-                    // console.log(dayZooms);
-                    // var zoom = dayZooms.shift();
-                    // commitsMetricsPanel.applier.change("currentEventsDataViewSettings.daysBack", zoom);
-                    //
-                    // contributorsPanel.applier.change("currentEventsDataViewSettings.daysBack", zoom);
-                    //
-                    // dayZooms.push(zoom);
-
-                }
-
-                // Turn this on to enable the animation
-                // var timeoutID = window.setInterval(alterZoom, 3000);
+                // Uncomment this to enable the animation
+                // gpii.qualityInfrastructure.frontEnd.demo.animate(panels.commitsPanel, panels.contributorsPanel);
 
             });
-
 
 
         </script>
