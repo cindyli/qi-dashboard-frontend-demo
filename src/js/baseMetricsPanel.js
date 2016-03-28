@@ -54,7 +54,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 }
             },
             graph: {
-                type: "floe.chartAuthoring.lineChart.chart",
+                type: "floe.chartAuthoring.lineChart.timeSeriesSingleDataSet",
                 container: "{baseMetricsPanel}.dom.graph",
                 createOnEvent: "{baseMetricsPanel}.events.onServiceResponseReady",
                 options: {

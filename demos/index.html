@@ -9,16 +9,23 @@
         <script src="../src/lib/infusion/infusion-custom.js"></script>
         <script src="../src/lib/d3/d3.js"></script>
 
+        <script src="../src/lib/chartAuthoring/src/js/d3Utils.js"></script>
+        <script src="../src/lib/chartAuthoring/src/js/d3ViewComponent.js"></script>
+        <script src="../src/lib/chartAuthoring/src/js/svgDrawingArea.js"></script>
+        <script src="../src/lib/chartAuthoring/src/js/templateInjection.js"></script>
+
         <script src="../src/lib/chartAuthoring/src/js/valueBinding.js"></script>
         <script src="../src/lib/chartAuthoring/src/js/percentage.js"></script>
         <script src="../src/lib/chartAuthoring/src/js/transformations.js"></script>
-        <script src="../src/lib/chartAuthoring/src/js/templateInjection.js"></script>
-        <script src="../src/lib/chartAuthoring/src/js/d3ViewComponent.js"></script>
-        <script src="../src/lib/chartAuthoring/src/js/svgDrawingArea.js"></script>
         <script src="../src/lib/chartAuthoring/src/js/totalRelaying.js"></script>
-        <script src="../src/lib/chartAuthoring/src/js/d3Utils.js"></script>
-        <script src="../src/lib/chartAuthoring/src/js/utils.js"></script>
-        <script src="../src/lib/chartAuthoring/src/js/line.js"></script>
+        <script src="../src/lib/chartAuthoring/src/js/axis.js"></script>
+        <script src="../src/lib/chartAuthoring/src/js/xAxisTimeSeries.js"></script>
+        <script src="../src/lib/chartAuthoring/src/js/yAxis.js"></script>
+        <script src="../src/lib/chartAuthoring/src/js/lineChartTimeSeriesLine.js"></script>
+        <script src="../src/lib/chartAuthoring/src/js/lineChartTimeSeriesArea.js"></script>
+        <script src="../src/lib/chartAuthoring/src/js/lineChartTimeSeriesPoints.js"></script>
+        <script src="../src/lib/chartAuthoring/src/js/lineChartTimeSeriesMultiDataSet.js"></script>
+        <script src="../src/lib/chartAuthoring/src/js/lineChartTimeSeriesSingleDataSet.js"></script>
 
         <script src="../src/js/commitsSummaryPanel.js"></script>
         <script src="../src/js/contributorsSummaryPanel.js"></script>
@@ -41,15 +48,8 @@
             var params={};window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(str,key,value){params[key] = value;});
             var repo = params.repo;
 
-            // Static examples, good for fast testing
-            var sampleCommitsScriptSrc = "../src/js/sampleCommitsCallback.js";
-            var sampleContributorsScriptSrc = "../src/js/sampleContributorsCallback.js";
-            // Set true to use static example
-            var staticMode = false;
-
-
             var heading = document.createElement('h1');
-            heading.innerHTML = (staticMode === true) ? "gpii/universal" : repo;
+            heading.innerHTML = repo;
             document.write(heading.outerHTML);
         </script>
 

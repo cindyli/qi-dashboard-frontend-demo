@@ -13,6 +13,12 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
 
     "use strict";
 
+    fluid.defaults("gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel.graph", {
+        gradeNames: ["floe.chartAuthoring.lineChart.timeSeriesSingleDataSet", "floe.chartAuthoring.lineChart.timeSeries.area"]
+    });
+
+
+
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel", {
         gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseMetricsPanel"],
         resources: {
@@ -32,10 +38,10 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 }
             },
             graph: {
+                type: "gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel.graph",
                 options: {
                     lineOptions: {
-                        interpolation: "cardinal",
-                        addArea: true
+                        interpolation: "cardinal"
                     }
                 }
             }
