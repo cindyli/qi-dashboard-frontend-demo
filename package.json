@@ -7,7 +7,7 @@
   "homepage": "http://www.fluidproject.org/",
   "dependencies": {
       "d3":"latest",
-      "chartAuthoring":"https://github.com/waharnum/chartAuthoring#GPII-1584"
+      "chartAuthoring":"https://github.com/waharnum/chartAuthoring#GPII-1702"
   },
   "licenses": [
     {
