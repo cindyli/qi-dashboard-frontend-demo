@@ -36,11 +36,16 @@
         window.setInterval(changeView, 3000);
     };
 
+    gpii.qualityInfrastructure.frontEnd.demo.getURLParamValue = function (param) {
+        var params={};window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(str,key,value){params[key] = value;});
+        return params[param];
+    };
+
     $(document).ready(function () {
 
         var params={};window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(str,key,value){params[key] = value;});
-        var repoFromURL = params.repo;
-        var shouldAnimate = params.animate;
+        var repoFromURL = gpii.qualityInfrastructure.frontEnd.demo.getURLParamValue("repo");
+        var shouldAnimate = gpii.qualityInfrastructure.frontEnd.demo.getURLParamValue("animate");
 
         if (repoFromURL !== undefined) {
             $("#gpii-demo-repoTitle").text(repoFromURL);
