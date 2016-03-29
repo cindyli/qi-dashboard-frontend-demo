@@ -47,7 +47,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
 
     };
 
-    gpii.qualityInfrastructure.frontEnd.getEndpointURL = function(qualityInfrastructureHost, apiVersion, repo, endpoint) {
+    gpii.qualityInfrastructure.frontEnd.getEndpointURL = function(endpoint, qualityInfrastructureHost, apiVersion, repo) {
         return qualityInfrastructureHost + "/" + apiVersion + "/" + repo + "/" + endpoint;
     };
 
@@ -67,7 +67,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     };
 
     gpii.qualityInfrastructure.frontEnd.createCommitsPanel = function (qualityInfrastructureHost, apiVersion, repo, container) {
-        var commitsEndpoint = gpii.qualityInfrastructure.frontEnd.getEndpointURL(qualityInfrastructureHost, apiVersion, repo, "commits");
+        var commitsEndpoint = gpii.qualityInfrastructure.frontEnd.getEndpointURL("commits", qualityInfrastructureHost, apiVersion, repo);
         return gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel(container, {
             expander: {
                     funcName: "gpii.qualityInfrastructure.frontEnd.getJsonpLoaderComponent",
@@ -77,7 +77,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     };
 
     gpii.qualityInfrastructure.frontEnd.createContributorsPanel = function (qualityInfrastructureHost, apiVersion, repo, container) {
-        var contributorsEndpoint = gpii.qualityInfrastructure.frontEnd.getEndpointURL(qualityInfrastructureHost, apiVersion, repo, "contributors");
+        var contributorsEndpoint = gpii.qualityInfrastructure.frontEnd.getEndpointURL("contributors", qualityInfrastructureHost, apiVersion, repo);
         return gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel(container, {
             expander: {
                     funcName: "gpii.qualityInfrastructure.frontEnd.getJsonpLoaderComponent",
