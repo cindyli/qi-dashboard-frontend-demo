@@ -5,14 +5,26 @@
 - `npm install`
 - `grunt copy:frontEndDependencies`
 
+This copies necessary front-end dependencies from `node_modules` to `src/lib`
+
 ## Building a Redistributable Single File Version
 
 - `npm install`
 - `grunt copy:frontEndDependencies`
 - `grunt dist`
 
-This produces single-file versons in the /dist directory
+This produces four single-file versions of the dependencies in the `/dist` directory:
+- non-minified with all dependencies
+- minified with all dependencies
+- non-minified without jQuery
+- minified with jQuery
 
-## The Demo
+## Libraries Used
+- jQuery / jQuery UI
+- Infusion
+- D3
+- Floe Chart Authoring Tool
 
-The demo in `/demos` assumes a single-file distribution has been built and includes it
+## The Demos
+
+The demos in `/demos` assumes a single-file distribution has been built and use it in their markup; the demos are intended to guide those implementing the QI panels into their own site.
