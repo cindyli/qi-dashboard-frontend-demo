@@ -27,20 +27,14 @@
             var heading = document.createElement('h1');
             heading.innerHTML = repoFromURL;
             document.write(heading.outerHTML);
-        </script>
-
-        <div class="gpiic-commits gpii-panel"></div>
-
-        <div class="gpiic-contributors gpii-panel"></div>
-
-        <script>
 
             var demoPanelsConfig = {
+                qualityInfrastructureHost: "http://localhost:3000",
+                apiVersion: "a",
                 repo: repoFromURL,
-                commitsContainer: ".gpiic-commits",
-                contributorsContainer: ".gpiic-contributors"
+                commitsContainer: ".gpiic-metrics-commits",
+                contributorsContainer: ".gpiic-metrics-contributors"
             }
-
 
             $(document).ready(function () {
                 var panels = gpii.qualityInfrastructure.frontEnd.createPanels(demoPanelsConfig);
@@ -50,8 +44,10 @@
 
             });
 
-
         </script>
 
+        <div class="gpiic-metrics-commits gpii-panel"></div>
+
+        <div class="gpiic-metrics-contributors gpii-panel"></div>
     </body>
 </html>
