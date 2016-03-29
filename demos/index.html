@@ -46,32 +46,18 @@
     </head>
 
     <body>
+        <h1>About This Demo</h1>
 
-        <script>
-            var params={};window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(str,key,value){params[key] = value;});
-            var repoFromURL = params.repo;
+        An example of embedding charts from the Quality Infrastructure on a website via included Javascript.
 
-            var heading = document.createElement('h1');
-            heading.innerHTML = repoFromURL;
-            document.write(heading.outerHTML);
+        This version includes all files individually and is largely used for internal testing.
 
-            var demoPanelsConfig = {
-                qualityInfrastructureHost: "http://localhost:3000",
-                apiVersion: "a",
-                repo: repoFromURL,
-                commitsContainer: ".gpiic-metrics-commits",
-                contributorsContainer: ".gpiic-metrics-contributors"
-            }
+        <ul>
+            <li><a href="./index.html?repo=gpii/universal">gpii/universal</a></li>
+            <li><a href="./index.html?repo=gpii/universal&animate=true">gpii/universal (animated graphs)</a></li>
+        </ul>
 
-            $(document).ready(function () {
-                var panels = gpii.qualityInfrastructure.frontEnd.createPanels(demoPanelsConfig);
-
-                // Uncomment this to enable the animation
-                // gpii.qualityInfrastructure.frontEnd.demo.animate(panels.commitsPanel, panels.contributorsPanel);
-
-            });
-
-        </script>
+        <h2 id="gpii-demo-repoTitle"></h2>
 
         <div class="gpiic-metrics-commits gpii-panel"></div>
 

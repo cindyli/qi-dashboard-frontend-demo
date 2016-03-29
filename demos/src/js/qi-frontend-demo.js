@@ -36,4 +36,29 @@
         window.setInterval(changeView, 3000);
     };
 
+    $(document).ready(function () {
+
+        var params={};window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(str,key,value){params[key] = value;});
+        var repoFromURL = params.repo;
+        var shouldAnimate = params.animate;
+
+        if (repoFromURL !== undefined) {
+            $("#gpii-demo-repoTitle").text(repoFromURL);
+
+            var demoPanelsConfig = {
+                qualityInfrastructureHost: "http://localhost:3000",
+                apiVersion: "a",
+                repo: repoFromURL,
+                commitsContainer: ".gpiic-metrics-commits",
+                contributorsContainer: ".gpiic-metrics-contributors"
+            };
+
+        var panels = gpii.qualityInfrastructure.frontEnd.createPanels(demoPanelsConfig);
+
+        if (shouldAnimate) {
+            gpii.qualityInfrastructure.frontEnd.demo.animate(panels.commitsPanel, panels.contributorsPanel);
+            }
+        }
+    });
+
 })(jQuery, fluid);
