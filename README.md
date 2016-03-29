@@ -27,4 +27,4 @@ This produces four single-file versions of the dependencies in the `/dist` direc
 
 ## The Demos
 
-The demos in `/demos` assumes a single-file distribution has been built and use it in their markup; the demos are intended to guide those implementing the QI panels into their own site.
+The demos `index-singleFile.html` and `index-noJquery.html` in `/demos` assumes a single-file distribution has been built and use it in their markup; these demos are intended to guide those implementing the QI panels into their own site.

@@ -51,32 +51,37 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         return qualityInfrastructureHost + "/" + apiVersion + "/" + repo + "/" + endpoint;
     };
 
-    gpii.qualityInfrastructure.frontEnd.createCommitsPanel = function (qualityInfrastructureHost, apiVersion, repo, container) {
-        var commitsEndpoint = gpii.qualityInfrastructure.frontEnd.getEndpointURL(qualityInfrastructureHost, apiVersion, repo, "commits");
-        return gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel(container, {
+    // Expander function
+    gpii.qualityInfrastructure.frontEnd.getJsonpLoaderComponent = function (endPointURL) {
+        return {
             components: {
                 jsonpLoader: {
                     options: {
                         jsonpOptions: {
-                            url: commitsEndpoint
+                            url: endPointURL
                         }
                     }
                 }
+            }
+        };
+    };
+
+    gpii.qualityInfrastructure.frontEnd.createCommitsPanel = function (qualityInfrastructureHost, apiVersion, repo, container) {
+        var commitsEndpoint = gpii.qualityInfrastructure.frontEnd.getEndpointURL(qualityInfrastructureHost, apiVersion, repo, "commits");
+        return gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel(container, {
+            expander: {
+                    funcName: "gpii.qualityInfrastructure.frontEnd.getJsonpLoaderComponent",
+                    args: [commitsEndpoint]
             }
         });
     };
 
     gpii.qualityInfrastructure.frontEnd.createContributorsPanel = function (qualityInfrastructureHost, apiVersion, repo, container) {
-        var contributorsEndpoint = qualityInfrastructureHost + "/" + apiVersion + "/" + repo + "/contributors";
+        var contributorsEndpoint = gpii.qualityInfrastructure.frontEnd.getEndpointURL(qualityInfrastructureHost, apiVersion, repo, "contributors");
         return gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel(container, {
-            components: {
-                jsonpLoader: {
-                    options: {
-                        jsonpOptions: {
-                            url: contributorsEndpoint
-                        }
-                    }
-                }
+            expander: {
+                    funcName: "gpii.qualityInfrastructure.frontEnd.getJsonpLoaderComponent",
+                    args: [contributorsEndpoint]
             }
         });
     };
