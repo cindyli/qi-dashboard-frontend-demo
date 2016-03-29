@@ -120,7 +120,7 @@ module.exports = function (grunt) {
         },
         uglify: {
             options: {
-                preserveComments: "all"
+                banner: "/* ! minified version of Javascript dependencies of https://github.com/waharnum/qi-dashboard-frontend-demo - see repository for details */"
             },
             distUglify: {
                 src: "dist/qi-frontend-full.js",
