@@ -13,38 +13,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
 
     "use strict";
 
-    fluid.registerNamespace("gpii.qualityInfrastructure.frontEnd");
+    fluid.registerNamespace("gpii.qualityInfrastructure.frontEnd");    
 
-    // A panels configuration object looks like this:
-    // {
-    //   qualityInfrastructureHost: host address of QI instance, ex: "http://localhost:3000",
-    //   apiVersion: alphabetical version of the QI API to use, ex: "a"
-    //   repo: repo to retrieve results for, ex: "gpii/universal",
-    //   buildsContainer: selector for container for build metrics panel, ex: ".gpiic-metrics-builds",
-    //   testsContainer: selector for container for tests metrics panel, ex: ".gpiic-metrics-tests",
-    //   commitsContainer: selector for container for commits metrics, ex: ".gpiic-metrics-commits",
-    //   contributorsContainer: selector for container for contributors metrics panel, ex: ".gpiic-metrics-contributors"
-    // }
-
-    gpii.qualityInfrastructure.frontEnd.createPanels = function(panelsConfig) {
-        var qualityInfrastructureHost = panelsConfig.qualityInfrastructureHost;
-        var apiVersion = panelsConfig.apiVersion;
-        var repo = panelsConfig.repo;
-        var commitsContainer = panelsConfig.commitsContainer;
-        var contributorsContainer = panelsConfig.contributorsContainer;
-
-        var commitsPanel = gpii.qualityInfrastructure.frontEnd.createCommitsPanel(qualityInfrastructureHost, apiVersion, repo, commitsContainer);
-
-        var contributorsPanel = gpii.qualityInfrastructure.frontEnd.createContributorsPanel(qualityInfrastructureHost, apiVersion, repo, contributorsContainer);
-
-        // Returns a data object with references to the created panels, in case
-        // the implenentation needs to do something further with them
-
-        return {
-            commitsPanel: commitsPanel,
-            contributorsPanel: contributorsPanel
-        };
-
+    gpii.qualityInfrastructure.frontEnd.qualityInfrastructureDefaults = {
+        host: "http://localhost:3000",
+        apiVersion: "a"
     };
 
     gpii.qualityInfrastructure.frontEnd.getEndpointURL = function(endpoint, qualityInfrastructureHost, apiVersion, repo) {
@@ -66,7 +39,10 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         };
     };
 
-    gpii.qualityInfrastructure.frontEnd.createCommitsPanel = function (qualityInfrastructureHost, apiVersion, repo, container) {
+    gpii.qualityInfrastructure.frontEnd.createCommitsPanel = function (repo, container) {
+        var qualityInfrastructureHost = gpii.qualityInfrastructure.frontEnd.qualityInfrastructureDefaults.host,
+        apiVersion = gpii.qualityInfrastructure.frontEnd.qualityInfrastructureDefaults.apiVersion;
+
         var commitsEndpoint = gpii.qualityInfrastructure.frontEnd.getEndpointURL("commits", qualityInfrastructureHost, apiVersion, repo);
         return gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel(container, {
             expander: {
@@ -76,7 +52,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         });
     };
 
-    gpii.qualityInfrastructure.frontEnd.createContributorsPanel = function (qualityInfrastructureHost, apiVersion, repo, container) {
+    gpii.qualityInfrastructure.frontEnd.createContributorsPanel = function (repo, container) {
+
+        var qualityInfrastructureHost = gpii.qualityInfrastructure.frontEnd.qualityInfrastructureDefaults.host,
+        apiVersion = gpii.qualityInfrastructure.frontEnd.qualityInfrastructureDefaults.apiVersion;
+
         var contributorsEndpoint = gpii.qualityInfrastructure.frontEnd.getEndpointURL("contributors", qualityInfrastructureHost, apiVersion, repo);
         return gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel(container, {
             expander: {
