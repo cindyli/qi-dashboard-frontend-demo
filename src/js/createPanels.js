@@ -13,7 +13,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
 
     "use strict";
 
-    fluid.registerNamespace("gpii.qualityInfrastructure.frontEnd");    
+    fluid.registerNamespace("gpii.qualityInfrastructure.frontEnd");
 
     gpii.qualityInfrastructure.frontEnd.qualityInfrastructureDefaults = {
         host: "http://localhost:3000",
@@ -24,9 +24,14 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         return qualityInfrastructureHost + "/" + apiVersion + "/" + repo + "/" + endpoint;
     };
 
-    // Expander function
-    gpii.qualityInfrastructure.frontEnd.getJsonpLoaderComponent = function (endPointURL) {
-        return {
+    gpii.qualityInfrastructure.frontEnd.createPanel = function (repo, container, endpoint, panelComponent) {
+
+        var qualityInfrastructureHost = gpii.qualityInfrastructure.frontEnd.qualityInfrastructureDefaults.host,
+        apiVersion = gpii.qualityInfrastructure.frontEnd.qualityInfrastructureDefaults.apiVersion;
+
+        var endPointURL = gpii.qualityInfrastructure.frontEnd.getEndpointURL(endpoint, qualityInfrastructureHost, apiVersion, repo);
+
+        return panelComponent(container, {
             components: {
                 jsonpLoader: {
                     options: {
@@ -36,34 +41,17 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                     }
                 }
             }
-        };
+        });
     };
 
     gpii.qualityInfrastructure.frontEnd.createCommitsPanel = function (repo, container) {
-        var qualityInfrastructureHost = gpii.qualityInfrastructure.frontEnd.qualityInfrastructureDefaults.host,
-        apiVersion = gpii.qualityInfrastructure.frontEnd.qualityInfrastructureDefaults.apiVersion;
 
-        var commitsEndpoint = gpii.qualityInfrastructure.frontEnd.getEndpointURL("commits", qualityInfrastructureHost, apiVersion, repo);
-        return gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel(container, {
-            expander: {
-                    funcName: "gpii.qualityInfrastructure.frontEnd.getJsonpLoaderComponent",
-                    args: [commitsEndpoint]
-            }
-        });
+        return gpii.qualityInfrastructure.frontEnd.createPanel(repo, container, "commits", gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel);
     };
 
     gpii.qualityInfrastructure.frontEnd.createContributorsPanel = function (repo, container) {
 
-        var qualityInfrastructureHost = gpii.qualityInfrastructure.frontEnd.qualityInfrastructureDefaults.host,
-        apiVersion = gpii.qualityInfrastructure.frontEnd.qualityInfrastructureDefaults.apiVersion;
-
-        var contributorsEndpoint = gpii.qualityInfrastructure.frontEnd.getEndpointURL("contributors", qualityInfrastructureHost, apiVersion, repo);
-        return gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel(container, {
-            expander: {
-                    funcName: "gpii.qualityInfrastructure.frontEnd.getJsonpLoaderComponent",
-                    args: [contributorsEndpoint]
-            }
-        });
+        return gpii.qualityInfrastructure.frontEnd.createPanel(repo, container, "contributors", gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel);
     };
 
 })(jQuery, fluid);
