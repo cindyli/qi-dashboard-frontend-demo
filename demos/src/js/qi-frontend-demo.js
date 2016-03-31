@@ -11,58 +11,79 @@
 
     $(document).ready(function () {
 
-        var params={};window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(str,key,value){params[key] = value;});
         var repoFromURL = gpii.qualityInfrastructure.frontEnd.demo.getURLParamValue("repo");
         var shouldAnimate = gpii.qualityInfrastructure.frontEnd.demo.getURLParamValue("animate");
 
         if (repoFromURL !== undefined) {
             $("#gpii-demo-repoTitle").text(repoFromURL);
 
-            var repo = repoFromURL,
-                commitsContainer = ".gpiic-metrics-commits",
-                contributorsContainer = ".gpiic-metrics-contributors";
+            gpii.qualityInfrastructure.frontEnd.demo.createPanels(repoFromURL, shouldAnimate);
 
-
-            var commitsPanel = gpii.qualityInfrastructure.frontEnd.createCommitsPanel(repo, commitsContainer);
-
-            var contributorsPanel = gpii.qualityInfrastructure.frontEnd.createContributorsPanel(repo, contributorsContainer);
-
-        if (shouldAnimate) {
-            gpii.qualityInfrastructure.frontEnd.demo.animate(commitsPanel, contributorsPanel);
-            }
         }
     });
 
-    gpii.qualityInfrastructure.frontEnd.demo.animate = function(commitsPanel, contributorsPanel) {
-        // var dayZooms = [30, 60, 180, 365, 730, 1040, 2080];
+    gpii.qualityInfrastructure.frontEnd.demo.createPanels = function (repo, shouldAnimate) {
 
-        var originalMetricsEndDate = fluid.copy( contributorsPanel.model.currentEventsDataViewSettings.metricsEndDate);
-        var nextMetricsEndDate;
+        var commitsContainer = ".gpiic-metrics-commits",
+        contributorsContainer = ".gpiic-metrics-contributors";
+
+        var commitsPanel = gpii.qualityInfrastructure.frontEnd.createCommitsPanel(repo, commitsContainer);
+
+        var contributorsPanel = gpii.qualityInfrastructure.frontEnd.createContributorsPanel(repo, contributorsContainer);
+
+
+        $("#gpiic-metrics-back").click(function (e) {
+            gpii.qualityInfrastructure.frontEnd.demo.moveView(commitsPanel, -180);
+            gpii.qualityInfrastructure.frontEnd.demo.moveView(contributorsPanel, -180);
+            e.preventDefault();
+        });
+
+        $("#gpiic-metrics-forward").click(function (e) {
+            gpii.qualityInfrastructure.frontEnd.demo.moveView(commitsPanel, 180);
+            gpii.qualityInfrastructure.frontEnd.demo.moveView(contributorsPanel, 180);
+            e.preventDefault();
+        });
+
+        if (shouldAnimate) {
+            gpii.qualityInfrastructure.frontEnd.demo.animate(commitsPanel, contributorsPanel, 180);
+            }
+
+    };
+
+    gpii.qualityInfrastructure.frontEnd.demo.rollDays = function (panel, rollDays) {
+        var currentMetricsEndDate = panel.model.currentEventsDataViewSettings.metricsEndDate;
+
+        var nextMetricsEndDate = new Date(currentMetricsEndDate);
+
+        nextMetricsEndDate.setDate(currentMetricsEndDate.getDate() + rollDays);
+
+        panel.applier.change("currentEventsDataViewSettings.metricsEndDate", nextMetricsEndDate);
+    };
+
+    gpii.qualityInfrastructure.frontEnd.demo.moveView = function (panel, daysToScroll) {
+        try {
+            gpii.qualityInfrastructure.frontEnd.demo.rollDays(panel, daysToScroll);
+        } catch(e) {
+            gpii.qualityInfrastructure.frontEnd.demo.rollDays(panel, - daysToScroll);
+        }
+    };
+
+    gpii.qualityInfrastructure.frontEnd.demo.animate = function(commitsPanel, contributorsPanel, daysToScroll) {
+
+        var forward = false;
 
         var changeView = function() {
+            var daysToRoll = forward ? daysToScroll : -daysToScroll;
             try {
-                var currentMetricsEndDate = contributorsPanel.model.currentEventsDataViewSettings.metricsEndDate;
-
-                nextMetricsEndDate = new Date(currentMetricsEndDate);
-
-                nextMetricsEndDate.setDate(currentMetricsEndDate.getDate() - 30);
-
-                commitsPanel.applier.change("currentEventsDataViewSettings.metricsEndDate", nextMetricsEndDate);
-
-                contributorsPanel.applier.change("currentEventsDataViewSettings.metricsEndDate", nextMetricsEndDate);
+                gpii.qualityInfrastructure.frontEnd.demo.rollDays(commitsPanel, daysToRoll);
+                gpii.qualityInfrastructure.frontEnd.demo.rollDays(contributorsPanel, daysToRoll);
             }
-            // An error means we've moved past the start of the data coverage
-            // range, so should reset to the start
             catch(e) {
-                commitsPanel.applier.change("currentEventsDataViewSettings.metricsEndDate", originalMetricsEndDate);
-
-                contributorsPanel.applier.change("currentEventsDataViewSettings.metricsEndDate", originalMetricsEndDate);
-
+                forward = forward ? false : true;
             }
-
         };
 
-        window.setInterval(changeView, 3000);
+        window.setInterval(changeView, 5000);
     };
 
 })(jQuery, fluid);

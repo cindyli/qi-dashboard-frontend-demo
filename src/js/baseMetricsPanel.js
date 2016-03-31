@@ -60,6 +60,12 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 options: {
                     model: {
                         dataSet: "{baseMetricsPanel}.model.currentEventsDataView"
+                    },
+                    axisOptions: {
+                        XAxisTimeSeriesTickFormats: {
+                            firstDayOfMonth: "%b %d %Y",
+                            month: "%b %Y"
+                        }
                     }
                 }
             }
@@ -95,6 +101,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         that.events.onServiceResponseReady.fire();
     };
 
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataViewException = function (message) {
+        this.message = message;
+        this.name = "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataViewException";
+    };
+
     gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataView = function (that) {
         var events = that.model.events,
             metricsEndDate = that.model.currentEventsDataViewSettings.metricsEndDate,
@@ -108,8 +119,12 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         } else {
             filteredEvents = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsDataByDaysBack(events, metricsEndDate, daysBack);
         }
-
-        that.applier.change("currentEventsDataView", filteredEvents);
+        
+        if(filteredEvents.length !== 0) {
+            that.applier.change("currentEventsDataView", filteredEvents);
+        } else {
+            throw new gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataViewException("Filter would result in empty dataSet object");
+        }
     };
 
     // Transforms events data into the style expected by the line chart component
