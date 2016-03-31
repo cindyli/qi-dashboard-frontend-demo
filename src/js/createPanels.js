@@ -15,21 +15,24 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
 
     fluid.registerNamespace("gpii.qualityInfrastructure.frontEnd");
 
-    gpii.qualityInfrastructure.frontEnd.qualityInfrastructureDefaults = {
+    gpii.qualityInfrastructure.frontEnd.qualityInfrastructureSettings = {
         host: "http://localhost:3000",
-        apiVersion: "a"
+        apiVersion: "a",
+        // For testing without a backend service
+        endpointSuffix: ""
     };
 
-    gpii.qualityInfrastructure.frontEnd.getEndpointURL = function(endpoint, qualityInfrastructureHost, apiVersion, repo) {
-        return qualityInfrastructureHost + "/" + apiVersion + "/" + repo + "/" + endpoint;
+    gpii.qualityInfrastructure.frontEnd.getEndpointURL = function(endpoint, qualityInfrastructureHost, apiVersion, repo, endpointSuffix) {
+        return qualityInfrastructureHost + "/" + apiVersion + "/" + repo + "/" + endpoint + endpointSuffix;
     };
 
     gpii.qualityInfrastructure.frontEnd.createPanel = function (repo, container, endpoint, panelComponent) {
 
-        var qualityInfrastructureHost = gpii.qualityInfrastructure.frontEnd.qualityInfrastructureDefaults.host,
-        apiVersion = gpii.qualityInfrastructure.frontEnd.qualityInfrastructureDefaults.apiVersion;
+        var qualityInfrastructureHost = gpii.qualityInfrastructure.frontEnd.qualityInfrastructureSettings.host,
+        apiVersion = gpii.qualityInfrastructure.frontEnd.qualityInfrastructureSettings.apiVersion,
+        endpointSuffix = gpii.qualityInfrastructure.frontEnd.qualityInfrastructureSettings.endpointSuffix;
 
-        var endPointURL = gpii.qualityInfrastructure.frontEnd.getEndpointURL(endpoint, qualityInfrastructureHost, apiVersion, repo);
+        var endPointURL = gpii.qualityInfrastructure.frontEnd.getEndpointURL(endpoint, qualityInfrastructureHost, apiVersion, repo, endpointSuffix);
 
         return panelComponent(container, {
             components: {
