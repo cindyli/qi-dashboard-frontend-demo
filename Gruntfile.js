@@ -89,7 +89,7 @@ module.exports = function (grunt) {
             },
             infusionNoJQueryWithLicense: {
                 options: {
-                    banner: licenseWrapper("Infusion", "src/lib/infusion/infusion-LICENSE.txt")
+                    banner: licenseWrapper("Infusion", "src/lib/infusion/Infusion-LICENSE.txt")
                 },
                 src: ["src/lib/infusion/infusion-custom-noJquery.js"],
                 dest: "dist/infusion-noJquery-with-license.js"
