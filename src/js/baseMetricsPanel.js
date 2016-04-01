@@ -70,7 +70,8 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                         preserveAspectRatio: "xMidYMid"
                     },
                     lineOptions: {
-                        padding: 25
+                        padding: 25,
+                        colors: ["#009688"]
                     }
                 }
             }
@@ -98,8 +99,14 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         var summary = that.jsonpLoader.model.jsonpData.summary,
             events = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.transformEventsData(that.jsonpLoader.model.jsonpData.events);
 
+        // We set the metricsEndDate to the last day in the dataset
+        var lastDayOfData = new Date(events[0].date);
+
         that.applier.change("summary", summary);
         that.applier.change("events", events);
+        that.applier.change("currentEventsDataViewSettings.metricsEndDate", lastDayOfData);
+
+
 
         gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataView(that);
 
