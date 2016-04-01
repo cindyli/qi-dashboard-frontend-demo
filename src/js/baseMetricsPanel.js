@@ -62,7 +62,8 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                         dataSet: "{baseMetricsPanel}.model.currentEventsDataView"
                     },
                     axisOptions: {
-                        numberOfXAxisTicks: 6
+                        numberOfXAxisTicks: 6,
+                        numberOfYAxisTicks: 6
                     },
                     svgOptions: {
                         height: 150,

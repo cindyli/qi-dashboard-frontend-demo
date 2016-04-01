@@ -5,7 +5,6 @@ body {
 .gpii-panel {
     width: 60em;
     clear: both;
-    height: 30em;
 }
 
 .gpii-demo-controls {
@@ -17,12 +16,12 @@ body {
 }
 
 .gpiic-metricsPanel-summary {
-    width: 20%;
+    width: 25%;
     float: left;
 }
 
 .gpiic-metricsPanel-graph {
-    width: 80%;
+    width: 75%;
     float:left;
 }
 
@@ -51,7 +50,7 @@ body {
 /* tick text style */
 .floec-ca-lineChart-y-axis .tick text, .floec-ca-lineChart-x-axis .tick text {
     font-family: sans-serif;
-    font-size: 11px;
+    font-size: 6pt;
 }
 
 /* chart line style */

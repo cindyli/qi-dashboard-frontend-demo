@@ -17,7 +17,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseMetricsPanel"],
         resources: {
             template: {
-                resourceText: "<div class=\"gpiic-metricsPanel-summary\"><h2>Loading Commits Metrics...</h2></div><div class=\"gpiic-metricsPanel-graph\"></div>"
+                resourceText: "<div class=\"gpiic-metricsPanel-summary\"><h2>Loading Commits Metrics...</h2></div><div class=\"gpiic-metricsPanel-graph\"><h3>Number of Commits</h3></div>"
             }
         },
         components: {
