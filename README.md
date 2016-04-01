@@ -3,6 +3,7 @@
 ## Developing
 
 - `npm install`
+- `npm install -g grunt-cli`
 - `grunt copy:frontEndDependencies`
 
 This copies necessary front-end dependencies from `node_modules` to `src/lib`
@@ -10,6 +11,7 @@ This copies necessary front-end dependencies from `node_modules` to `src/lib`
 ## Building a Redistributable Single File Version
 
 - `npm install`
+- `npm install -g grunt-cli`
 - `grunt copy:frontEndDependencies`
 - `grunt dist`
 
