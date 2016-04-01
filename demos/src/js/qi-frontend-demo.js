@@ -70,6 +70,16 @@
             e.preventDefault();
         });
 
+        $("#gpiic-metrics-visibility-highContrast").click(function (e) {
+            $("body").toggleClass("highContrast");
+            e.preventDefault();
+        });
+
+        $("#gpiic-metrics-visibility-largeGraphs").click(function (e) {
+            $("body").toggleClass("largeGraphs");
+            e.preventDefault();
+        });
+
         if (shouldAnimate) {
             gpii.qualityInfrastructure.frontEnd.demo.animate(commitsPanel, contributorsPanel, gpii.qualityInfrastructure.frontEnd.demo.daysToZoom);
             }

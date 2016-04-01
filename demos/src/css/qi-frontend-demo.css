@@ -8,6 +8,14 @@ body {
     height: 30em;
 }
 
+.gpii-demo-controls {
+    float:left;
+    margin-right: 2em;
+    padding: 1em;
+    background-color: #E6E6E6;
+    height: 8em;
+}
+
 .gpiic-metricsPanel-summary {
     width: 20%;
     float: left;
@@ -45,4 +53,51 @@ body {
 .floec-ca-lineChart-chartLine-area {
     opacity: 0.2;
     fill: black;
+}
+
+/* High Contrast Styles */
+
+body.highContrast {
+    background-color: black;
+    color: white;
+}
+
+.highContrast a {
+    color: white;
+}
+
+.highContrast .gpii-demo-controls {
+    float:left;
+    margin-right: 2em;
+    padding: 1em;
+    background-color: black;
+    border:1px solid white;
+    height: 8em;
+}
+
+.highContrast .floec-ca-lineChart-y-axis line {
+  stroke: white;
+  opacity: 0.2;
+}
+
+.highContrast .floec-ca-lineChart-x-axis line {
+  stroke: white;
+  opacity: 1;
+}
+
+.highContrast .floec-ca-lineChart-y-axis text, .highContrast .floec-ca-lineChart-x-axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+    fill: white;
+}
+
+.highContrast .floec-ca-lineChart-chartLineArea {
+    opacity: 1;
+    fill: white;
+}
+
+/* Large Graphs Styles */
+
+.largeGraphs .gpiic-metricsPanel-graph {
+    width: 60em;
 }
