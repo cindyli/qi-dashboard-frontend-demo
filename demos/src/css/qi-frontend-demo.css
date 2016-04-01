@@ -30,29 +30,39 @@ body {
     display: none;
 }
 
+/* Scales the SVG in relation to its parent container */
 .gpiic-metricsPanel-graph svg {
     width: 100%;
     height: 100%;
 }
 
-.floec-ca-lineChart-y-axis line {
+/* y-Axis tick style */
+.floec-ca-lineChart-y-axis .tick line {
   stroke: black;
   opacity: 0.2;
 }
 
-.floec-ca-lineChart-x-axis line {
+/* x-Axis tick style */
+.floec-ca-lineChart-x-axis .tick line {
   stroke: black;
   opacity: 0.2;
 }
 
-.floec-ca-lineChart-y-axis text, .floec-ca-lineChart-x-axis text {
+/* tick text style */
+.floec-ca-lineChart-y-axis .tick text, .floec-ca-lineChart-x-axis .tick text {
     font-family: sans-serif;
     font-size: 11px;
 }
 
-.floec-ca-lineChart-chartLine-area {
-    opacity: 0.2;
-    fill: black;
+/* chart line style */
+.floec-ca-lineChart-chartLine {
+    stroke: #009688;
+}
+
+/* chart line area style */
+.floec-ca-lineChart-chartLineArea {
+    opacity: 0.5;
+    fill: #009688;
 }
 
 /* High Contrast Styles */
@@ -75,20 +85,24 @@ body.highContrast {
     height: 8em;
 }
 
-.highContrast .floec-ca-lineChart-y-axis line {
+.highContrast .floec-ca-lineChart-y-axis .tick line {
   stroke: white;
   opacity: 0.2;
 }
 
-.highContrast .floec-ca-lineChart-x-axis line {
+.highContrast .floec-ca-lineChart-x-axis .tick line {
   stroke: white;
   opacity: 1;
 }
 
-.highContrast .floec-ca-lineChart-y-axis text, .highContrast .floec-ca-lineChart-x-axis text {
+.highContrast .floec-ca-lineChart-y-axis .tick text, .highContrast .floec-ca-lineChart-x-axis .tick text {
     font-family: sans-serif;
     font-size: 11px;
     fill: white;
+}
+
+.highContrast .floec-ca-lineChart-chartLine {
+    stroke: white;
 }
 
 .highContrast .floec-ca-lineChart-chartLineArea {
