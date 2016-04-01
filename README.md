@@ -30,3 +30,27 @@ This produces four single-file versions of the dependencies in the `/dist` direc
 ## The Demos
 
 The demos `index-singleFile.html` and `index-noJquery.html` in `/demos` assumes a single-file distribution has been built and use it in their markup; these demos are intended to guide those implementing the QI panels into their own site.
+
+## Using a Container
+
+A container running a web server can be used to host the redistributable source code mentioned above. 
+
+To build a container the following command should be used:
+
+```
+sudo docker build \
+--no-cache \
+-t gpii/qi-dashboard-frontend-demo .
+```
+
+Then to start a container this command can be used:
+
+```
+sudo docker run \
+--name qi-dashboard-frontend-demo \ 
+-d \
+-p 80:80 \
+gpii/qi-dashboard-frontend-demo
+```
+
+The server will be reachable at ``http://<your container's IP address>:8888/`` and will serve the contents of the generated ``dist`` directory. 
