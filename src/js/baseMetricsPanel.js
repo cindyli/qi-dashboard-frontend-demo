@@ -62,11 +62,15 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                         dataSet: "{baseMetricsPanel}.model.currentEventsDataView"
                     },
                     axisOptions: {
-                        XAxisTimeSeriesTickFormats: {
-                            firstDayOfMonth: "%b %d %Y",
-                            month: "%b %Y"
-                        },
-                        numberOfXAxisTicks: 4
+                        numberOfXAxisTicks: 6
+                    },
+                    svgOptions: {
+                        height: 150,
+                        width: 500,
+                        preserveAspectRatio: "xMidYMid"
+                    },
+                    lineOptions: {
+                        padding: 25
                     }
                 }
             }
