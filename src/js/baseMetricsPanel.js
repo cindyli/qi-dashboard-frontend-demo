@@ -65,7 +65,8 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                         XAxisTimeSeriesTickFormats: {
                             firstDayOfMonth: "%b %d %Y",
                             month: "%b %Y"
-                        }
+                        },
+                        numberOfXAxisTicks: 4
                     }
                 }
             }
@@ -119,7 +120,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         } else {
             filteredEvents = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsDataByDaysBack(events, metricsEndDate, daysBack);
         }
-        
+
         if(filteredEvents.length !== 0) {
             that.applier.change("currentEventsDataView", filteredEvents);
         } else {

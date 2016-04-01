@@ -16,7 +16,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     fluid.registerNamespace("gpii.qualityInfrastructure.frontEnd");
 
     gpii.qualityInfrastructure.frontEnd.qualityInfrastructureSettings = {
-        host: "http://localhost:3000",
+        host: "http://qi-backend.gpii.net",
         apiVersion: "a",
         // For testing without a backend service
         endpointSuffix: ""
