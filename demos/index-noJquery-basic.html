@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- include a separate version of jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+        <!-- include the noJquery version of the dependencies -->
+        <script src="../dist/qi-frontend-noJquery.min.js"></script>
+
+        <!-- include the stylesheet -->
+        <link rel="stylesheet" type="text/css" href="src/css/qi-frontend-demo.css" />
+
+        <title>QI Frontend Basic Demo</title>
+    </head>
+
+    <body>
+
+        <h1>About This Demo</h1>
+
+        A basic example of embedding charts from the Quality Infrastructure on a website via included Javascript.
+
+        This version uses a single-file Javascript including all the dependencies, and inline script tags to create panels.
+
+        <h2 id="repo-name">repo name</h2>
+
+        <!-- container for commit metrics panels -->
+        <div id="commits-gpii-universal" class="gpii-panel"></div>
+
+        <!-- container for contributor metrics panels -->
+        <div id="contributors-gpii-universal" class="gpii-panel"></div>
+
+        <script>
+            // The GitHub user/organization + repo to request metrics for
+            var repo = "gpii/universal"
+
+            // Update the heading to the repo
+            $("#repo-name").text(repo);
+
+            // Call the createCommitsPanel function with arguments for the
+            // repo + selector for the container to inject results into
+            var commitsPanel = gpii.qualityInfrastructure.frontEnd.createCommitsPanel(repo, "#commits-gpii-universal");
+
+            // Call the createContributorsPanel function with arguments for the
+            // repo + selector for the container to inject results into
+            var contributorsPanel = gpii.qualityInfrastructure.frontEnd.createContributorsPanel(repo, "#contributors-gpii-universal");
+        </script>
+
+    </body>
+</html>
