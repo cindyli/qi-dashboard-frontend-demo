@@ -1,5 +1,26 @@
 # Quality Infrastructure - Frontend Demo Code
 
+## End-User Demos
+
+This branch (`dist`) includes pre-built single-file versions of the Javascript code needed to embed metrics informations (charts and summaries) from the Quality Infrastructure on another site, along with demo code showing implementation examples.
+
+All demos will need to be served from a webserver due to the use of AJAX.
+
+The most basic examples of using the demo code are:
+- `demos/index-singleFile-basic.html` (single Javascript file including jQuery + single CSS file)
+- `demos/index-noJquery-basic.html` (separate jQuery include)
+
+These examples require no particular knowledge of the underlying code implemented using the [Infusion](https://github.com/fluid-project/infusion) Javascript library, and use basic inline Javascript to render the panels.
+
+More elaborate examples are:
+- `demos/index.html?repo=gpii/universal`
+- `demos/index-singleFile.html?repo=gpii/universal`
+- `demos/index-noJquery.html?repo=gpii/universal`
+
+These demos include navigation controls and functions that make use of Infusion component features to change the views presented by the graphs.
+
+---
+
 ## Developing
 
 - `npm install`
@@ -33,7 +54,7 @@ The demos `index-singleFile.html` and `index-noJquery.html` in `/demos` assumes 
 
 ## Using a Container
 
-A container running a web server can be used to host the redistributable source code mentioned above. 
+A container running a web server can be used to host the redistributable source code mentioned above.
 
 To build a container the following command should be used:
 
@@ -47,10 +68,10 @@ Then to start a container this command can be used:
 
 ```
 sudo docker run \
---name qi-dashboard-frontend-demo \ 
+--name qi-dashboard-frontend-demo \
 -d \
 -p 80:80 \
 gpii/qi-dashboard-frontend-demo
 ```
 
-The server will be reachable at ``http://<your container's IP address>:8888/`` and will serve the contents of the generated ``dist`` directory. 
+The server will be reachable at ``http://<your container's IP address>:8888/`` and will serve the contents of the generated ``dist`` directory.
