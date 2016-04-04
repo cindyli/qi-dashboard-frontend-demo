@@ -1,8 +1,10 @@
 # Quality Infrastructure - Frontend Demo Code
 
-## End-User Demos
+## Using
 
 This branch (`dist`) includes pre-built single-file versions of the Javascript code needed to embed metrics informations (charts and summaries) from the Quality Infrastructure on another site, along with demo code showing implementation examples.
+
+### Demo Examples
 
 All demos will need to be served from a webserver due to the use of AJAX.
 
@@ -18,6 +20,46 @@ More elaborate examples are:
 - `demos/index-noJquery.html?repo=gpii/universal`
 
 These demos include navigation controls and functions that make use of Infusion component features to change the views presented by the graphs.
+
+### Implementing on Your Own Site
+
+The most basic means of embedding metrics display is to do the following:
+
+In the document `HEAD`:
+
+```
+<!-- include the single-file version of the dependencies -->
+<script src="../dist/qi-frontend-full.min.js"></script>
+
+<!-- optionally include the stylesheet -->
+<link rel="stylesheet" type="text/css" href="../dist/qi-frontend.css" />
+```
+
+In the document `BODY`:
+
+```
+<!-- container for commit metrics panels -->
+<div id="commits" class="gpii-panel"></div>
+
+<!-- container for contributor metrics panels -->
+<div id="contributors" class="gpii-panel"></div>
+
+<script>
+    // The GitHub user/organization + repo to request metrics for
+    var repo = "gpii/universal"
+
+    // Update the heading to the repo
+    $("#repo-name").text(repo);
+
+    // Call the createCommitsPanel function with arguments for the
+    // repo + selector for the container to inject results into
+    var commitsPanel = gpii.qualityInfrastructure.frontEnd.createCommitsPanel(repo, "#commits");
+
+    // Call the createContributorsPanel function with arguments for the
+    // repo + selector for the container to inject results into
+    var contributorsPanel = gpii.qualityInfrastructure.frontEnd.createContributorsPanel(repo, "#contributors");
+</script>
+```
 
 ---
 
