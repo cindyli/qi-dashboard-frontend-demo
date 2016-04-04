@@ -50,6 +50,11 @@ module.exports = function (grunt) {
                     {expand: true, cwd: "./node_modules/flocking/", src: "**", dest: "./src/lib/flocking/"}
 
                 ]
+            },
+            cssToDist: {
+                files: [
+                    {src: "demos/src/css/qi-frontend-demo.css", dest: "dist/qi-frontend.css"}
+                ]
             }
         },
         concat: {
@@ -145,5 +150,5 @@ module.exports = function (grunt) {
 
     grunt.registerTask("default", ["lint"]);
     grunt.registerTask("lint", "Apply jshint and jsonlint", ["jshint", "jsonlint"]);
-    grunt.registerTask("dist", "Build single-file distrbituion", ["concat", "uglify", "clean:distArtifacts"]);
+    grunt.registerTask("dist", "Build single-file distrbituion", ["copy:cssToDist", "concat", "uglify", "clean:distArtifacts"]);
 };
