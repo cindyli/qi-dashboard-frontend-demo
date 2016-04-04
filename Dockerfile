@@ -4,13 +4,15 @@ COPY . /tmp/build
 
 WORKDIR /tmp/build
 
-RUN npm install && \
+RUN yum -y install make && \
+    npm install && \
     grunt copy:frontEndDependencies && \
     grunt dist && \
     cp -R ./dist /srv/www && \
+    yum -y autoremove make && \
     cd /tmp && \
     rm -rf /tmp/build
-    
+
 COPY provisioning/*.yml /etc/ansible/playbooks/
 
 COPY provisioning/start.sh /usr/local/bin/start.sh
