@@ -5722,7 +5722,7 @@ var fluid_2_0_0 = fluid_2_0_0 || {};
         fluid.cacheShadowGrades(that, shadow);
         shadow.mergeOptions = mergeOptions;
     };
-    
+
     /** Dynamic grade closure algorithm - the following 4 functions share access to a small record structure "rec" which is
      * constructed at the start of fluid.computeDynamicGrades
      */
@@ -5744,7 +5744,7 @@ var fluid_2_0_0 = fluid_2_0_0 || {};
         var newDefaults = fluid.copy(fluid.getGradedDefaults(rec.that.typeName, rec.gradeNames));
         rec.gradeNames.length = 0; // acquire derivatives of dynamic grades (FLUID-5054)
         rec.gradeNames.push.apply(rec.gradeNames, newDefaults.gradeNames);
-        
+
         fluid.each(rec.gradeNames, function (gradeName) {
             if (gradeName.charAt(0) !== "{") {
                 rec.seenGrades[gradeName] = true;
@@ -5762,10 +5762,10 @@ var fluid_2_0_0 = fluid_2_0_0 || {};
         rec.defaultsBlock.source = newDefaults;
         shadow.mergeOptions.updateBlocks();
         shadow.mergeOptions.computeMergePolicy(); // TODO: we should really only do this if its content changed - this implies moving all options evaluation over to some (cheap) variety of the ChangeApplier
-        
+
         fluid.accumulateDynamicGrades(rec, newDefaults.gradeNames);
     };
-    
+
     // Filter some newly discovered grades into their plain and dynamic queues
     fluid.accumulateDynamicGrades = function (rec, newGradeNames) {
         fluid.each(newGradeNames, function (gradeName) {
@@ -5786,7 +5786,7 @@ var fluid_2_0_0 = fluid_2_0_0 || {};
         gradeNames.length = 0;
         // TODO: In complex distribution cases, a component might end up with multiple default blocks
         var defaultsBlock = fluid.findMergeBlocks(shadow.mergeOptions.mergeBlocks, "defaults")[0];
-        
+
         var rec = {
             that: that,
             shadow: shadow,
@@ -6198,7 +6198,7 @@ var fluid_2_0_0 = fluid_2_0_0 || {};
 
             var childPath = that.composePath(path, name);
             var childShadow = that.idToShadow[child.id];
-            if (!childShadow) { // Explicit FLUID-5812 check - this can be eliminated once we move visitComponentChildren to instantiator's records 
+            if (!childShadow) { // Explicit FLUID-5812 check - this can be eliminated once we move visitComponentChildren to instantiator's records
                 return;
             }
             var created = childShadow.path === childPath;
@@ -6588,7 +6588,7 @@ var fluid_2_0_0 = fluid_2_0_0 || {};
 
         fluid.popActivity();
     };
-    
+
     fluid.assessTreeConstruction = function (that, shadow) {
         var instantiator = fluid.globalInstantiator;
         var thatStack = instantiator.getThatStack(that);
@@ -6601,7 +6601,7 @@ var fluid_2_0_0 = fluid_2_0_0 || {};
             fluid.markSubtree(instantiator, that, shadow.path, "treeConstructed");
         }
     };
-    
+
     fluid.markSubtree = function (instantiator, that, path, state) {
         that.lifecycleStatus = state;
         fluid.visitComponentChildren(that, function (child, name) {
@@ -6664,7 +6664,7 @@ var fluid_2_0_0 = fluid_2_0_0 || {};
             memberName: memberName
         };
     };
-    
+
    /** Construct an instance of a component as a child of the specified parent, with a well-known, unique name derived from its typeName
     * @param parentPath {String|Array of String} Parent of path where the new component is to be constructed, represented as a string or array of segments
     * @param options {String|Object} Options encoding the component to be constructed. If this is of type String, it is assumed to represent the component's typeName with no options
@@ -20740,24 +20740,24 @@ $.widget( "ui.tooltip", {
 
     var touch = event.originalEvent.changedTouches[0],
         simulatedEvent = document.createEvent('MouseEvents');
-    
+
     // Initialize the simulated mouse event using the touch event's coordinates
     simulatedEvent.initMouseEvent(
       simulatedType,    // type
-      true,             // bubbles                    
-      true,             // cancelable                 
-      window,           // view                       
-      1,                // detail                     
-      touch.screenX,    // screenX                    
-      touch.screenY,    // screenY                    
-      touch.clientX,    // clientX                    
-      touch.clientY,    // clientY                    
-      false,            // ctrlKey                    
-      false,            // altKey                     
-      false,            // shiftKey                   
-      false,            // metaKey                    
-      0,                // button                     
-      null              // relatedTarget              
+      true,             // bubbles
+      true,             // cancelable
+      window,           // view
+      1,                // detail
+      touch.screenX,    // screenX
+      touch.screenY,    // screenY
+      touch.clientX,    // clientX
+      touch.clientY,    // clientY
+      false,            // ctrlKey
+      false,            // altKey
+      false,            // shiftKey
+      false,            // metaKey
+      0,                // button
+      null              // relatedTarget
     );
 
     // Dispatch the simulated event to the target element
@@ -20846,7 +20846,7 @@ $.widget( "ui.tooltip", {
    * original mouse event handling methods.
    */
   mouseProto._mouseInit = function () {
-    
+
     var self = this;
 
     // Delegate the touch handlers to the widget's element

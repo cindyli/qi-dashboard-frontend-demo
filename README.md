@@ -15,6 +15,63 @@ A basic stylesheet can also optionally be included or studied to apply your own 
 
 - `https://qi.gpii.net/qi-frontend.css`
 
+### Implementation Example
+
+The most basic means of embedding metrics display is to do the following:
+
+In the document `HEAD`:
+
+```
+<!-- include the single-file version of the dependencies -->
+<script src="http://qi.gpii.net/qi-frontend-full.min.js"></script>
+
+<!-- optionally include the stylesheet -->
+<link rel="stylesheet" type="text/css" href="https://qi.gpii.net/qi-frontend.css" />
+```
+
+In the document `BODY`:
+
+```
+<!-- container for commit metrics panels -->
+<div id="commits" class="gpii-panel"></div>
+
+<!-- container for contributor metrics panels -->
+<div id="contributors" class="gpii-panel"></div>
+
+<script>
+    // The GitHub user/organization + repo to request metrics for
+    var repo = "gpii/universal"
+
+    // Update the heading to the repo
+    $("#repo-name").text(repo);
+
+    // Call the createCommitsPanel function with arguments for the
+    // repo + selector for the container to inject results into
+    var commitsPanel = gpii.qualityInfrastructure.frontEnd.createCommitsPanel(repo, "#commits");
+
+    // Call the createContributorsPanel function with arguments for the
+    // repo + selector for the container to inject results into
+    var contributorsPanel = gpii.qualityInfrastructure.frontEnd.createContributorsPanel(repo, "#contributors");
+</script>
+```
+
+### Demo Examples
+
+All demos will need to be served from a webserver due to the use of AJAX.
+
+The most basic examples of using the demo code are:
+- `demos/index-singleFile-basic.html` (single Javascript file including jQuery + single CSS file)
+- `demos/index-noJquery-basic.html` (separate jQuery include)
+
+These examples require no particular knowledge of the underlying code implemented using the [Infusion](https://github.com/fluid-project/infusion) Javascript library, and use basic inline Javascript to render the panels.
+
+More elaborate examples are:
+- `demos/index.html?repo=gpii/universal`
+- `demos/index-singleFile.html?repo=gpii/universal`
+- `demos/index-noJquery.html?repo=gpii/universal`
+
+These demos include navigation controls and functions that make use of Infusion component features to change the views presented by the graphs.
+
 ---
 
 ## Developing
