@@ -66,14 +66,16 @@ module.exports = function (grunt) {
                     banner: licenseWrapper("Chart Authoring Tool", "src/lib/chartAuthoring/LICENSE.txt")
                 },
                 src: "src/lib/chartAuthoring/src/js/**",
-                dest: "dist/chartAuthoring-with-license.js"
+                dest: "dist/chartAuthoring-with-license.js",
+                nonull: true
             },
             d3WithLicense: {
                 options: {
                     banner: licenseWrapper("D3", "src/lib/d3/LICENSE")
                 },
                 src: ["src/lib/d3/d3.min.js"],
-                dest: "dist/d3-with-license.js"
+                dest: "dist/d3-with-license.js",
+                nonull: true
             },
             flockingWithLicense: {
                 options: {
@@ -83,21 +85,24 @@ module.exports = function (grunt) {
                 "src/lib/flocking/src/ugens/envelopes.js",
                 "src/lib/flocking/src/ugens/midi.js",
                 "src/lib/flocking/src/ugens/scheduling.js"],
-                dest: "dist/flocking-with-license.js"
+                dest: "dist/flocking-with-license.js",
+                nonull: true
             },
             infusionWithLicense: {
                 options: {
                     banner: licenseWrapper("Infusion", "src/lib/infusion/Infusion-LICENSE.txt")
                 },
                 src: ["src/lib/infusion/infusion-custom.js"],
-                dest: "dist/infusion-with-license.js"
+                dest: "dist/infusion-with-license.js",
+                nonull: true
             },
             infusionNoJQueryWithLicense: {
                 options: {
                     banner: licenseWrapper("Infusion", "src/lib/infusion/Infusion-LICENSE.txt")
                 },
                 src: ["src/lib/infusion/infusion-custom-noJquery.js"],
-                dest: "dist/infusion-noJquery-with-license.js"
+                dest: "dist/infusion-noJquery-with-license.js",
+                nonull: true
             },
             dist: {
                 src: ["dist/d3-with-license.js",
