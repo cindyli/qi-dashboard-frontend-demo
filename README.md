@@ -6,14 +6,14 @@ A site can display metrics information (charts and summaries) from the Quality I
 
 Various single-file versions of the Javascript necessary to embed metrics information from the QI are available:
 
-- `http://qi.gpii.net/qi-frontend-full.js` - all depedencies
-- `http://qi.gpii.net/qi-frontend-full.min.js` - the above, minified
-- `http://qi.gpii.net/qi-frontend-noJquery.js` - all dependencies except jQuery
-- `http://qi.gpii.net/qi-frontend-noJquery.min.js` - the above, minified
+- `http://qi.gpii.net/js/qi-frontend-full.js` - all depedencies
+- `http://qi.gpii.net/js/qi-frontend-full.min.js` - the above, minified
+- `http://qi.gpii.net/js/qi-frontend-noJquery.js` - all dependencies except jQuery
+- `http://qi.gpii.net/js/qi-frontend-noJquery.min.js` - the above, minified
 
 A basic stylesheet can also optionally be included or studied to apply your own styles:
 
-- `https://qi.gpii.net/qi-frontend.css`
+- `https://qi.gpii.net/css/qi-frontend.css`
 
 ### GitHub Organization Restrictions
 
@@ -29,10 +29,10 @@ In the document `HEAD`:
 
 ```
 <!-- include the single-file version of the dependencies -->
-<script src="http://qi.gpii.net/qi-frontend-full.min.js"></script>
+<script src="http://qi.gpii.net/js/qi-frontend-full.min.js"></script>
 
 <!-- optionally include the stylesheet -->
-<link rel="stylesheet" type="text/css" href="https://qi.gpii.net/qi-frontend.css" />
+<link rel="stylesheet" type="text/css" href="https://qi.gpii.net/css/qi-frontend.css" />
 ```
 
 In the document `BODY`:
