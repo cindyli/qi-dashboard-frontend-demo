@@ -53,7 +53,13 @@ module.exports = function (grunt) {
             },
             cssToDist: {
                 files: [
-                    {src: "demos/src/css/qi-frontend-demo.css", dest: "dist/qi-frontend.css"}
+                    {src: "demos/src/css/qi-frontend-demo.css", dest: "dist/css/qi-frontend.css"}
+                ]
+            },
+            demosToDist: {
+                files: [
+                    {src: "demos/src/css/qi-frontend-demo.css", dest: "dist/css/qi-frontend.css"},
+                    {expand: true, cwd: "./demos/", src: "**", dest: "./dist/demos/"}
                 ]
             }
         },
@@ -110,7 +116,7 @@ module.exports = function (grunt) {
                  "dist/flocking-with-license.js",
                  "dist/chartAuthoring-with-license.js",
                 "src/js/*.js"],
-                dest: "dist/qi-frontend-full.js",
+                dest: "dist/js/qi-frontend-full.js",
                 nonull: true
             },
             distNoJquery: {
@@ -119,7 +125,7 @@ module.exports = function (grunt) {
                  "dist/flocking-with-license.js",
                  "dist/chartAuthoring-with-license.js",
                 "src/js/*.js"],
-                dest: "dist/qi-frontend-noJquery.js",
+                dest: "dist/js/qi-frontend-noJquery.js",
                 nonull: true
             }
         },
@@ -133,12 +139,12 @@ module.exports = function (grunt) {
                 banner: "/* ! minified version of Javascript dependencies of https://github.com/waharnum/qi-dashboard-frontend-demo - see repository for details */"
             },
             distUglify: {
-                src: "dist/qi-frontend-full.js",
-                dest: "dist/qi-frontend-full.min.js"
+                src: "dist/js/qi-frontend-full.js",
+                dest: "dist/js/qi-frontend-full.min.js"
             },
             distNoJQueryUglify: {
-                src: "dist/qi-frontend-noJquery.js",
-                dest: "dist/qi-frontend-noJquery.min.js"
+                src: "dist/js/qi-frontend-noJquery.js",
+                dest: "dist/js/qi-frontend-noJquery.min.js"
             }
         }
     });
@@ -155,5 +161,5 @@ module.exports = function (grunt) {
 
     grunt.registerTask("default", ["lint"]);
     grunt.registerTask("lint", "Apply jshint and jsonlint", ["jshint", "jsonlint"]);
-    grunt.registerTask("dist", "Build single-file distrbituion", ["copy:cssToDist", "concat", "uglify", "clean:distArtifacts"]);
+    grunt.registerTask("dist", "Build single-file distrbituion", ["copy:cssToDist", "copy:demosToDist", "concat", "uglify", "clean:distArtifacts"]);
 };
