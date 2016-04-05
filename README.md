@@ -15,6 +15,12 @@ A basic stylesheet can also optionally be included or studied to apply your own 
 
 - `https://qi.gpii.net/qi-frontend.css`
 
+### GitHub Organization Restrictions
+
+At this time the QI back end restricts queries to the following GitHub organizations:
+- https://github.com/gpii
+- https://github.com/fluid-project
+
 ### Implementation Example
 
 The most basic means of embedding metrics display is to do the following:
