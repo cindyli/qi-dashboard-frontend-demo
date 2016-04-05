@@ -1,5 +1,22 @@
 # Quality Infrastructure - Frontend Demo Code
 
+## Embedding QI Metrics on Your Site
+
+A site can display metrics information (charts and summaries) from the Quality Infrastructure by including Javascript from the QI site and calling various functions to create the desired panels.
+
+Various single-file versions of the Javascript necessary to embed metrics information from the QI are available:
+
+- `http://qi.gpii.net/qi-frontend-full.js` - all depedencies
+- `http://qi.gpii.net/qi-frontend-full.min.js` - the above, minified
+- `http://qi.gpii.net/qi-frontend-noJquery.js` - all dependencies except jQuery
+- `http://qi.gpii.net/qi-frontend-noJquery.min.js` - the above, minified
+
+A basic stylesheet can also optionally be included or studied to apply your own styles:
+
+- `https://qi.gpii.net/qi-frontend.css`
+
+---
+
 ## Developing
 
 - `npm install`
