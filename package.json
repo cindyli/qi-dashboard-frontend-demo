@@ -1,10 +1,10 @@
 {
-  "name": "chartAuthoring",
+  "name": "qi-frontend",
   "description": "A tool for authoring accessible charts for the web.",
   "version": "0.1.0-SNAPSHOT",
-  "author": "Fluid Project",
-  "bugs": "https://issues.fluidproject.org/browse/FLOE/component/11615",
-  "homepage": "http://www.fluidproject.org/",
+  "author": "IDRC",
+  "bugs": "https://issues.gpii.net/browse/GPII/component/10800/",
+  "homepage": "https://wiki.gpii.net/w/Quality_Infrastructure",
   "dependencies": {
       "d3":"latest",
       "chartAuthoring":"https://github.com/waharnum/chartAuthoring#GPII-1584",
@@ -28,7 +28,7 @@
     "infusion",
     "sonfication"
   ],
-  "repository": "git://github.com/fluid-project/chartAuthoring.git",
+  "repository": "https://github.com/waharnum/qi-dashboard-frontend-demo",
   "main": "",
   "engines": {
     "node": ">=0.10.0"
