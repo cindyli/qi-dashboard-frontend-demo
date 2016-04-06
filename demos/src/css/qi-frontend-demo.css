@@ -1,24 +1,165 @@
-.gpii-panel {
-    width: 60em;
-    clear: both;
+/*
+Colours to use:
+#333333
+#3D4557
+#009688
+#E56759
+#FCC760
+#E6E6E6
+*/
+
+@font-face {
+    font-family: 'Open Sans';
+    src:url('../fonts/OpenSans-Regular.ttf');
 }
 
-.gpii-demo-controls {
-    float:left;
-    margin-right: 2em;
-    padding: 1em;
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* Clearfix courtesy of CSS Tricks http://css-tricks.com/snippets/css/clear-fix/
+ */
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.layout-small {
+    display:inline;
+    visibility: visible;
+}
+
+.layout-medium {
+    display:none;
+    visibility: hidden;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
     background-color: #E6E6E6;
-    height: 8em;
+    color: #333;
+}
+
+header {
+    background-color: #fff;
+}
+
+.gpii-logo {
+    fill: #fff;
+    color: #fff;
+    background-color: #3D4557;
+}
+
+.gpii-logo svg {
+    width: 4rem;
+    height: auto;
+    display: inline-block;
+    margin: 0.4rem 0 0 0.4rem;
+}
+
+.gpii-logo h1 {
+    font-size: 1.2rem;
+    font-weight: normal;
+    padding: 0.6rem;
+    margin: 0;
+    display: inline-block;
+}
+
+nav {
+    border-top: 0.1rem solid #3D4557;
+    border-bottom: 0.1rem solid #3D4557;
+}
+
+header ul {
+    list-style: none;
+
+    background-color: #fff;
+}
+
+header li {
+    float:left;
+    display:inline-block;
+    padding: 0.5rem;
+}
+
+header .gpii-demo-nav-active {
+    background-color: #009688;
+    color: #fff;
+}
+
+.gpii-demo-intro {
+    background-color: #fff;
+    padding: 1rem;
+    line-height: 1.4rem;
+}
+
+.gpii-demo-intro h1 {
+    margin: 0.6rem 0;
+}
+
+.gpii-demo-content {
+    padding: 1rem;
+}
+
+.gpii-demo-control {
+    background-color: #009688;
+    border-radius: 0.6rem;
+    padding: 0.6rem;
+    margin: 0.3rem 0;
+}
+
+.gpii-demo-control h3 {
+    color: #fff;
+}
+
+.gpii-demo-control ul {
+    list-style: none;
+}
+
+.gpii-demo-control li {
+    padding: 0.7rem 0;
+}
+
+.gpii-demo-control a {
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin: 0.3rem 0;
+    color: #fff;
+}
+
+.gpii-demo-control a:hover {
+    background-color: #fff;
+    color: #009688;
+}
+
+.gpii-panel {
+    color: #3D4557;
+    min-width: 30em;
+    width: 100%;
+    clear: both;
+    margin-top: 2rem;
 }
 
 .gpiic-metricsPanel-summary {
-    width: 25%;
-    float: left;
+    width: 100%;
+    background-color: #fff;
+    padding: 0.6rem;
 }
 
 .gpiic-metricsPanel-graph {
-    width: 75%;
-    float:left;
+    width: 100%;
+    background-color: #fff;
+    padding: 0.6rem;
+    margin-top: 0.1rem;
 }
 
 .gpiic-metricsPanel-graph .domain {
@@ -71,13 +212,9 @@ body.highContrast {
     color: white;
 }
 
-.highContrast .gpii-demo-controls {
-    float:left;
-    margin-right: 2em;
-    padding: 1em;
+.highContrast .gpii-demo-control {
     background-color: black;
-    border:1px solid white;
-    height: 8em;
+    border: 0.2rem solid white;
 }
 
 .highContrast .floec-ca-lineChart-y-axis .tick line {
@@ -109,4 +246,54 @@ body.highContrast {
 
 .largeGraphs .gpiic-metricsPanel-graph {
     width: 60em;
+}
+
+@media screen and (min-width: 40em) {
+    .layout-small {
+        display: none;
+        visibility: hidden;
+    }
+
+    .layout-medium {
+        display: initial;
+        visibility: visible;
+    }
+
+    .gpii-panel, .gpii-demo-controls {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .gpii-demo-control {
+        flex: 1;
+        width: 33%;
+        display:inline-block;
+        float:left;
+        margin: 0 0.2rem;
+        font-size: 0.8rem;
+    }
+
+    .gpiic-metricsPanel-summary {
+        width: 30%;
+        background-color: #fff;
+        padding: 0.6rem;
+        display:inline-block;
+        flex: 1;
+        font-size:0.8rem;
+        margin-right: 0.4rem;
+    }
+
+    .gpiic-metricsPanel-graph {
+        display:inline-block;
+        width: 70%;
+        background-color: #fff;
+        padding: 0.6rem;
+        margin-top: 0rem;
+        flex: 2;
+    }
+
+    .gpiic-metricsPanel-graph svg {
+        width: 100%;
+        height: 70%;
+    }
 }
