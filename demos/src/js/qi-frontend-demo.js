@@ -4,6 +4,8 @@
 
     fluid.registerNamespace("gpii.qualityInfrastructure.frontEnd.demo");
 
+    gpii.qualityInfrastructure.frontEnd.demo.daysToZoom = 180;
+
     gpii.qualityInfrastructure.frontEnd.demo.getURLParamValue = function (param) {
         var params={};window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(str,key,value){params[key] = value;});
         return params[param];
@@ -70,8 +72,8 @@
         var changeView = function() {
             var daysToRoll = forward ? daysToScroll : -daysToScroll;
             try {
-                gpii.qualityInfrastructure.frontEnd.demo.rollDays(commitsPanel, daysToRoll);
-                gpii.qualityInfrastructure.frontEnd.demo.rollDays(contributorsPanel, daysToRoll);
+                gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays(commitsPanel, daysToRoll);
+                gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays(contributorsPanel, daysToRoll);
             }
             catch(e) {
                 forward = forward ? false : true;

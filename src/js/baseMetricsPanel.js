@@ -117,7 +117,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         });
     };
 
-    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays = function (that, rollDays) {
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays = function (that, rollDays) {        
         var currentMetricsEndDate = that.model.currentEventsDataViewSettings.metricsEndDate;
 
         var nextMetricsEndDate = new Date(currentMetricsEndDate);
