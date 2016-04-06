@@ -97,27 +97,7 @@
             <h2 id="gpii-demo-repoTitle"></h2>
 
 
-            <div class="gpii-demo-controls">        
-
-                <div class="gpii-demo-control gpiic-metrics-changeRangeControls">
-
-                <h3>Change Visible Data Range</h3>
-
-                <ul>
-                    <li>
-                        <a id="gpiic-metrics-zoom-oneMonth" href="#">One Month</a>
-                    </li>
-                    <li>
-                        <a id="gpiic-metrics-zoom-threeMonths" href="#">Three Months</a>
-                    </li>
-                    <li>
-                        <a id="gpiic-metrics-zoom-sixMonths" href="#">Six Months</a>
-                    </li>
-                    <li>
-                        <a id="gpiic-metrics-zoom-oneYear" href="#">One Year</a>
-                    </li>
-                </ul>
-                </div>
+            <div class="gpii-demo-controls">
 
                 <div class="gpii-demo-control gpiic-metrics-visibilityControls">
 
@@ -132,6 +112,17 @@
                     </li>
                 </ul>
                 </div>
+            </div>
+
+            <div class="gpii-demo-dataRange">
+                <form>
+                    <select class="gpiic-demo-dataRangeSelector">
+                        <option value="30">One Month View</option>
+                        <option value="90">Three Month View</option>
+                        <option selected value="180">Six Month View</option>
+                        <option value="365">One Year View</option>
+                    </select>
+                </form>
             </div>
 
             <div class="gpii-demo-graphs">

@@ -22,6 +22,16 @@
         }
     });
 
+    gpii.qualityInfrastructure.frontEnd.demo.bindViewSelectHandler = function(commitsPanel, contributorsPanel) {
+        var selectControl = $(".gpiic-demo-dataRangeSelector");
+        selectControl.change(function (e) {
+            var selectedValue = $(this).find(":selected").attr("value");
+            gpii.qualityInfrastructure.frontEnd.demo.changeZoom(commitsPanel, selectedValue);
+            gpii.qualityInfrastructure.frontEnd.demo.changeZoom(contributorsPanel, selectedValue);
+            e.preventDefault();
+        });
+    };
+
     gpii.qualityInfrastructure.frontEnd.demo.createPanels = function (repo, shouldAnimate) {
 
         var commitsContainer = ".gpiic-metrics-commits",
@@ -31,29 +41,7 @@
 
         var contributorsPanel = gpii.qualityInfrastructure.frontEnd.createContributorsPanel(repo, contributorsContainer);
 
-        $("#gpiic-metrics-zoom-sixMonths").click(function (e) {
-            gpii.qualityInfrastructure.frontEnd.demo.changeZoom(commitsPanel, 180);
-            gpii.qualityInfrastructure.frontEnd.demo.changeZoom(contributorsPanel, 180);
-            e.preventDefault();
-        });
-
-        $("#gpiic-metrics-zoom-oneYear").click(function (e) {
-            gpii.qualityInfrastructure.frontEnd.demo.changeZoom(commitsPanel, 365);
-            gpii.qualityInfrastructure.frontEnd.demo.changeZoom(contributorsPanel, 365);
-            e.preventDefault();
-        });
-
-        $("#gpiic-metrics-zoom-threeMonths").click(function (e) {
-            gpii.qualityInfrastructure.frontEnd.demo.changeZoom(commitsPanel, 90);
-            gpii.qualityInfrastructure.frontEnd.demo.changeZoom(contributorsPanel, 90);
-            e.preventDefault();
-        });
-
-        $("#gpiic-metrics-zoom-oneMonth").click(function (e) {
-            gpii.qualityInfrastructure.frontEnd.demo.changeZoom(commitsPanel, 30);
-            gpii.qualityInfrastructure.frontEnd.demo.changeZoom(contributorsPanel, 30);
-            e.preventDefault();
-        });
+        gpii.qualityInfrastructure.frontEnd.demo.bindViewSelectHandler(commitsPanel, contributorsPanel);
 
         $("#gpiic-metrics-visibility-highContrast").click(function (e) {
             $("body").toggleClass("highContrast");
