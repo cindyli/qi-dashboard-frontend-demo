@@ -2,16 +2,31 @@
 
 ## Embedding QI Metrics on Your Site
 
-A site can display metrics information (charts and summaries) from the Quality Infrastructure by including Javascript from the QI site and calling various functions to create the desired panels.
+A site can display metrics information (charts and summaries) from the Quality Infrastructure by including Javascript from the QI site and calling functions to create the desired panels.
 
-Various single-file versions of the Javascript necessary to embed metrics information from the QI are available:
+Various single-file versions of the Javascript necessary to embed metrics information from the QI are hosted and available at these URLs:
 
-- `http://qi.gpii.net/js/qi-frontend-full.js` - all depedencies
-- `http://qi.gpii.net/js/qi-frontend-full.min.js` - the above, minified
-- `http://qi.gpii.net/js/qi-frontend-noJquery.js` - all dependencies except jQuery
-- `http://qi.gpii.net/js/qi-frontend-noJquery.min.js` - the above, minified
+- `https://qi.gpii.net/js/qi-frontend-full.js` - all depedencies
+- `https://qi.gpii.net/js/qi-frontend-full.min.js` - the above, minified
+- `https://qi.gpii.net/js/qi-frontend-noJquery.js` - all dependencies except jQuery
+- `https://qi.gpii.net/js/qi-frontend-noJquery.min.js` - the above, minified
 
-A basic stylesheet can also optionally be included or studied to apply your own styles:
+### Public Functions
+
+Two public functions are currently provided to simplify panel creation:
+
+#### gpii.qualityInfrastructure.frontEnd.createCommitsPanel(repo, container)
+* **repo**: a string identifying the GitHub organization and repo to retrieve commit metrics for (ex: *"gpii/universal"*)
+* **container**: a DOM selector string in the jQuery style identifying a container to inject the metrics panels into; this must be a unique page element (ex: *"#commits"*)
+
+
+#### gpii.qualityInfrastructure.frontEnd.createContributorsPanel(repo, container)
+* **repo**: a string identifying the GitHub organization and repo to retrieve contributors metrics for (ex: *"gpii/universal"*)
+* **container**: a DOM selector string in the jQuery style identifying a container to inject the metrics panels into; this must be a unique page element (ex: *"#contributors"#*)
+
+### Styling
+
+A basic stylesheet can also optionally be included or studied to assist in applying your own styles:
 
 - `https://qi.gpii.net/css/qi-frontend.css`
 
@@ -29,7 +44,7 @@ In the document `HEAD`:
 
 ```
 <!-- include the single-file version of the dependencies -->
-<script src="http://qi.gpii.net/js/qi-frontend-full.min.js"></script>
+<script src="https://qi.gpii.net/js/qi-frontend-full.min.js"></script>
 
 <!-- optionally include the stylesheet -->
 <link rel="stylesheet" type="text/css" href="https://qi.gpii.net/css/qi-frontend.css" />
@@ -76,7 +91,7 @@ More elaborate examples are:
 - `demos/index-singleFile.html?repo=gpii/universal`
 - `demos/index-noJquery.html?repo=gpii/universal`
 
-These demos include navigation controls and functions that make use of Infusion component features to change the views presented by the graphs.
+These demos include navigation controls and functions that make use of Infusion component features to change and navigate the views presented by the graphs.
 
 ---
 
