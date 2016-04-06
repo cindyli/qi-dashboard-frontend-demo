@@ -53,12 +53,11 @@ module.exports = function (grunt) {
             },
             cssToDist: {
                 files: [
-                    {src: "demos/src/css/qi-frontend-demo.css", dest: "dist/css/qi-frontend.css"}
+                    {src: "demos/src/css/qi-frontend-panels.css", dest: "dist/css/qi-frontend.css"}
                 ]
             },
             demosToDist: {
                 files: [
-                    {src: "demos/src/css/qi-frontend-demo.css", dest: "dist/css/qi-frontend.css"},
                     {expand: true, cwd: "./demos/", src: "**", dest: "./dist/demos/"}
                 ]
             }
