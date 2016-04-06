@@ -46,70 +46,112 @@
     </head>
 
     <body>
-        <h1>About This Demo</h1>
+        <header>
+            <div class="gpii-logo">
+                <svg  version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                	 width="457px" height="230px" viewBox="0 0 457 230" enable-background="new 0 0 457 230" xml:space="preserve">
+                <path d="M12.175,196.194c0,0-24.481-43.542,12.395-82.313c0,0,21.614-21.931,57.527-16.84
+                	c0,0,2.867-62.622,59.442-84.875c0,0,58.474-20.663,100.739,20.037c0,0,18.446,23.2,22.582,33.993c0,0,42.595-34.322,88.039,5.734
+                	c0,0,47.652-26.396,83.26,16.197c0,0,22.566,29.561,12.399,58.157c0,0,4.762-44.885-25.746-57.284c0,0-38.458-28.522-73.728,6.756
+                	c0,0-3.51-29.561-48.007-28.918c0,0-20.334-0.643-40.988,20.655c0,0-25.119-67.376-85.509-60.381c0,0-76.908-0.956-85.489,86.448
+                	c0,0-35.274-9.532-58.161,10.167C30.931,123.727-1.493,142.486,12.175,196.194"/>
+                <path d="M179.228,138.202l23.002-3.84c0,0,3.007-19.971-21.354-31.472c0,0-30.121-10.677-59.961,8.766
+                	c0,0-47.084,30.919-24.354,89.234c0,0,17.52,33.399,70.35,14.771c0,0,6.294-1.631,25.186-12.309l8.75-46.812l-50.623,0.264
+                	l-3.864,18.619l27.942,0.28l-3.296,14.517c0,0-9.351,9.302-24.646,10.117c0,0-26.813,2.472-31.179-18.348
+                	c0,0-7.942-28.456,15.868-53.098C131.047,128.892,165.814,103.715,179.228,138.202"/>
+                <polygon points="341.282,101.564 363.988,101.564 343.194,218.957 319.92,218.957 "/>
+                <polygon points="385.352,101.564 408.065,101.564 387.271,218.957 363.988,218.957 "/>
+                <path d="M316.559,128.349c-3.106-21.075-22.097-25.458-22.097-25.458h-62.408l-21.074,116.066h23.81l7.398-44.349
+                	h35.319c15.052-1.64,27.641-14.343,27.641-14.343C318.008,147.824,316.559,128.349,316.559,128.349z M285.77,147.783
+                	c-3.822,7.555-21.98,7.67-21.98,7.67h-17.54l5.874-33.531h15.324c15.332,0,17.499,2.637,17.499,2.637
+                	C292.369,134.264,289.602,140.245,285.77,147.783z"/>
+                </svg>
+                <h1>Developer Space</h1>
+            </div>
 
-        An example of embedding charts from the Quality Infrastructure on a website via included Javascript.
+            <nav>
+                <ul class="clearfix">
+                    <li>About</li>
+                    <li>Resources</li>
+                    <li class="gpii-demo-nav-active">Parts & Tools</li>
+                    <li>Service Infrastructures</li>
+                    <li>Community</li>
+                </ul>
+            </nav>
+        </header>
 
-        This version includes all files individually and is largely used for internal testing.
+        <section class="gpii-demo-intro">
+            <h1>About This Demo</h1>
+            <p>
+            An example of embedding charts from the Quality Infrastructure on a website via included Javascript.
+            This version includes all files individually and is largely used for internal testing.
+            </p>
 
-        <ul>
-            <li><a href="./individualFiles-advanced.html?repo=gpii/universal">gpii/universal</a></li>
-            <li><a href="./individualFiles-advanced.html?repo=gpii/universal&animate=true">gpii/universal (animated graphs)</a></li>
-        </ul>
+            <ul>
+                <li><a href="./index.html?repo=gpii/universal">gpii/universal</a></li>
+                <li><a href="./index.html?repo=gpii/universal&animate=true">gpii/universal (animated graphs)</a></li>
+            </ul>
+        </section>
+
+        <section class="gpii-demo-content">
+            <h2 id="gpii-demo-repoTitle"></h2>
 
 
-        <h2 id="gpii-demo-repoTitle"></h2>
+            <div class="gpii-demo-controls">
+                <div class="gpii-demo-control gpiic-metrics-navigateByTimeControls">
 
-        <div class="gpii-demo-controls gpiic-metrics-navigateByTimeControls">
+                <h3>Navigate by Time</h3>
+                <ul>
+                    <li>
+                        <a id="gpiic-metrics-back" href="#">Back</a>
+                    </li>
+                    <li>
+                        <a id="gpiic-metrics-forward" href="#">Forward</a>
+                    </li>
+                </ul>
 
-        <h3>Navigate by Time</h3>
-        <ul>
-            <li>
-                <a id="gpiic-metrics-back" href="#">Back</a>
-            </li>
-            <li>
-                <a id="gpiic-metrics-forward" href="#">Forward</a>
-            </li>
-        </ul>
+                </div>
 
-        </div>
+                <div class="gpii-demo-control gpiic-metrics-changeRangeControls">
 
-        <div class="gpii-demo-controls gpiic-metrics-changeRangeControls">
+                <h3>Change Visible Data Range</h3>
 
-        <h3>Change Visible Data Range</h3>
+                <ul>
+                    <li>
+                        <a id="gpiic-metrics-zoom-oneMonth" href="#">One Month</a>
+                    </li>
+                    <li>
+                        <a id="gpiic-metrics-zoom-threeMonths" href="#">Three Months</a>
+                    </li>
+                    <li>
+                        <a id="gpiic-metrics-zoom-sixMonths" href="#">Six Months</a>
+                    </li>
+                    <li>
+                        <a id="gpiic-metrics-zoom-oneYear" href="#">One Year</a>
+                    </li>
+                </ul>
+                </div>
 
-        <ul>
-            <li>
-                <a id="gpiic-metrics-zoom-oneMonth" href="#">One Month</a>
-            </li>
-            <li>
-                <a id="gpiic-metrics-zoom-threeMonths" href="#">Three Months</a>
-            </li>
-            <li>
-                <a id="gpiic-metrics-zoom-sixMonths" href="#">Six Months</a>
-            </li>
-            <li>
-                <a id="gpiic-metrics-zoom-oneYear" href="#">One Year</a>
-            </li>
-        </ul>
-        </div>
+                <div class="gpii-demo-control gpiic-metrics-visibilityControls">
 
-        <div class="gpii-demo-controls gpiic-metrics-visibilityControls">
+                <h3>Visibility Settings</h3>
 
-        <h3>Visibility Settings</h3>
+                <ul>
+                    <li>
+                        <a id="gpiic-metrics-visibility-highContrast" href="#">High Contrast</a>
+                    </li>
+                    <li>
+                        <a id="gpiic-metrics-visibility-largeGraphs" href="#">Large Graphs</a>
+                    </li>
+                </ul>
+                </div>
+            </div>
 
-        <ul>
-            <li>
-                <a id="gpiic-metrics-visibility-highContrast" href="#">High Contrast</a>
-            </li>
-            <li>
-                <a id="gpiic-metrics-visibility-largeGraphs" href="#">Large Graphs</a>
-            </li>
-        </ul>
-        </div>
+            <div class="gpii-demo-graphs">
+                <div class="gpiic-metrics-commits gpii-panel"></div>
 
-        <div class="gpiic-metrics-commits gpii-panel"></div>
-
-        <div class="gpiic-metrics-contributors gpii-panel"></div>
+                <div class="gpiic-metrics-contributors gpii-panel"></div>
+            </div>
+        </section>
     </body>
 </html>

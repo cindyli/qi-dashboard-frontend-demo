@@ -24,6 +24,9 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 resourceText: "<div class=\"gpiic-metricsPanel-summary\"></div><div class=\"gpiic-metricsPanel-graph\"></div>"
             }
         },
+        strings: {
+            navigationLinksHTML: "Use <a href=\"#\">Back</a> and <a href=\"#\">Forward</a> to scroll"
+        },
         model: {
             // events: the events data from the service,
             // currentEventsDataView: filtered events
