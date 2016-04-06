@@ -110,76 +110,102 @@ header .gpii-demo-nav-active {
     padding: 1rem;
 }
 
+.gpii-metrics-visibilityControls {
+    float:right;
+    display: block;
+}
+
 .gpii-demo-control {
+    font-size: 0.8rem;
+    color: #fff;
+    width: 4.8rem;
+    height: 4.5rem;
     background-color: #009688;
     border-radius: 0.6rem;
     padding: 0.6rem;
-    margin: 0.3rem 0;
+    margin: 0 0.6rem;
+    text-align: center;
+    fill: #fff;
+    display: inline-block;
 }
 
-.gpii-demo-control h3 {
-    color: #fff;
+.icon {
+    height: 1.3rem;
+    width: 1.3rem;
+    display: block;
+    margin: 0 auto;
 }
 
-.gpii-demo-control ul {
-    list-style: none;
+.icon-zoom {
+    height: 1.8rem;
+    width: 1.8rem;
+    margin-top: -0.4rem;
 }
 
-.gpii-demo-control li {
-    padding: 0.7rem 0;
-}
-
-.gpii-demo-control a {
-    font-size: 1rem;
-    padding: 0.5rem;
-    margin: 0.3rem 0;
-    color: #fff;
-}
-
-.gpii-demo-control a:hover {
+.gpii-demo-control.a:hover {
     background-color: #fff;
     color: #009688;
+}
+
+.gpii-demo-dataRange form {
+    float: right;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 /* High Contrast Styles */
 
 body.highContrast {
-    background-color: black;
-    color: white;
+    background-color: #000;
+    color: #000;
 }
 
 .highContrast a {
-    color: white;
+    color: #000;
+}
+
+.highContrast .gpii-logo,
+.highContrast .gpii-demo-nav-active {
+    background-color: #000;
+    color: #fff;
+}
+
+.highContrast .gpii-demo-content h2,
+.highContrast .gpii-demo-control {
+    color: #fff;
 }
 
 .highContrast .gpii-demo-control {
-    background-color: black;
-    border: 0.2rem solid white;
+    background-color: #000;
+    border: 0.2rem solid #fff;
 }
 
-.highContrast .floec-ca-lineChart-y-axis .tick line {
-  stroke: white;
-  opacity: 0.2;
+.highContrast.largeGraphs .gpii-demo-control-largeGraphs,
+.highContrast .gpii-demo-control-contrast {
+    box-shadow:
+        0 0 0 0.2rem #fff,
+        0 0 0 0.4rem #000,
+        0 0 0 0.6rem #fff;
 }
 
+.highContrast text {
+    color: #000;
+}
+
+.highContrast .floec-ca-lineChart-y-axis .tick line,
 .highContrast .floec-ca-lineChart-x-axis .tick line {
-  stroke: white;
+  stroke: #000;
   opacity: 1;
 }
 
-.highContrast .floec-ca-lineChart-y-axis .tick text, .highContrast .floec-ca-lineChart-x-axis .tick text {
-    font-family: sans-serif;
-    font-size: 11px;
-    fill: white;
-}
-
 .highContrast .floec-ca-lineChart-chartLine {
-    stroke: white;
+    stroke: #000;
 }
 
 .highContrast .floec-ca-lineChart-chartLineArea {
     opacity: 1;
-    fill: white;
+    stroke: #000;
+    fill: #fff;
 }
 
 /* Large Graphs Styles */
@@ -189,51 +215,11 @@ body.highContrast {
 }
 
 @media screen and (min-width: 40em) {
-    .layout-small {
-        display: none;
-        visibility: hidden;
-    }
-
-    .layout-medium {
-        display: initial;
-        visibility: visible;
-    }
-
-    .gpii-panel, .gpii-demo-controls {
-        display: flex;
-        flex-direction: row;
-    }
-
     .gpii-demo-control {
-        flex: 1;
-        width: 33%;
         display:inline-block;
         float:left;
-        margin: 0 0.2rem;
+        /*margin: 0 0.2rem;*/
         font-size: 0.8rem;
     }
 
-    .gpiic-metricsPanel-summary {
-        width: 30%;
-        background-color: #fff;
-        padding: 0.6rem;
-        display:inline-block;
-        flex: 1;
-        font-size:0.8rem;
-        margin-right: 0.4rem;
-    }
-
-    .gpiic-metricsPanel-graph {
-        display:inline-block;
-        width: 70%;
-        background-color: #fff;
-        padding: 0.6rem;
-        margin-top: 0rem;
-        flex: 2;
-    }
-
-    .gpiic-metricsPanel-graph svg {
-        width: 100%;
-        height: 70%;
-    }
 }
