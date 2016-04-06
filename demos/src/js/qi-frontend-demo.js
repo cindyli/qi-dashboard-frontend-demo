@@ -4,8 +4,6 @@
 
     fluid.registerNamespace("gpii.qualityInfrastructure.frontEnd.demo");
 
-    gpii.qualityInfrastructure.frontEnd.demo.daysToZoom = 180;
-
     gpii.qualityInfrastructure.frontEnd.demo.getURLParamValue = function (param) {
         var params={};window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(str,key,value){params[key] = value;});
         return params[param];
@@ -32,19 +30,6 @@
         var commitsPanel = gpii.qualityInfrastructure.frontEnd.createCommitsPanel(repo, commitsContainer);
 
         var contributorsPanel = gpii.qualityInfrastructure.frontEnd.createContributorsPanel(repo, contributorsContainer);
-
-
-        $("#gpiic-metrics-back").click(function (e) {
-            gpii.qualityInfrastructure.frontEnd.demo.moveView(commitsPanel, -gpii.qualityInfrastructure.frontEnd.demo.daysToZoom);
-            gpii.qualityInfrastructure.frontEnd.demo.moveView(contributorsPanel, -gpii.qualityInfrastructure.frontEnd.demo.daysToZoom);
-            e.preventDefault();
-        });
-
-        $("#gpiic-metrics-forward").click(function (e) {
-            gpii.qualityInfrastructure.frontEnd.demo.moveView(commitsPanel, gpii.qualityInfrastructure.frontEnd.demo.daysToZoom);
-            gpii.qualityInfrastructure.frontEnd.demo.moveView(contributorsPanel, gpii.qualityInfrastructure.frontEnd.demo.daysToZoom);
-            e.preventDefault();
-        });
 
         $("#gpiic-metrics-zoom-sixMonths").click(function (e) {
             gpii.qualityInfrastructure.frontEnd.demo.changeZoom(commitsPanel, 180);
@@ -83,30 +68,11 @@
         if (shouldAnimate) {
             gpii.qualityInfrastructure.frontEnd.demo.animate(commitsPanel, contributorsPanel, gpii.qualityInfrastructure.frontEnd.demo.daysToZoom);
             }
-
-    };
-
-    gpii.qualityInfrastructure.frontEnd.demo.rollDays = function (panel, rollDays) {
-        var currentMetricsEndDate = panel.model.currentEventsDataViewSettings.metricsEndDate;
-
-        var nextMetricsEndDate = new Date(currentMetricsEndDate);
-
-        nextMetricsEndDate.setDate(currentMetricsEndDate.getDate() + rollDays);
-
-        panel.applier.change("currentEventsDataViewSettings.metricsEndDate", nextMetricsEndDate);
     };
 
     gpii.qualityInfrastructure.frontEnd.demo.changeZoom = function (panel, daysToZoom) {
         gpii.qualityInfrastructure.frontEnd.demo.daysToZoom = daysToZoom;
         panel.applier.change("currentEventsDataViewSettings.daysBack", daysToZoom);
-    };
-
-    gpii.qualityInfrastructure.frontEnd.demo.moveView = function (panel, daysToScroll) {
-        try {
-            gpii.qualityInfrastructure.frontEnd.demo.rollDays(panel, daysToScroll);
-        } catch(e) {
-            gpii.qualityInfrastructure.frontEnd.demo.rollDays(panel, - daysToScroll);
-        }
     };
 
     gpii.qualityInfrastructure.frontEnd.demo.animate = function(commitsPanel, contributorsPanel, daysToScroll) {

@@ -17,15 +17,14 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         gradeNames: ["floe.chartAuthoring.templateInjection"],
         selectors: {
             summary: ".gpiic-metricsPanel-summary",
-            graph: ".gpiic-metricsPanel-graph"
+            graph: ".gpiic-metricsPanel-graph",
+            backControl: ".gpiic-metricsPanel-backControl",
+            forwardControl: ".gpiic-metricsPanel-forwardControl"
         },
         resources: {
             template: {
-                resourceText: "<div class=\"gpiic-metricsPanel-summary\"></div><div class=\"gpiic-metricsPanel-graph\"></div>"
+                resourceText: "<div class=\"gpiic-metricsPanel-summary\"></div><div class=\"gpiic-metricsPanel-graph\">Use <a href=\"#\">Back</a> and <a href=\"#\">Forward</a> to scroll</div>"
             }
-        },
-        strings: {
-            navigationLinksHTML: "Use <a href=\"#\">Back</a> and <a href=\"#\">Forward</a> to scroll"
         },
         model: {
             // events: the events data from the service,
@@ -88,6 +87,10 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             "onJSONPLoaded.convertServiceResponse": {
                 "funcName": "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.convertServiceResponse",
                 "args": ["{that}"]
+            },
+            "onServiceResponseReady.bindNavigationHandlers": {
+                "funcName": "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.bindNavigationHandlers",
+                "args": ["{that}"]
             }
         },
         modelListeners: {
@@ -98,6 +101,39 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             }
         }
     });
+
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.bindNavigationHandlers = function (that) {
+        var backControl = that.locate("backControl");
+        var forwardControl = that.locate("forwardControl");
+
+        backControl.click(function (e) {
+            gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.moveView(that, -that.model.currentEventsDataViewSettings.daysBack);
+            e.preventDefault();
+        });
+
+        forwardControl.click(function (e) {
+            gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.moveView(that, that.model.currentEventsDataViewSettings.daysBack);
+            e.preventDefault();
+        });
+    };
+
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays = function (that, rollDays) {
+        var currentMetricsEndDate = that.model.currentEventsDataViewSettings.metricsEndDate;
+
+        var nextMetricsEndDate = new Date(currentMetricsEndDate);
+
+        nextMetricsEndDate.setDate(currentMetricsEndDate.getDate() + rollDays);
+
+        that.applier.change("currentEventsDataViewSettings.metricsEndDate", nextMetricsEndDate);
+    };
+
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.moveView = function (that, daysToScroll) {
+        try {
+            gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays(that, daysToScroll);
+        } catch(e) {
+            gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays(that, - daysToScroll);
+        }
+    };
 
     gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.convertServiceResponse = function (that) {
         var summary = that.jsonpLoader.model.jsonpData.summary,
