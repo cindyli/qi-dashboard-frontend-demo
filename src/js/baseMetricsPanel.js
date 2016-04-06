@@ -27,8 +27,8 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             }
         },
         model: {
-            // events: the events data from the service,
-            // currentEventsDataView: filtered events
+            // events: the full events data from the service,
+            // currentEventsDataView: filtered events currently being shown
             // Set to something else to change the metrics end date
             // defaults to current day
             currentEventsDataViewSettings: {
@@ -75,6 +75,15 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                     lineOptions: {
                         padding: 25,
                         colors: ["#009688"]
+                    },
+                    scaleOptions: {
+                        yScaleMaxTransform: {
+                            "literalValue": {
+                                expander: {
+                                    func: "{baseMetricsPanel}.getCompleteDataMaxValue"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -99,6 +108,12 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 excludeSource: "init",
                 args: "{that}"
             }
+        },
+        invokers: {
+            "getCompleteDataMaxValue": {
+                funcName: "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getCompleteDataMaxValue",
+                args: "{that}"
+            }
         }
     });
 
@@ -117,7 +132,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         });
     };
 
-    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays = function (that, rollDays) {        
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays = function (that, rollDays) {
         var currentMetricsEndDate = that.model.currentEventsDataViewSettings.metricsEndDate;
 
         var nextMetricsEndDate = new Date(currentMetricsEndDate);
@@ -146,11 +161,15 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         that.applier.change("events", events);
         that.applier.change("currentEventsDataViewSettings.metricsEndDate", lastDayOfData);
 
-
-
         gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataView(that);
 
         that.events.onServiceResponseReady.fire();
+    };
+
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getCompleteDataMaxValue = function (that) {
+        return d3.max(that.model.events, function (d) {
+            return d.value;
+        });
     };
 
     gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataViewException = function (message) {
