@@ -78,20 +78,15 @@ In the document `BODY`:
 
 ### Demo Examples
 
-All demos will need to be served from a webserver due to the use of AJAX.
+All demos will need to be served from a webserver due to the use of AJAX. They can be accessed in the `/demos` directory or at https://qi.gpii.net/demos/
 
-The most basic examples of using the demo code are:
-- `demos/index-singleFile-basic.html` (single Javascript file including jQuery + single CSS file)
-- `demos/index-noJquery-basic.html` (separate jQuery include)
+#### Basic Examples
 
 These examples require no particular knowledge of the underlying code implemented using the [Infusion](https://github.com/fluid-project/infusion) Javascript library, and use basic inline Javascript to render the panels.
 
-More elaborate examples are:
-- `demos/index.html?repo=gpii/universal`
-- `demos/index-singleFile.html?repo=gpii/universal`
-- `demos/index-noJquery.html?repo=gpii/universal`
+### Advanced Examples
 
-These demos include navigation controls and functions that make use of Infusion component features to change and navigate the views presented by the graphs.
+These examples include navigation controls and functions that make use of Infusion component features to change and navigate the views presented by the graphs.
 
 ---
 

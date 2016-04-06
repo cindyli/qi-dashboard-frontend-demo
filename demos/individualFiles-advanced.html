@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../src/lib/infusion/src/lib/normalize/css/normalize.css" />
+        <link rel="stylesheet" type="text/css" href="../src/lib/infusion/src/framework/core/css/fluid.css" />
+
+        <script src="../src/lib/infusion/infusion-custom.js"></script>
+
+         <script src="../src/lib/d3/d3.js"></script>
+
+         <script src="../src/lib/chartAuthoring/src/js/d3Utils.js"></script>
+         <script src="../src/lib/chartAuthoring/src/js/d3ViewComponent.js"></script>
+         <script src="../src/lib/chartAuthoring/src/js/svgDrawingArea.js"></script>
+         <script src="../src/lib/chartAuthoring/src/js/templateInjection.js"></script>
+
+         <script src="../src/lib/chartAuthoring/src/js/valueBinding.js"></script>
+         <script src="../src/lib/chartAuthoring/src/js/percentage.js"></script>
+         <script src="../src/lib/chartAuthoring/src/js/transformations.js"></script>
+         <script src="../src/lib/chartAuthoring/src/js/totalRelaying.js"></script>
+         <script src="../src/lib/chartAuthoring/src/js/axis.js"></script>
+         <script src="../src/lib/chartAuthoring/src/js/xAxis.js"></script>
+         <script src="../src/lib/chartAuthoring/src/js/xAxisTimeSeries.js"></script>
+         <script src="../src/lib/chartAuthoring/src/js/yAxis.js"></script>
+         <script src="../src/lib/chartAuthoring/src/js/lineChartTimeSeriesLine.js"></script>
+         <script src="../src/lib/chartAuthoring/src/js/lineChartTimeSeriesArea.js"></script>
+         <script src="../src/lib/chartAuthoring/src/js/lineChartTimeSeriesPoints.js"></script>
+         <script src="../src/lib/chartAuthoring/src/js/lineChartTimeSeriesMultiDataSet.js"></script>
+         <script src="../src/lib/chartAuthoring/src/js/lineChartTimeSeriesSingleDataSet.js"></script>
+
+         <script src="../src/js/commitsSummaryPanel.js"></script>
+         <script src="../src/js/contributorsSummaryPanel.js"></script>
+         <script src="../src/js/jsonp.js"></script>
+
+         <script src="../src/js/baseMetricsPanel.js"></script>
+         <script src="../src/js/commitsMetricsPanel.js"></script>
+         <script src="../src/js/contributorsMetricsPanel.js"></script>
+
+         <script src="../src/js/createPanels.js"></script>
+
+        <script src="src/js/qi-frontend-demo.js"></script>
+        <link rel="stylesheet" type="text/css" href="src/css/qi-frontend-demo.css" />
+
+        <title>QI Frontend Demo</title>
+    </head>
+
+    <body>
+        <h1>About This Demo</h1>
+
+        An example of embedding charts from the Quality Infrastructure on a website via included Javascript.
+
+        This version includes all files individually and is largely used for internal testing.
+
+        <ul>
+            <li><a href="./individualFiles-advanced.html?repo=gpii/universal">gpii/universal</a></li>
+            <li><a href="./individualFiles-advanced.html?repo=gpii/universal&animate=true">gpii/universal (animated graphs)</a></li>
+        </ul>
+
+
+        <h2 id="gpii-demo-repoTitle"></h2>
+
+        <div class="gpii-demo-controls gpiic-metrics-navigateByTimeControls">
+
+        <h3>Navigate by Time</h3>
+        <ul>
+            <li>
+                <a id="gpiic-metrics-back" href="#">Back</a>
+            </li>
+            <li>
+                <a id="gpiic-metrics-forward" href="#">Forward</a>
+            </li>
+        </ul>
+
+        </div>
+
+        <div class="gpii-demo-controls gpiic-metrics-changeRangeControls">
+
+        <h3>Change Visible Data Range</h3>
+
+        <ul>
+            <li>
+                <a id="gpiic-metrics-zoom-oneMonth" href="#">One Month</a>
+            </li>
+            <li>
+                <a id="gpiic-metrics-zoom-threeMonths" href="#">Three Months</a>
+            </li>
+            <li>
+                <a id="gpiic-metrics-zoom-sixMonths" href="#">Six Months</a>
+            </li>
+            <li>
+                <a id="gpiic-metrics-zoom-oneYear" href="#">One Year</a>
+            </li>
+        </ul>
+        </div>
+
+        <div class="gpii-demo-controls gpiic-metrics-visibilityControls">
+
+        <h3>Visibility Settings</h3>
+
+        <ul>
+            <li>
+                <a id="gpiic-metrics-visibility-highContrast" href="#">High Contrast</a>
+            </li>
+            <li>
+                <a id="gpiic-metrics-visibility-largeGraphs" href="#">Large Graphs</a>
+            </li>
+        </ul>
+        </div>
+
+        <div class="gpiic-metrics-commits gpii-panel"></div>
+
+        <div class="gpiic-metrics-contributors gpii-panel"></div>
+    </body>
+</html>
