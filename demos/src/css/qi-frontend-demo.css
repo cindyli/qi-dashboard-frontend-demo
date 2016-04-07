@@ -1,13 +1,3 @@
-/*
-Colours to use:
-#333333
-#3D4557
-#009688
-#E56759
-#FCC760
-#E6E6E6
-*/
-
 @font-face {
     font-family: 'Open Sans';
     src:url('../fonts/OpenSans-Regular.ttf');
@@ -19,6 +9,10 @@ html {
 
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+a:focus {
+    outline: 0.2rem solid #009688;
 }
 
 /* Clearfix courtesy of CSS Tricks http://css-tricks.com/snippets/css/clear-fix/
@@ -74,14 +68,13 @@ header {
     display: inline-block;
 }
 
-nav {
+.gpii-demo-nav {
     border-top: 0.1rem solid #3D4557;
     border-bottom: 0.1rem solid #3D4557;
 }
 
 header ul {
     list-style: none;
-
     background-color: #fff;
 }
 
@@ -127,7 +120,26 @@ header .gpii-demo-nav-active {
     text-align: center;
     fill: #fff;
     display: inline-block;
+    float: right;
 }
+
+.gpii-demo-control:focus {
+    outline:none;
+    box-shadow:
+        0 0 0 0.2rem #fff,
+        0 0 0 0.4rem #009688;
+
+    background-color: #fff;
+    color: #009688;
+    fill: #009688;
+}
+
+.gpii-demo-control-largeGraphs {
+    /* Hide the large graphs button on mobile */
+    display: none;
+    visibility: hidden;
+}
+
 
 .icon {
     height: 1.3rem;
@@ -164,6 +176,14 @@ body.highContrast {
     color: #000;
 }
 
+.highContrast a:focus {
+    box-shadow:
+        0 0 0 0.2rem #fff,
+        0 0 0 0.4rem #000;
+    outline: none;
+    font-weight: bold;
+}
+
 .highContrast .gpii-logo,
 .highContrast .gpii-demo-nav-active {
     background-color: #000;
@@ -188,16 +208,38 @@ body.highContrast {
         0 0 0 0.6rem #fff;
 }
 
+.highContrast .gpii-demo-control:focus {
+    box-shadow:
+        0 0 0 0.2rem #000,
+        0 0 0 0.4rem #fff;
+
+    background-color: #fff;
+    color: #000;
+    fill: #000;
+}
+
 .highContrast text {
     color: #000;
+}
+
+/* Large Graphs styles */
+
+.largeGraphs .gpii-demo-control-largeGraphs {
+    box-shadow:
+        0 0 0 0.2rem #009688,
+        0 0 0 0.4rem #E6E6E6,
+        0 0 0 0.6rem #009688;
 }
 
 @media screen and (min-width: 40em) {
     .gpii-demo-control {
         display:inline-block;
         float:left;
-        /*margin: 0 0.2rem;*/
         font-size: 0.8rem;
     }
 
+    .gpii-demo-control-largeGraphs {
+        display: inline;
+        visibility: visible;
+    }
 }

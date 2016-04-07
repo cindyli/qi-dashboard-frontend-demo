@@ -70,7 +70,7 @@
                 <h1>Developer Space</h1>
             </div>
 
-            <nav>
+            <div class="gpii-demo-nav">
                 <ul class="clearfix">
                     <li>About</li>
                     <li>Resources</li>
@@ -78,7 +78,7 @@
                     <li>Service Infrastructures</li>
                     <li>Community</li>
                 </ul>
-            </nav>
+            </div>
         </header>
 
         <section class="gpii-demo-intro">
@@ -99,18 +99,9 @@
 
 
             <div class="gpiic-metrics-visibilityControls gpii-metrics-visibilityControls">
-                <a class="gpii-demo-control gpii-demo-control-contrast" role="button" id="gpiic-metrics-visibility-highContrast" href="#">
-                    <!-- Contrast Icon source: ZURB Foundation. Used under MIT License.-->
-                    <svg class="icon icon-contrast" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
-                        <g>
-                        	<path d="M256,0C114.606,0,0,114.64,0,256.014C0,397.394,114.606,512,256,512s256-114.606,256-255.986C512,114.64,397.394,0,256,0z    M256.847,67.877c103.366,0.456,187.3,84.687,187.3,188.137c0,103.46-83.934,187.653-187.3,188.106V67.877z"/>
-                        </g>
-                    </svg>
-                    High Contrast
-                </a>
                 <a class="gpii-demo-control gpii-demo-control-largeGraphs" role="button" id="gpiic-metrics-visibility-largeGraphs" href="#">
                     <!-- Contrast Icon source: ZURB Foundation. Used under MIT License. -->
-                    <svg class="icon icon-zoom" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    <svg role="presentation" class="icon icon-zoom" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     	 width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
                     <g>
                     	<g>
@@ -131,6 +122,16 @@
                     </g>
                     </svg>
                     Large Graphs
+                </a>
+
+                <a class="gpii-demo-control gpii-demo-control-contrast" role="button" id="gpiic-metrics-visibility-highContrast" href="#">
+                    <!-- Contrast Icon source: ZURB Foundation. Used under MIT License.-->
+                    <svg role="presentation" class="icon icon-contrast" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+                        <g>
+                        	<path d="M256,0C114.606,0,0,114.64,0,256.014C0,397.394,114.606,512,256,512s256-114.606,256-255.986C512,114.64,397.394,0,256,0z    M256.847,67.877c103.366,0.456,187.3,84.687,187.3,188.137c0,103.46-83.934,187.653-187.3,188.106V67.877z"/>
+                        </g>
+                    </svg>
+                    High Contrast
                 </a>
 
                 <div class="gpii-demo-dataRange">
