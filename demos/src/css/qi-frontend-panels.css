@@ -89,10 +89,11 @@
     }
     .largeGraphs .gpiic-metricsPanel-graph {
         flex: 7;
+        height: 100%;
     }
 }
 
-/*
+/* High Contrast */
 
 .highContrast .floec-ca-lineChart-y-axis .tick line,
 .highContrast .floec-ca-lineChart-x-axis .tick line {
