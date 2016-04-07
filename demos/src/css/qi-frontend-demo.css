@@ -192,28 +192,6 @@ body.highContrast {
     color: #000;
 }
 
-.highContrast .floec-ca-lineChart-y-axis .tick line,
-.highContrast .floec-ca-lineChart-x-axis .tick line {
-  stroke: #000;
-  opacity: 1;
-}
-
-.highContrast .floec-ca-lineChart-chartLine {
-    stroke: #000;
-}
-
-.highContrast .floec-ca-lineChart-chartLineArea {
-    opacity: 1;
-    stroke: #000;
-    fill: #fff;
-}
-
-/* Large Graphs Styles */
-
-.largeGraphs .gpiic-metricsPanel-graph {
-    width: 60em;
-}
-
 @media screen and (min-width: 40em) {
     .gpii-demo-control {
         display:inline-block;
