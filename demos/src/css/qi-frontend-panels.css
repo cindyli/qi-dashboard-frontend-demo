@@ -23,6 +23,13 @@
     display: none;
 }
 
+.gpii-metricsPanel-instructions {
+    font-size: 0.8rem;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 0.2rem;
+}
+
 /* Scales the SVG in relation to its parent container */
 .gpiic-metricsPanel-graph svg {
     width: 100%;
@@ -56,6 +63,30 @@
 .floec-ca-lineChart-chartLineArea {
     opacity: 0.5;
     fill: #009688;
+}
+
+.gpii-metricsPanel-forwardControl,
+.gpii-metricsPanel-backControl {
+    border-radius: 0.3rem;
+    background-color: #efefef;
+    border: 0.1rem solid #000;
+    text-decoration: none;
+    padding: 0.3rem;
+    color: #000;
+}
+
+.gpii-metricsPanel-forwardControl:active,
+.gpii-metricsPanel-backControl:active {
+    color: #efefef;
+    background-color: #000;
+}
+
+.gpii-metricsPanel-backControl:before {
+    content: "\2190";
+}
+
+.gpii-metricsPanel-forwardControl:after {
+    content: "\2192";
 }
 
 @media screen and (min-width: 40em) {
@@ -111,8 +142,8 @@
     fill: #fff;
 }
 
-/* Large Graphs Styles */
-
-.largeGraphs .gpiic-metricsPanel-graph {
-
+.highContrast .gpii-metricsPanel-forwardControl,
+.highContrast .gpii-metricsPanel-backControl {
+    background-color: #fff;
+    border: 0.1rem solid #000;
 }
