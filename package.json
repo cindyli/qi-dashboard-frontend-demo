@@ -1,6 +1,6 @@
 {
   "name": "qi-frontend",
-  "description": "A tool for authoring accessible charts for the web.",
+  "description": "Front end code for the Quality Infrastructure",
   "version": "0.1.0-SNAPSHOT",
   "author": "IDRC",
   "bugs": "https://issues.gpii.net/browse/GPII/component/10800/",
