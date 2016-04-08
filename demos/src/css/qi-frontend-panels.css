@@ -57,3 +57,62 @@
     opacity: 0.5;
     fill: #009688;
 }
+
+@media screen and (min-width: 40em) {
+    .gpii-panel {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .gpiic-metricsPanel-summary {
+        width: 30%;
+        background-color: #fff;
+        padding: 0.6rem;
+        display:inline-block;
+        flex: 1;
+        font-size:0.8rem;
+        margin-right: 0.4rem;
+    }
+
+    .gpiic-metricsPanel-graph {
+        display:inline-block;
+        width: 70%;
+        background-color: #fff;
+        padding: 0.6rem;
+        margin-top: 0rem;
+        flex: 2;
+    }
+
+    .gpiic-metricsPanel-graph svg {
+        width: 100%;
+        height: 70%;
+    }
+    .largeGraphs .gpiic-metricsPanel-graph {
+        flex: 7;
+        height: 100%;
+    }
+}
+
+/* High Contrast */
+
+.highContrast .floec-ca-lineChart-y-axis .tick line,
+.highContrast .floec-ca-lineChart-x-axis .tick line {
+  stroke: #000;
+  opacity: 1;
+}
+
+.highContrast .floec-ca-lineChart-chartLine {
+    stroke: #000;
+}
+
+.highContrast .floec-ca-lineChart-chartLineArea {
+    opacity: 1;
+    stroke: #000;
+    fill: #fff;
+}
+
+/* Large Graphs Styles */
+
+.largeGraphs .gpiic-metricsPanel-graph {
+
+}

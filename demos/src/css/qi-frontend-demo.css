@@ -1,13 +1,3 @@
-/*
-Colours to use:
-#333333
-#3D4557
-#009688
-#E56759
-#FCC760
-#E6E6E6
-*/
-
 @font-face {
     font-family: 'Open Sans';
     src:url('../fonts/OpenSans-Regular.ttf');
@@ -19,6 +9,10 @@ html {
 
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+a:focus {
+    outline: 0.2rem solid #009688;
 }
 
 /* Clearfix courtesy of CSS Tricks http://css-tricks.com/snippets/css/clear-fix/
@@ -74,14 +68,13 @@ header {
     display: inline-block;
 }
 
-nav {
+.gpii-demo-nav {
     border-top: 0.1rem solid #3D4557;
     border-bottom: 0.1rem solid #3D4557;
 }
 
 header ul {
     list-style: none;
-
     background-color: #fff;
 }
 
@@ -110,130 +103,143 @@ header .gpii-demo-nav-active {
     padding: 1rem;
 }
 
+.gpii-metrics-visibilityControls {
+    float:right;
+    display: block;
+}
+
 .gpii-demo-control {
+    font-size: 0.8rem;
+    color: #fff;
+    width: 4.8rem;
+    height: 4.5rem;
     background-color: #009688;
     border-radius: 0.6rem;
     padding: 0.6rem;
-    margin: 0.3rem 0;
+    margin: 0 0.6rem;
+    text-align: center;
+    fill: #fff;
+    display: inline-block;
+    float: right;
 }
 
-.gpii-demo-control h3 {
-    color: #fff;
-}
+.gpii-demo-control:focus {
+    outline:none;
+    box-shadow:
+        0 0 0 0.2rem #fff,
+        0 0 0 0.4rem #009688;
 
-.gpii-demo-control ul {
-    list-style: none;
-}
-
-.gpii-demo-control li {
-    padding: 0.7rem 0;
-}
-
-.gpii-demo-control a {
-    font-size: 1rem;
-    padding: 0.5rem;
-    margin: 0.3rem 0;
-    color: #fff;
-}
-
-.gpii-demo-control a:hover {
     background-color: #fff;
     color: #009688;
+    fill: #009688;
+}
+
+.gpii-demo-control-largeGraphs {
+    /* Hide the large graphs button on mobile */
+    display: none;
+    visibility: hidden;
+}
+
+
+.icon {
+    height: 1.3rem;
+    width: 1.3rem;
+    display: block;
+    margin: 0 auto;
+}
+
+.icon-zoom {
+    height: 1.8rem;
+    width: 1.8rem;
+    margin-top: -0.4rem;
+}
+
+.gpii-demo-control.a:hover {
+    background-color: #fff;
+    color: #009688;
+}
+
+.gpii-demo-dataRange form {
+    float: right;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 /* High Contrast Styles */
 
 body.highContrast {
-    background-color: black;
-    color: white;
+    background-color: #000;
+    color: #000;
 }
 
 .highContrast a {
-    color: white;
+    color: #000;
+}
+
+.highContrast a:focus {
+    box-shadow:
+        0 0 0 0.2rem #fff,
+        0 0 0 0.4rem #000;
+    outline: none;
+    font-weight: bold;
+}
+
+.highContrast .gpii-logo,
+.highContrast .gpii-demo-nav-active {
+    background-color: #000;
+    color: #fff;
+}
+
+.highContrast .gpii-demo-content h2,
+.highContrast .gpii-demo-control {
+    color: #fff;
 }
 
 .highContrast .gpii-demo-control {
-    background-color: black;
-    border: 0.2rem solid white;
+    background-color: #000;
+    border: 0.2rem solid #fff;
 }
 
-.highContrast .floec-ca-lineChart-y-axis .tick line {
-  stroke: white;
-  opacity: 0.2;
+.highContrast.largeGraphs .gpii-demo-control-largeGraphs,
+.highContrast .gpii-demo-control-contrast {
+    box-shadow:
+        0 0 0 0.2rem #fff,
+        0 0 0 0.4rem #000,
+        0 0 0 0.6rem #fff;
 }
 
-.highContrast .floec-ca-lineChart-x-axis .tick line {
-  stroke: white;
-  opacity: 1;
+.highContrast .gpii-demo-control:focus {
+    box-shadow:
+        0 0 0 0.2rem #000,
+        0 0 0 0.4rem #fff;
+
+    background-color: #fff;
+    color: #000;
+    fill: #000;
 }
 
-.highContrast .floec-ca-lineChart-y-axis .tick text, .highContrast .floec-ca-lineChart-x-axis .tick text {
-    font-family: sans-serif;
-    font-size: 11px;
-    fill: white;
+.highContrast text {
+    color: #000;
 }
 
-.highContrast .floec-ca-lineChart-chartLine {
-    stroke: white;
-}
+/* Large Graphs styles */
 
-.highContrast .floec-ca-lineChart-chartLineArea {
-    opacity: 1;
-    fill: white;
-}
-
-/* Large Graphs Styles */
-
-.largeGraphs .gpiic-metricsPanel-graph {
-    width: 60em;
+.largeGraphs .gpii-demo-control-largeGraphs {
+    box-shadow:
+        0 0 0 0.2rem #009688,
+        0 0 0 0.4rem #E6E6E6,
+        0 0 0 0.6rem #009688;
 }
 
 @media screen and (min-width: 40em) {
-    .layout-small {
-        display: none;
-        visibility: hidden;
-    }
-
-    .layout-medium {
-        display: initial;
-        visibility: visible;
-    }
-
-    .gpii-panel, .gpii-demo-controls {
-        display: flex;
-        flex-direction: row;
-    }
-
     .gpii-demo-control {
-        flex: 1;
-        width: 33%;
         display:inline-block;
         float:left;
-        margin: 0 0.2rem;
         font-size: 0.8rem;
     }
 
-    .gpiic-metricsPanel-summary {
-        width: 30%;
-        background-color: #fff;
-        padding: 0.6rem;
-        display:inline-block;
-        flex: 1;
-        font-size:0.8rem;
-        margin-right: 0.4rem;
-    }
-
-    .gpiic-metricsPanel-graph {
-        display:inline-block;
-        width: 70%;
-        background-color: #fff;
-        padding: 0.6rem;
-        margin-top: 0rem;
-        flex: 2;
-    }
-
-    .gpiic-metricsPanel-graph svg {
-        width: 100%;
-        height: 70%;
+    .gpii-demo-control-largeGraphs {
+        display: inline;
+        visibility: visible;
     }
 }
