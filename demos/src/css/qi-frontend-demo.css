@@ -11,6 +11,7 @@ html {
   box-sizing: inherit;
 }
 
+select:focus,
 a:focus {
     outline: 0.2rem solid #009688;
 }
@@ -116,11 +117,12 @@ header .gpii-demo-nav-active {
     background-color: #009688;
     border-radius: 0.6rem;
     padding: 0.6rem;
-    margin: 0 0.6rem;
+    margin: 0 0 1rem 1.2rem;
     text-align: center;
     fill: #fff;
     display: inline-block;
     float: right;
+    text-decoration: none;
 }
 
 .gpii-demo-control:focus {
@@ -139,7 +141,6 @@ header .gpii-demo-nav-active {
     display: none;
     visibility: hidden;
 }
-
 
 .icon {
     height: 1.3rem;
@@ -174,6 +175,19 @@ body.highContrast {
 
 .highContrast a {
     color: #000;
+}
+
+.highContrast select {
+    background-color: #fff;
+    color: #000;
+    border: none;
+}
+
+.highContrast select:focus {
+    box-shadow:
+        0 0 0 0.2rem #000,
+        0 0 0 0.4rem #fff;
+    outline: none;
 }
 
 .highContrast a:focus {

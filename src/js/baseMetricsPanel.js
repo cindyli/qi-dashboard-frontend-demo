@@ -65,7 +65,13 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                     },
                     axisOptions: {
                         numberOfXAxisTicks: 6,
-                        numberOfYAxisTicks: 6
+                        numberOfYAxisTicks: 6,
+                        XAxisTimeSeriesTickFormats: {
+                            day: "%a %d",
+                            firstDayOfMonth: "%b %d",
+                            month: "%b-%y",
+                            year: "%Y"
+                        }
                     },
                     svgOptions: {
                         height: 150,
