@@ -34,6 +34,9 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
 
         var endPointURL = gpii.qualityInfrastructure.frontEnd.getEndpointURL(endpoint, qualityInfrastructureHost, apiVersion, repo, endpointSuffix);
 
+        // Append styles to cause SVG to autoscale in relation to parent container
+        $("<style type='text/css'>.gpiic-metricsPanel-graph svg { width: 100%; height: 100%;} </style>").appendTo("head");
+
         return panelComponent(container, {
             components: {
                 jsonpLoader: {
