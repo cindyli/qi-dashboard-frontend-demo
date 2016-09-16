@@ -36,9 +36,9 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         },
         modelRelay: [
             {
-                source: "{that}.model.timeOfLastCommit",
                 target: "{that}.model.lastCommitDaysAgo",
                 singleTransform: {
+                    input: "{that}.model.timeOfLastCommit",
                     type: "fluid.transforms.free",
                     args: ["{that}.model.timeOfLastCommit"],
                     func: "gpii.qualityInfrastructure.frontEnd.commitsSummaryPanel.getDaysAgo"

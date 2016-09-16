@@ -145,6 +145,20 @@ module.exports = function (grunt) {
                 src: "dist/js/qi-frontend-noJquery.js",
                 dest: "dist/js/qi-frontend-noJquery.min.js"
             }
+        },
+        exec: {
+            infusionInstall: {
+                command: "npm install",
+                cwd: "./node_modules/infusion"
+            },
+            infusionBuild: {
+                command: "grunt custom --source=true --include='enhancement,renderer'",
+                cwd: "./node_modules/infusion"
+            },
+            infusionBuildNoJquery: {
+                command: "grunt custom --source=true --include='enhancement,renderer' --exclude='jQuery'",
+                cwd: "./node_modules/infusion"
+            }
         }
     });
 
@@ -155,6 +169,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-uglify");
+    grunt.loadNpmTasks("grunt-exec");
 
     // Custom tasks:
 
