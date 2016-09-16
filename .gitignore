@@ -1,5 +1,4 @@
 dist
 node_modules/
-src/lib/chartAuthoring
-src/lib/d3
-src/lib/flocking
+src/lib/
+tests/lib/

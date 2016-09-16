@@ -17,7 +17,7 @@ module.exports = function (grunt) {
 
     var licenseWrapper = function (libraryName, licenseFilePath) {
         try {
-            return "/* " + libraryName + "\n" + grunt.file.read(licenseFilePath) + "*/\n";
+            return "\n/* " + libraryName + "\n" + grunt.file.read(licenseFilePath) + "*/\n";
         }
         catch (e) {
             return null;
@@ -41,24 +41,39 @@ module.exports = function (grunt) {
         copy: {
             // Copy external front end dependencies into appropriate directories
             frontEndDependencies: {
+                nonull: true,
                 files: [
                     // D3
                     {expand: true, cwd: "./node_modules/d3/", src: "**", dest: "./src/lib/d3/"},
                     // Chart Authoring
                     {expand: true, cwd: "./node_modules/chartAuthoring/", src: "**", dest: "./src/lib/chartAuthoring/"},
                     // Flocking
-                    {expand: true, cwd: "./node_modules/flocking/", src: "**", dest: "./src/lib/flocking/"}
+                    {expand: true, cwd: "./node_modules/flocking/", src: "**", dest: "./src/lib/flocking/"},
+                    // Infusion
+                    {expand: true, cwd: "./node_modules/infusion/build", src: "**", dest: "./src/lib/infusion"},
+                    // Infusion testing framework
+                    {expand: true, cwd: "./node_modules/infusion/tests", src: "**", dest: "./tests/lib/infusion"}
 
                 ]
             },
             cssToDist: {
+                nonull: true,
                 files: [
                     {src: "demos/src/css/qi-frontend-panels.css", dest: "dist/css/qi-frontend.css"}
                 ]
             },
             demosToDist: {
+                nonull: true,
                 files: [
                     {expand: true, cwd: "./demos/", src: "**", dest: "./dist/demos/"}
+                ]
+            },
+            infusionNoJquery: {
+                nonull: true,
+                files: [
+                    // Infusion
+                    {src: "./node_modules/infusion/build/infusion-custom.js", dest: "./src/lib/infusion/infusion-custom-noJquery.js"},
+                    {src: "./node_modules/infusion/build/infusion-custom.js.map", dest: "./src/lib/infusion/infusion-custom-noJquery.js.map"}
                 ]
             }
         },
@@ -174,6 +189,12 @@ module.exports = function (grunt) {
     // Custom tasks:
 
     grunt.registerTask("default", ["lint"]);
+
     grunt.registerTask("lint", "Apply jshint and jsonlint", ["jshint", "jsonlint"]);
+
+    grunt.registerTask("installInfusionNoJquery", "Additionally install the custom version of Infusion without jQuery", ["exec:infusionBuildNoJquery", "copy:infusionNoJquery"]);
+
+    grunt.registerTask("installFrontEnd", "Install front-end dependencies from the node_modules directory after 'npm install'", ["exec:infusionInstall", "exec:infusionBuild", "copy:frontEndDependencies", "installInfusionNoJquery"]);
+
     grunt.registerTask("dist", "Build single-file distrbituion", ["copy:cssToDist", "copy:demosToDist", "concat", "uglify", "clean:distArtifacts"]);
 };
