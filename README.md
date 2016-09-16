@@ -94,7 +94,7 @@ These examples include navigation controls and functions that make use of Infusi
 
 - `npm install --ignore-scripts`
 - `npm install -g grunt-cli`
-- `grunt copy:frontEndDependencies`
+- `grunt installFrontEnd`
 
 This copies necessary front-end dependencies from `node_modules` to `src/lib`
 
@@ -102,7 +102,7 @@ This copies necessary front-end dependencies from `node_modules` to `src/lib`
 
 - `npm install --ignore-scripts`
 - `npm install -g grunt-cli`
-- `grunt copy:frontEndDependencies`
+- `grunt installFrontEnd`
 - `grunt dist`
 
 This produces four single-file versions of the dependencies in the `/dist` directory:
