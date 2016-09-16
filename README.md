@@ -139,7 +139,7 @@ Then to start a container this command can be used:
 sudo docker run \
 --name qi-dashboard-frontend-demo \
 -d \
--p 80:80 \
+-p 8888:80 \
 gpii/qi-dashboard-frontend-demo
 ```
 

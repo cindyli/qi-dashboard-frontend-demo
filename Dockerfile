@@ -1,12 +1,12 @@
-FROM inclusivedesign/nodejs:4.3.1
+FROM inclusivedesign/nodejs:latest
 
 COPY . /tmp/build
 
 WORKDIR /tmp/build
 
 RUN yum -y install make && \
-    npm install && \
-    grunt copy:frontEndDependencies && \
+    npm install --ignore-scripts && \
+    grunt installFrontEnd && \
     grunt dist && \
     cp -R ./dist /srv/www && \
     yum -y autoremove make && \
@@ -23,6 +23,6 @@ RUN ansible-galaxy install -fr requirements.yml && \
     ansible-playbook docker.yml --tags "install,configure" && \
     chmod 755 /usr/local/bin/start.sh
 
-EXPOSE 8888
+EXPOSE 80
 
 ENTRYPOINT ["/usr/local/bin/start.sh"]
