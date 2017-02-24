@@ -7,9 +7,9 @@
   "homepage": "https://wiki.gpii.net/w/Quality_Infrastructure",
   "dependencies": {
       "d3": "3.5.17",
-      "chartAuthoring":"https://github.com/fluid-project/chartAuthoring#6c8232a28a0066694babd1cefc66949ce0845db6",
-      "flocking": "colinbdclark/Flocking#6749bee2b7041b76f494bd188b755d568332eda0",
-      "infusion": "2.0.0-dev.20160911T222604Z.b86ecbb"
+      "chartAuthoring":"https://github.com/fluid-project/chartAuthoring#23232ccb4078f05725879ef030366f280cd90b3e",
+      "flocking": "0.2.0-dev.20170206T221943Z.fb09a52",
+      "infusion": "3.0.0-dev.20170214T161720Z.6126724"
   },
   "licenses": [
     {
@@ -27,7 +27,7 @@
     "web",
     "fluid",
     "infusion",
-    "sonfication"
+    "sonification"
   ],
   "repository": "https://github.com/waharnum/qi-dashboard-frontend-demo",
   "main": "",
