@@ -37,11 +37,14 @@
     gpii.qualityInfrastructure.frontEnd.demo.createPanels = function (repo, shouldAnimate) {
 
         var commitsContainer = ".gpiic-metrics-commits",
-        contributorsContainer = ".gpiic-metrics-contributors";
+            contributorsContainer = ".gpiic-metrics-contributors",
+            ciResultsContainer = ".gpiic-metrics-ci-results";
 
         var commitsPanel = gpii.qualityInfrastructure.frontEnd.createCommitsPanel(repo, commitsContainer);
 
         var contributorsPanel = gpii.qualityInfrastructure.frontEnd.createContributorsPanel(repo, contributorsContainer);
+
+        var ciResultsPanel = gpii.qualityInfrastructure.frontEnd.createCiResultsPanel(repo, ciResultsContainer);
 
         gpii.qualityInfrastructure.frontEnd.demo.bindViewSelectHandler(commitsPanel, contributorsPanel);
 
@@ -57,7 +60,7 @@
 
         if (shouldAnimate) {
             gpii.qualityInfrastructure.frontEnd.demo.animate(commitsPanel, contributorsPanel, gpii.qualityInfrastructure.frontEnd.demo.daysToZoom);
-            }
+        }
     };
 
     gpii.qualityInfrastructure.frontEnd.demo.changeZoom = function (panel, daysToZoom) {
