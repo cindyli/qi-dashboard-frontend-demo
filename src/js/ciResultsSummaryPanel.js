@@ -16,32 +16,23 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.ciResultsSummaryPanel", {
         gradeNames: ["floe.chartAuthoring.templateInjection", "floe.chartAuthoring.valueBinding"],
         selectors: {
-            lastCiResultDaysAgo: ".gpiic-commitsSummary-lastCiResultDaysAgo",
-            totalCiResults: ".gpiic-commitsSummary-totalCiResults"
+            lastCiResultStatus: ".gpiic-ciResultsSummary-lastCiResultStatus",
+            numOflastPassedCiResult: ".gpiic-ciResultsSummary-numOflastPassedCiResult",
+            totalCiResults: ".gpiic-ciResultsSummary-totalCiResults"
         },
         model: {
-            // timeOfLastCiResult: date,
-            // lastCiResultDaysAgo: string,
+            // lastCiResultStatus: string,
+            // numOflastPassedCiResult: number,
             // totalCiResults: number
         },
         bindings: {
-            lastCiResultDaysAgo: "lastCiResultDaysAgo",
+            lastCiResultStatus: "lastCiResultStatus",
+            numOflastPassedCiResult: "numOflastPassedCiResult",
             totalCiResults: "totalCiResults"
         },
-        modelRelay: [
-            {
-                target: "{that}.model.lastCiResultDaysAgo",
-                singleTransform: {
-                    input: "{that}.model.timeOfLastCiResult",
-                    type: "fluid.transforms.free",
-                    args: ["{that}.model.timeOfLastCommit"],
-                    func: "gpii.qualityInfrastructure.frontEnd.ciResultsSummaryPanel.getDaysAgo"
-                }
-            }
-        ],
         resources: {
             template: {
-                resourceText: "<h2>CI Results</h2><p>Last CI result made <span class=\"gpiic-commitsSummary-lastCiResultDaysAgo\"></span>.</p><p>Total CI Results: <span class=\"gpiic-commitsSummary-totalCiResults\"></span></p>"
+                resourceText: "<h2>CI Builds</h2><p>Last CI build <span class=\"gpiic-ciResultsSummary-lastCiResultStatus\"></span>.</p><p><span class=\"gpiic-ciResultsSummary-numOflastPassedCiResult\"></span> of <span class=\"gpiic-ciResultsSummary-numOflastPassedCiResult\"></span> last CI builds passed.</p><p>Total CI Builds: <span class=\"gpiic-ciResultsSummary-totalCiResults\"></span>.</p>"
             }
         }
     });

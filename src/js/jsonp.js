@@ -39,7 +39,8 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             }
         },
         events: {
-            onJSONPLoaded: null
+            onJSONPLoaded: null,
+            onJSONPError: null
         },
         model: {
             // jsonpData: JSON
@@ -70,6 +71,9 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             cache: allowCache,
             success: function (result) {
                 gpii.qualityInfrastructure.frontEnd.jsonp.storeResult(that, result);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                that.events.onJSONPError.fire(textStatus);
             }
         });
     };

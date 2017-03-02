@@ -51,7 +51,8 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                         // url:
                     },
                     events: {
-                        onJSONPLoaded: "{baseMetricsPanel}.events.onJSONPLoaded"
+                        onJSONPLoaded: "{baseMetricsPanel}.events.onJSONPLoaded",
+                        onJSONPError: "{baseMetricsPanel}.events.onJSONPError"
                     }
                 }
             },
@@ -96,6 +97,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         },
         events: {
             onJSONPLoaded: null,
+            onJSONPError: null,
             onServiceResponseReady: null
         },
         listeners: {

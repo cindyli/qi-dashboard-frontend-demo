@@ -18,10 +18,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         model: {
             svgTitle: "Contributors line chart",
             svgDescription: "A line chart showing statistics for contributors"
+        },
+        lineOptions: {
+            interpolation: "cardinal"
         }
     });
-
-
 
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel", {
         gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseMetricsPanel"],
@@ -42,12 +43,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 }
             },
             graph: {
-                type: "gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel.graph",
-                options: {
-                    lineOptions: {
-                        interpolation: "cardinal"
-                    }
-                }
+                type: "gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel.graph"
             }
         }
     });

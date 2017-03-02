@@ -13,6 +13,14 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
 
     "use strict";
 
+    fluid.defaults("gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel.graph", {
+        gradeNames: ["floe.chartAuthoring.lineChart.timeSeriesSingleDataSet"],
+        model: {
+            svgTitle: "Commits line chart",
+            svgDescription: "A line chart showing statistics for commits"
+        }
+    });
+
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel", {
         gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseMetricsPanel"],
         resources: {
@@ -35,12 +43,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 }
             },
             graph: {
-                options: {
-                    model: {
-                        svgTitle: "Commits line chart",
-                        svgDescription: "A line chart showing statistics for commits"
-                    }
-                }
+                type: "gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel.graph"
             }
         }
     });
