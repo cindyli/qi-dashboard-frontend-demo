@@ -49,21 +49,8 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             }
         },
         listeners: {
-            "onJSONPLoaded.convertServiceResponse": "fluid.identity",
-            "onJSONPError.debug": {
-                listener: "console.log",
-                args: ["{that}.options.strings.JSONPError", "{arguments}.0"]
-            },
-            "onCreate.fireMockData": {
-                listener: "gpii.qualityInfrastructure.frontEnd.ciResultsMetricsPanel.setMockData",
-                args: ["{that}"]
-            }
+            "onJSONPLoaded.convertServiceResponse": "{that}.events.onServiceResponseReady.fire"
         }
     });
-
-    gpii.qualityInfrastructure.frontEnd.ciResultsMetricsPanel.setMockData = function (that) {
-        that.jsonpLoader.applier.change("jsonpData", gpii.qualityInfrastructure.frontEnd.ciResults);
-        that.events.onJSONPLoaded.fire();
-    };
 
 })(jQuery, fluid);

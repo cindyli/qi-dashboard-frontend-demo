@@ -62,7 +62,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
 
     gpii.qualityInfrastructure.frontEnd.createCiResultsPanel = function (repo, container) {
 
-        return gpii.qualityInfrastructure.frontEnd.createPanel(repo, container, "ciResults", gpii.qualityInfrastructure.frontEnd.ciResultsMetricsPanel);
+        return gpii.qualityInfrastructure.frontEnd.createPanel(repo, container, "ci", gpii.qualityInfrastructure.frontEnd.ciResultsMetricsPanel);
     };
 
 })(jQuery, fluid);
