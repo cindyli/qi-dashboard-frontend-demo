@@ -1,5 +1,5 @@
 /*
-Copyright 2016 OCAD University
+Copyright 2017 OCAD University
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -22,7 +22,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     });
 
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.ciResultsMetricsPanel", {
-        gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseSingleDataSetMetricsPanel"],
+        gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseMultiDataSetMetricsPanel"],
         resources: {
             template: {
                 resourceText: "<div class=\"gpii-metricsPanel-summary gpiic-metricsPanel-summary\"><h2>Loading CI Results Metrics...</h2></div><div class=\"gpii-metricsPanel-graph gpiic-metricsPanel-graph\"><h3>Number of CI Results</h3><p class=\"gpii-metricsPanel-instructions\">Use <a class=\"gpiic-metricsPanel-backControl gpii-metricsPanel-backControl\" href=\"#\">Back</a> and <a class=\"gpiic-metricsPanel-forwardControl gpii-metricsPanel-forwardControl\" href=\"#\">Forward</a> to scroll</p></div>"
@@ -44,9 +44,6 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             graph: {
                 type: "gpii.qualityInfrastructure.frontEnd.ciResultsMetricsPanel.graph"
             }
-        },
-        listeners: {
-            "onJSONPLoaded.convertServiceResponse": "{that}.events.onServiceResponseReady.fire"
         }
     });
 
