@@ -14,7 +14,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     "use strict";
 
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel.graph", {
-        gradeNames: ["floe.chartAuthoring.lineChart.timeSeriesSingleDataSet", "floe.chartAuthoring.lineChart.timeSeries.area"],
+        gradeNames: ["gpii.qualityInfrastructure.frontEnd.singleDataSetGraph", "floe.chartAuthoring.lineChart.timeSeries.area"],
         model: {
             svgTitle: "Contributors line chart",
             svgDescription: "A line chart showing statistics for contributors"
@@ -25,7 +25,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     });
 
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel", {
-        gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseMetricsPanel"],
+        gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseSingleDataSetMetricsPanel"],
         resources: {
             template: {
                 resourceText: "<div class=\"gpiic-metricsPanel-summary gpii-metricsPanel-summary\"><h2>Loading Contributors Metrics...</h2></div><div class=\"gpiic-metricsPanel-graph gpii-metricsPanel-graph\"><h3>Amount of Contribution</h3><p class=\"gpii-metricsPanel-instructions\">Use <a class=\"gpiic-metricsPanel-backControl gpii-metricsPanel-backControl\" href=\"#\">Back</a> and <a class=\"gpiic-metricsPanel-forwardControl gpii-metricsPanel-forwardControl\" href=\"#\">Forward</a> to scroll</p></div>"

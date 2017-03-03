@@ -14,7 +14,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     "use strict";
 
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.ciResultsMetricsPanel.graph", {
-        gradeNames: ["floe.chartAuthoring.lineChart.timeSeriesMultiDataSet"],
+        gradeNames: ["gpii.qualityInfrastructure.frontEnd.multiDataSetGraph"],
         model: {
             svgTitle: "CI Results line chart",
             svgDescription: "A line chart showing statistics for CI results"
@@ -22,14 +22,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     });
 
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.ciResultsMetricsPanel", {
-        gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseMetricsPanel"],
+        gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseSingleDataSetMetricsPanel"],
         resources: {
             template: {
                 resourceText: "<div class=\"gpii-metricsPanel-summary gpiic-metricsPanel-summary\"><h2>Loading CI Results Metrics...</h2></div><div class=\"gpii-metricsPanel-graph gpiic-metricsPanel-graph\"><h3>Number of CI Results</h3><p class=\"gpii-metricsPanel-instructions\">Use <a class=\"gpiic-metricsPanel-backControl gpii-metricsPanel-backControl\" href=\"#\">Back</a> and <a class=\"gpiic-metricsPanel-forwardControl gpii-metricsPanel-forwardControl\" href=\"#\">Forward</a> to scroll</p></div>"
             }
-        },
-        strings: {
-            JSONPError: "JSONP error at fetching CI Results: "
         },
         components: {
             summary: {

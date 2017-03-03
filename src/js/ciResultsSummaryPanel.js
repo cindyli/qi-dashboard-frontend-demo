@@ -37,31 +37,4 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         }
     });
 
-    // Gets a human-readable "days ago" string, when given a date string
-    // or Date object representing the day to calculate back to
-    gpii.qualityInfrastructure.frontEnd.ciResultsSummaryPanel.getDaysAgo = function (date) {
-        date = (typeof date.getMonth === "function") ? date : Date.parse(date);
-        var today = new Date();
-        var daysAgo = gpii.qualityInfrastructure.frontEnd.ciResultsSummaryPanel.getDaysBetween(date, today);
-
-        return (daysAgo === 0) ? "today" : daysAgo + " days ago";
-    };
-
-    // Given two Date objects, returns the number of elapsed days
-    // between them
-    gpii.qualityInfrastructure.frontEnd.ciResultsSummaryPanel.getDaysBetween = function (olderDate, newerDate) {
-
-        // Elapsed time in milliseconds between olderDate and newerDate
-        var elapsedTime = newerDate - olderDate;
-
-        var elapsedTimeInDays = gpii.qualityInfrastructure.frontEnd.ciResultsSummaryPanel.millisecondsToDays(elapsedTime);
-
-        return elapsedTimeInDays;
-    };
-
-    // Given a measure in milliseonds, returns it in days
-    gpii.qualityInfrastructure.frontEnd.ciResultsSummaryPanel.millisecondsToDays = function (milliseconds) {
-        var elapsedDays = Math.round(milliseconds / 1000 / 60 / 60 / 24);         return elapsedDays;
-    };
-
 })(jQuery, fluid);
