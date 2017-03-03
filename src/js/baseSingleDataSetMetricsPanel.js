@@ -24,21 +24,18 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
      */
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.baseSingleDataSetMetricsPanel", {
         gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseMetricsPanel"],
-        components: {
-            graph: {
-                options: {
-                    scaleOptions: {
-                        yScaleMaxTransform: {
-                            "literalValue": {
-                                expander: {
-                                    func: "{baseSingleDataSetMetricsPanel}.getCompleteDataMaxValue",
-                                    args: ["{baseSingleDataSetMetricsPanel}.model.events"]
-                                }
-                            }
-                        }
-                    }
-                }
+        yScaleMaxTransform: {
+            expander: {
+                func: "{baseSingleDataSetMetricsPanel}.getCompleteDataMaxValue",
+                args: ["{baseSingleDataSetMetricsPanel}.model.events"]
             }
+        },
+        mergePolicy: {
+            yScaleMaxTransform: "noexpand"
+        },
+        distributeOptions: {
+            source: "{that}.options.yScaleMaxTransform",
+            target: "{that > graph}.options.scaleOptions.yScaleMaxTransform.literalValue"
         },
         invokers: {
             transformEventsData: {
