@@ -63,15 +63,6 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 options: {
                     model: {
                         dataSet: "{baseMetricsPanel}.model.currentEventsDataView"
-                    },
-                    scaleOptions: {
-                        yScaleMaxTransform: {
-                            "literalValue": {
-                                expander: {
-                                    func: "{baseMetricsPanel}.getCompleteDataMaxValue"
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -105,9 +96,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 }],
                 priority: "after:setEvents"
             },
-            "onJSONPLoaded.convertServiceResponse": {
-                listener: "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.convertServiceResponse",
-                "args": ["{that}"]
+            "onJSONPLoaded.updateCurrentEventsDataView": {
+                listener: "{that}.updateCurrentEventsDataView"
+            },
+            "onJSONPLoaded.fireServiceResponseReady": {
+                listener: "{that}.events.onServiceResponseReady.fire"
             },
             // End of setting various data based on jsonP return
             "onServiceResponseReady.bindNavigationHandlers": {
@@ -117,7 +110,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         },
         modelListeners: {
             currentEventsDataViewSettings: {
-                listener: "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataView",
+                listener: "{that}.updateCurrentEventsDataView",
                 excludeSource: "init",
                 args: "{that}"
             }
@@ -125,13 +118,22 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         invokers: {
             getCompleteDataMaxValue: {
                 funcName: "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getCompleteDataMaxValue",
-                args: "{that}"
+                args: ["{arguments}.0"]
             },
             transformEventsData: {
                 funcName: "fluid.identity",
                 args: ["{jsonpLoader}.model.jsonpData.events"]
             },
-            getLastDate: "fluid.identity"
+            getLastDate: "fluid.identity",   // Implemented by integrators
+            getFilteredEvents: "fluid.identity",   // Implemented by integrators
+            updateCurrentEventsDataView: {
+                func: "{that}.applier.change",
+                "args": ["currentEventsDataView", {
+                    expander: {
+                        func: "{that}.getFilteredEvents"
+                    }
+                }],
+            }
         }
     });
 
@@ -168,22 +170,8 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         }
     };
 
-    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.convertServiceResponse = function (that) {
-        // var events = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.transformEventsData(that.jsonpLoader.model.jsonpData.events);
-
-        // We set the metricsEndDate to the last day in the dataset
-        // var lastDayOfData = new Date(events[0].date);
-
-        // that.applier.change("events", events);
-        // that.applier.change("currentEventsDataViewSettings.metricsEndDate", lastDayOfData);
-
-        gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataView(that);
-
-        that.events.onServiceResponseReady.fire();
-    };
-
-    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getCompleteDataMaxValue = function (that) {
-        return d3.max(that.model.events, function (d) {
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getCompleteDataMaxValue = function (events) {
+        return d3.max(events, function (d) {
             return d.value;
         });
     };
@@ -193,11 +181,10 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         this.name = "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataViewException";
     };
 
-    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataView = function (that) {
-        var events = that.model.events,
-            metricsEndDate = that.model.currentEventsDataViewSettings.metricsEndDate,
-            daysBack = that.model.currentEventsDataViewSettings.daysBack,
-            metricsStartDate = that.model.currentEventsDataViewSettings.metricsStartDate;
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getFilteredEvents = function (events, currentEventsDataView, currentEventsDataViewSettings) {
+        var metricsEndDate = currentEventsDataViewSettings.metricsEndDate,
+            daysBack = currentEventsDataViewSettings.daysBack,
+            metricsStartDate = currentEventsDataViewSettings.metricsStartDate;
 
         var filteredEvents;
 
@@ -208,8 +195,9 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         }
 
         if(filteredEvents.length !== 0) {
-            that.applier.change("currentEventsDataView", filteredEvents);
+            return filteredEvents;
         } else {
+            return currentEventsDataView;
             throw new gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataViewException("Filter would result in empty dataSet object");
         }
     };
@@ -268,8 +256,23 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     // The base metrics panel component used for single data set graphs, such as commits and contribution panels
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.baseSingleDataSetMetricsPanel", {
         gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseMetricsPanel"],
+        components: {
+            graph: {
+                options: {
+                    scaleOptions: {
+                        yScaleMaxTransform: {
+                            "literalValue": {
+                                expander: {
+                                    func: "{baseSingleDataSetMetricsPanel}.getCompleteDataMaxValue",
+                                    args: ["{baseSingleDataSetMetricsPanel}.model.events"]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         invokers: {
-            // The invokers below need to be supplied by implementors
             transformEventsData: {
                 funcName: "gpii.qualityInfrastructure.frontEnd.baseSingleDataSetMetricsPanel.transformEventsData",
                 args: ["{jsonpLoader}.model.jsonpData.events"]
@@ -277,6 +280,10 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             getLastDate: {
                 funcName: "gpii.qualityInfrastructure.frontEnd.baseSingleDataSetMetricsPanel.getLastDate",
                 args: ["{that}.model.events"]
+            },
+            getFilteredEvents: {
+                funcName: "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getFilteredEvents",
+                args: ["{that}.model.events", "{that}.model.currentEventsDataView", "{that}.model.currentEventsDataViewSettings"]
             }
         }
     });
