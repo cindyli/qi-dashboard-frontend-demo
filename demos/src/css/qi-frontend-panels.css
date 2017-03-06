@@ -12,14 +12,14 @@
     padding: 0.6rem;
 }
 
-.gpiic-metricsPanel-graph {
+.gpii-metricsPanel-graph {
     width: 100%;
     background-color: #fff;
     padding: 0.6rem;
     margin-top: 0.1rem;
 }
 
-.gpiic-metricsPanel-graph .domain {
+.gpii-metricsPanel-graph .domain {
     display: none;
 }
 
@@ -31,7 +31,7 @@
 }
 
 /* Scales the SVG in relation to its parent container */
-.gpiic-metricsPanel-graph svg {
+.gpii-metricsPanel-svg {
     width: 100%;
     height: 100%;
 }
@@ -89,31 +89,37 @@
         flex-direction: row;
     }
 
-    .gpiic-metricsPanel-summary {
-        width: 30%;
+    .gpii-metricsPanel-summary {
+        width: 25%;
         background-color: #fff;
         padding: 0.6rem;
         display:inline-block;
-        flex: 1;
+        flex: 2.5;
         font-size:0.8rem;
         margin-right: 0.4rem;
     }
 
-    .gpiic-metricsPanel-graph {
+    .gpii-metricsPanel-graph {
         display:inline-block;
-        width: 70%;
+        width: 75%;
         background-color: #fff;
         padding: 0.6rem;
         margin-top: 0rem;
-        flex: 2;
+        flex: 7.5;
     }
 
-    .gpiic-metricsPanel-graph svg {
-        width: 100%;
+    .gpii-metricsPanel-svg {
+        width: 80%;
         height: 70%;
+        display: inline-block;
     }
-    .largeGraphs .gpiic-metricsPanel-graph {
-        flex: 7;
+    .gpii-metricsPanel-legend {
+        width: 20%;
+        height: 70%;
+        display: inline-block;
+    }
+    .largeGraphs .gpii-metricsPanel-graph {
+        flex: 20;
         height: 100%;
     }
 }

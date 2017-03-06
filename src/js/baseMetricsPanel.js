@@ -22,7 +22,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         gradeNames: ["floe.chartAuthoring.templateInjection"],
         selectors: {
             summary: ".gpiic-metricsPanel-summary",
-            graph: ".gpiic-metricsPanel-graph",
+            graph: ".gpiic-metricsPanel-graphContent",
             backControl: ".gpiic-metricsPanel-backControl",
             forwardControl: ".gpiic-metricsPanel-forwardControl"
         },

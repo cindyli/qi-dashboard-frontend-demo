@@ -38,8 +38,10 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             yScaleMaxTransform: "noexpand"
         },
         distributeOptions: {
-            source: "{that}.options.yScaleMaxTransform",
-            target: "{that > graph}.options.scaleOptions.yScaleMaxTransform.literalValue"
+            graphYScaleMax: {
+                source: "{that}.options.yScaleMaxTransform",
+                target: "{that > graph}.options.scaleOptions.yScaleMaxTransform.literalValue"
+            }
         },
         invokers: {
             transformEventsData: {
@@ -57,6 +59,32 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             getAllEventData: {
                 funcName: "gpii.qualityInfrastructure.frontEnd.baseMultiDataSetMetricsPanel.getAllEventData",
                 args: ["{that}.model.events"]
+            }
+        },
+        selectors: {
+            svg: ".gpiic-metricsPanel-svg",
+            legend: ".gpiic-metricsPanel-legend"
+        },
+        components: {
+            graph: {
+                container: "{baseMultiDataSetMetricsPanel}.dom.svg"
+            },
+            legend: {
+                type: "floe.chartAuthoring.pieChart.legend",
+                container: "{baseMultiDataSetMetricsPanel}.dom.legend",
+                createOnEvent: "{baseMultiDataSetMetricsPanel}.events.onServiceResponseReady",
+                options: {
+                    model: {
+                        dataSet: [{
+                            value: "success"
+                        }, {
+                            value: "failed"
+                        }]
+                    },
+                    legendOptions: {
+                        colors: ["#f15e4e", "#009688", "#ff7f0e"]
+                    }
+                }
             }
         }
     });
