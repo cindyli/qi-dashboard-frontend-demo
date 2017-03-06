@@ -54,11 +54,6 @@
     font-size: 6pt;
 }
 
-/* chart line style */
-.floec-ca-lineChart-chartLine {
-    stroke: #009688;
-}
-
 /* chart line area style */
 .floec-ca-lineChart-chartLineArea {
     opacity: 0.5;

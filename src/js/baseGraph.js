@@ -45,7 +45,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     });
 
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.multiDataSetGraph", {
-        gradeNames: ["floe.chartAuthoring.lineChart.timeSeriesMultiDataSet", "floe.chartAuthoring.lineChart.timeSeries.area", "gpii.qualityInfrastructure.frontEnd.baseGraph"],
+        gradeNames: ["floe.chartAuthoring.lineChart.timeSeriesMultiDataSet", "gpii.qualityInfrastructure.frontEnd.baseGraph"],
         lineOptions: {
             interpolation: "step",
             colors: ["#f15e4e", "#009688", "#ff7f0e"]

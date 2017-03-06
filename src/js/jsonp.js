@@ -76,6 +76,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 that.events.onJSONPError.fire(textStatus);
             }
         });
+
     };
 
 })(jQuery, fluid);
