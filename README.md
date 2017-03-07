@@ -16,12 +16,12 @@ Various single-file versions of the Javascript necessary to embed metrics inform
 Two public functions are currently provided to simplify panel creation:
 
 #### gpii.qualityInfrastructure.frontEnd.createCommitsPanel(repo, container)
-* **repo**: a string identifying the GitHub organization and repo to retrieve commit metrics for (ex: *"gpii/universal"*)
+* **repo**: a string identifying the GitHub organization and repo to retrieve commit metrics for (ex: *"p4a-test/nuts-and-bolts"*)
 * **container**: a DOM selector string in the jQuery style identifying a container to inject the metrics panels into; this must be a unique page element (ex: *"#commits"*)
 
 
 #### gpii.qualityInfrastructure.frontEnd.createContributorsPanel(repo, container)
-* **repo**: a string identifying the GitHub organization and repo to retrieve contributors metrics for (ex: *"gpii/universal"*)
+* **repo**: a string identifying the GitHub organization and repo to retrieve contributors metrics for (ex: *"p4a-test/nuts-and-bolts"*)
 * **container**: a DOM selector string in the jQuery style identifying a container to inject the metrics panels into; this must be a unique page element (ex: *"#contributors"#*)
 
 ### Styling
@@ -61,7 +61,7 @@ In the document `BODY`:
 
 <script>
     // The GitHub user/organization + repo to request metrics for
-    var repo = "gpii/universal"
+    var repo = "p4a-test/nuts-and-bolts"
 
     // Update the heading to the repo
     $("#repo-name").text(repo);
