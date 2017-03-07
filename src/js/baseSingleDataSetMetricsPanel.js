@@ -30,12 +30,19 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 args: ["{baseSingleDataSetMetricsPanel}.model.events"]
             }
         },
+        colors: ["#009688"],
         mergePolicy: {
             yScaleMaxTransform: "noexpand"
         },
         distributeOptions: {
-            source: "{that}.options.yScaleMaxTransform",
-            target: "{that > graph}.options.scaleOptions.yScaleMaxTransform.literalValue"
+            yScaleMaxTransform: {
+                source: "{that}.options.yScaleMaxTransform",
+                target: "{that > graph}.options.scaleOptions.yScaleMaxTransform.literalValue"
+            },
+            graphColors: {
+                source: "{that}.options.colors",
+                target: "{that > graph}.options.lineOptions.colors"
+            }
         },
         invokers: {
             transformEventsData: {

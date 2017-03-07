@@ -34,13 +34,59 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 }]
             }
         },
+        colors: ["#f15e4e", "#009688"],
         mergePolicy: {
             yScaleMaxTransform: "noexpand"
         },
         distributeOptions: {
-            graphYScaleMax: {
+            yScaleMaxTransform: {
                 source: "{that}.options.yScaleMaxTransform",
                 target: "{that > graph}.options.scaleOptions.yScaleMaxTransform.literalValue"
+            },
+            graphColors: {
+                source: "{that}.options.colors",
+                target: "{that > graph}.options.lineOptions.colors"
+            },
+            legendColors: {
+                source: "{that}.options.colors",
+                target: "{that > legend}.options.legendOptions.colors"
+            }
+        },
+        selectors: {
+            svg: ".gpiic-metricsPanel-svg",
+            legend: ".gpiic-metricsPanel-legend"
+        },
+        components: {
+            graph: {
+                container: "{baseMultiDataSetMetricsPanel}.dom.svg"
+            },
+            legend: {
+                type: "floe.chartAuthoring.pieChart.legend",
+                container: "{baseMultiDataSetMetricsPanel}.dom.legend",
+                createOnEvent: "onLegendDataReady",
+                options: {
+                    model: {
+                        dataSet: "{baseMultiDataSetMetricsPanel}.model.legendData"
+                    }
+                }
+            }
+        },
+        events: {
+            onLegendDataReady: null
+        },
+        listeners: {
+            "onJSONPLoaded.setLegendData": {
+                listener: "{that}.applier.change",
+                "args": ["legendData", {
+                    expander: {
+                        func: "{that}.getLegendData"
+                    }
+                }],
+                priority: "after:fireServiceResponseReady"
+            },
+            "onJSONPLoaded.fireLegendDataReady": {
+                listener: "{that}.events.onLegendDataReady.fire",
+                priority: "after:setLegendData"
             }
         },
         invokers: {
@@ -59,32 +105,10 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             getAllEventData: {
                 funcName: "gpii.qualityInfrastructure.frontEnd.baseMultiDataSetMetricsPanel.getAllEventData",
                 args: ["{that}.model.events"]
-            }
-        },
-        selectors: {
-            svg: ".gpiic-metricsPanel-svg",
-            legend: ".gpiic-metricsPanel-legend"
-        },
-        components: {
-            graph: {
-                container: "{baseMultiDataSetMetricsPanel}.dom.svg"
             },
-            legend: {
-                type: "floe.chartAuthoring.pieChart.legend",
-                container: "{baseMultiDataSetMetricsPanel}.dom.legend",
-                createOnEvent: "{baseMultiDataSetMetricsPanel}.events.onServiceResponseReady",
-                options: {
-                    model: {
-                        dataSet: [{
-                            value: "success"
-                        }, {
-                            value: "failed"
-                        }]
-                    },
-                    legendOptions: {
-                        colors: ["#f15e4e", "#009688", "#ff7f0e"]
-                    }
-                }
+            getLegendData: {
+                funcName: "gpii.qualityInfrastructure.frontEnd.baseMultiDataSetMetricsPanel.getLegendData",
+                args: ["{that}.model.events"]
             }
         }
     });
@@ -129,6 +153,17 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         });
 
         return allEventData;
+    };
+
+    gpii.qualityInfrastructure.frontEnd.baseMultiDataSetMetricsPanel.getLegendData = function (events) {
+        var legendData = [];
+        fluid.each(events, function (oneEventSet) {
+            var oneLegendData = {};
+            fluid.set(oneLegendData, ["id"], fluid.allocateGuid());
+            fluid.set(oneLegendData, ["label"], oneEventSet.id);
+            legendData.push(oneLegendData);
+        });
+        return legendData;
     };
 
 })(jQuery, fluid);

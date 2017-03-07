@@ -109,19 +109,26 @@
     }
 
     .gpii-metricsPanel-svg {
-        width: 80%;
+        width: 85%;
         height: 70%;
         display: inline-block;
     }
+    .gpii-metricsPanel-legend thead th {
+        visibility: hidden;
+    }
     .gpii-metricsPanel-legend {
-        width: 20%;
+        width: 15%;
         height: 70%;
         display: inline-block;
+        padding-bottom: 2rem;
     }
     .largeGraphs .gpii-metricsPanel-graph {
         flex: 20;
         height: 100%;
     }
+    .floe-ca-pieChart-legend-value-cell {
+        display: none;
+    }.
 }
 
 /* High Contrast */
@@ -146,4 +153,22 @@
 .highContrast .gpii-metricsPanel-backControl {
     background-color: #fff;
     border: 0.1rem solid #000;
+}
+
+/*
+When the CI results panel is on high contrast, use different thickness of lines to represent
+different data sets. Below is to control the stroke thickness for different SVG <path> elements
+and corresponding legend cells using their border line thickness.
+*/
+.highContrast .gpiic-metrics-ci-results .floec-ca-lineChart-chartLine:nth-of-type(2) {
+    stroke-width: 2;
+}
+
+.highContrast .floe-ca-pieChart-legend-color-cell {
+    background-color: #fff !important;
+    border-bottom: 0.1rem solid #000;
+}
+
+.highContrast .floe-ca-pieChart-legend-table-row:nth-child(2) .floe-ca-pieChart-legend-color-cell {
+    border-bottom: 0.3rem solid #000;
 }
