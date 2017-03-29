@@ -32,9 +32,12 @@
         <!-- container for contributor metrics panels -->
         <div id="contributors-gpii-universal" class="gpii-panel"></div>
 
+        <!-- container for CI results metrics panels -->
+        <div id="ci-results-gpii-universal" class="gpii-panel"></div>
+
         <script>
             // The GitHub user/organization + repo to request metrics for
-            var repo = "gpii/universal"
+            var repo = "p4a-test/nuts-and-bolts"
 
             // Update the heading to the repo
             $("#repo-name").text(repo);
@@ -46,6 +49,11 @@
             // Call the createContributorsPanel function with arguments for the
             // repo + selector for the container to inject results into
             var contributorsPanel = gpii.qualityInfrastructure.frontEnd.createContributorsPanel(repo, "#contributors-gpii-universal");
+
+            // Call the createCiResultsPanel function with arguments for the
+            // repo + selector for the container to inject results into
+            var ciResultsPanel = gpii.qualityInfrastructure.frontEnd.createCiResultsPanel(repo, "#ci-results-gpii-universal");
+
         </script>
 
     </body>

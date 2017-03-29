@@ -1,5 +1,5 @@
 /*
-Copyright 2016 OCAD University
+Copyright 2016-2017 OCAD University
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -35,7 +35,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         var endPointURL = gpii.qualityInfrastructure.frontEnd.getEndpointURL(endpoint, qualityInfrastructureHost, apiVersion, repo, endpointSuffix);
 
         // Append styles to cause SVG to autoscale in relation to parent container
-        $("<style type='text/css'>.gpiic-metricsPanel-graph svg { width: 100%; height: 100%;} </style>").appendTo("head");
+        $("<style type='text/css'>.gpii-metricsPanel-graph svg { width: 100%; height: 100%;} </style>").appendTo("head");
 
         return panelComponent(container, {
             components: {
@@ -58,6 +58,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     gpii.qualityInfrastructure.frontEnd.createContributorsPanel = function (repo, container) {
 
         return gpii.qualityInfrastructure.frontEnd.createPanel(repo, container, "contributors", gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel);
+    };
+
+    gpii.qualityInfrastructure.frontEnd.createCiResultsPanel = function (repo, container) {
+
+        return gpii.qualityInfrastructure.frontEnd.createPanel(repo, container, "ci", gpii.qualityInfrastructure.frontEnd.ciResultsMetricsPanel);
     };
 
 })(jQuery, fluid);

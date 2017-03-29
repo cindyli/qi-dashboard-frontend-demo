@@ -24,12 +24,13 @@
         }
     });
 
-    gpii.qualityInfrastructure.frontEnd.demo.bindViewSelectHandler = function(commitsPanel, contributorsPanel) {
+    gpii.qualityInfrastructure.frontEnd.demo.bindViewSelectHandler = function(commitsPanel, contributorsPanel, ciResultsPanel) {
         var selectControl = $(".gpiic-demo-dataRangeSelector");
         selectControl.change(function (e) {
             var selectedValue = $(this).find(":selected").attr("value");
             gpii.qualityInfrastructure.frontEnd.demo.changeZoom(commitsPanel, selectedValue);
             gpii.qualityInfrastructure.frontEnd.demo.changeZoom(contributorsPanel, selectedValue);
+            gpii.qualityInfrastructure.frontEnd.demo.changeZoom(ciResultsPanel, selectedValue);
             e.preventDefault();
         });
     };
@@ -37,13 +38,16 @@
     gpii.qualityInfrastructure.frontEnd.demo.createPanels = function (repo, shouldAnimate) {
 
         var commitsContainer = ".gpiic-metrics-commits",
-        contributorsContainer = ".gpiic-metrics-contributors";
+            contributorsContainer = ".gpiic-metrics-contributors",
+            ciResultsContainer = ".gpiic-metrics-ci-results";
 
         var commitsPanel = gpii.qualityInfrastructure.frontEnd.createCommitsPanel(repo, commitsContainer);
 
         var contributorsPanel = gpii.qualityInfrastructure.frontEnd.createContributorsPanel(repo, contributorsContainer);
 
-        gpii.qualityInfrastructure.frontEnd.demo.bindViewSelectHandler(commitsPanel, contributorsPanel);
+        var ciResultsPanel = gpii.qualityInfrastructure.frontEnd.createCiResultsPanel(repo, ciResultsContainer);
+
+        gpii.qualityInfrastructure.frontEnd.demo.bindViewSelectHandler(commitsPanel, contributorsPanel, ciResultsPanel);
 
         $("#gpiic-metrics-visibility-highContrast").click(function (e) {
             $("body").toggleClass("highContrast");
@@ -56,8 +60,8 @@
         });
 
         if (shouldAnimate) {
-            gpii.qualityInfrastructure.frontEnd.demo.animate(commitsPanel, contributorsPanel, gpii.qualityInfrastructure.frontEnd.demo.daysToZoom);
-            }
+            gpii.qualityInfrastructure.frontEnd.demo.animate(commitsPanel, contributorsPanel, ciResultsPanel, gpii.qualityInfrastructure.frontEnd.demo.daysToZoom);
+        }
     };
 
     gpii.qualityInfrastructure.frontEnd.demo.changeZoom = function (panel, daysToZoom) {
@@ -65,7 +69,7 @@
         panel.applier.change("currentEventsDataViewSettings.daysBack", daysToZoom);
     };
 
-    gpii.qualityInfrastructure.frontEnd.demo.animate = function(commitsPanel, contributorsPanel, daysToScroll) {
+    gpii.qualityInfrastructure.frontEnd.demo.animate = function(commitsPanel, contributorsPanel, ciResultsPanel, daysToScroll) {
 
         var forward = false;
 
@@ -74,6 +78,7 @@
             try {
                 gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays(commitsPanel, daysToRoll);
                 gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays(contributorsPanel, daysToRoll);
+                gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays(ciResultsPanel, daysToRoll);
             }
             catch(e) {
                 forward = forward ? false : true;

@@ -1,5 +1,5 @@
 /*
-Copyright 2016 OCAD University
+Copyright 2016-2017 OCAD University
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -13,12 +13,23 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
 
     "use strict";
 
+    fluid.defaults("gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel.graph", {
+        gradeNames: ["gpii.qualityInfrastructure.frontEnd.singleDataSetGraph"],
+        model: {
+            svgTitle: "Commits line chart",
+            svgDescription: "A line chart showing statistics for commits"
+        }
+    });
+
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel", {
-        gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseMetricsPanel"],
+        gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseSingleDataSetMetricsPanel"],
         resources: {
             template: {
-                resourceText: "<div class=\"gpii-metricsPanel-summary gpiic-metricsPanel-summary\"><h2>Loading Commits Metrics...</h2></div><div class=\"gpii-metricsPanel-graph gpiic-metricsPanel-graph\"><h3>Number of Commits</h3><p class=\"gpii-metricsPanel-instructions\">Use <a class=\"gpiic-metricsPanel-backControl gpii-metricsPanel-backControl\" href=\"#\">Back</a> and <a class=\"gpiic-metricsPanel-forwardControl gpii-metricsPanel-forwardControl\" href=\"#\">Forward</a> to scroll</p></div>"
+                resourceText: "<div class=\"gpii-metricsPanel-summary gpiic-metricsPanel-summary\"><h2>Loading Commits Metrics...</h2></div><div class=\"gpii-metricsPanel-graph\"><h3>Number of Commits</h3><p class=\"gpii-metricsPanel-instructions\">Use <a class=\"gpiic-metricsPanel-backControl gpii-metricsPanel-backControl\" href=\"#\">Back</a> and <a class=\"gpiic-metricsPanel-forwardControl gpii-metricsPanel-forwardControl\" href=\"#\">Forward</a> to scroll</p><div class=\"gpiic-metricsPanel-graphContent\"><div class=\"gpiic-metricsPanel-svg gpii-metricsPanel-svg\"></div></div></div>"
             }
+        },
+        selectors: {
+            graph: ".gpii-metricsPanel-svg"
         },
         components: {
             summary: {
@@ -35,12 +46,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 }
             },
             graph: {
-                options: {
-                    model: {
-                        svgTitle: "Commits line chart",
-                        svgDescription: "A line chart showing statistics for commits"
-                    }
-                }
+                type: "gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel.graph"
             }
         }
     });

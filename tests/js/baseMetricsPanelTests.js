@@ -245,7 +245,7 @@ https://raw.githubusercontent.com/fluid-project/chartAuthoring/master/LICENSE.tx
         gradeNames: ["fluid.test.testEnvironment"],
         components: {
             baseMetricsPanel: {
-                type: "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel",
+                type: "gpii.qualityInfrastructure.frontEnd.baseSingleDataSetMetricsPanel",
                 container: ".gpiic-baseMetricsPanelTest",
                 createOnEvent: "{baseMetricsPanelTester}.events.onTestCaseStart",
                 options: {

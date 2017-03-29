@@ -1,5 +1,5 @@
 /*
-Copyright 2016 OCAD University
+Copyright 2016-2017 OCAD University
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -39,7 +39,8 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             }
         },
         events: {
-            onJSONPLoaded: null
+            onJSONPLoaded: null,
+            onJSONPError: null
         },
         model: {
             // jsonpData: JSON
@@ -70,8 +71,12 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             cache: allowCache,
             success: function (result) {
                 gpii.qualityInfrastructure.frontEnd.jsonp.storeResult(that, result);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                that.events.onJSONPError.fire(textStatus);
             }
         });
+
     };
 
 })(jQuery, fluid);
