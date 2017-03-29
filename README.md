@@ -13,16 +13,19 @@ Various single-file versions of the Javascript necessary to embed metrics inform
 
 ### Public Functions
 
-Two public functions are currently provided to simplify panel creation:
+Three public functions are currently provided to simplify panel creation:
 
 #### gpii.qualityInfrastructure.frontEnd.createCommitsPanel(repo, container)
-* **repo**: a string identifying the GitHub organization and repo to retrieve commit metrics for (ex: *"p4a-test/nuts-and-bolts"*)
+* **repo**: a string identifying the GitHub organization and repository to retrieve commit metrics for (ex: *"p4a-test/nuts-and-bolts"*)
 * **container**: a DOM selector string in the jQuery style identifying a container to inject the metrics panels into; this must be a unique page element (ex: *"#commits"*)
 
-
 #### gpii.qualityInfrastructure.frontEnd.createContributorsPanel(repo, container)
-* **repo**: a string identifying the GitHub organization and repo to retrieve contributors metrics for (ex: *"p4a-test/nuts-and-bolts"*)
+* **repo**: a string identifying the GitHub organization and repository to retrieve contributors metrics for (ex: *"p4a-test/nuts-and-bolts"*)
 * **container**: a DOM selector string in the jQuery style identifying a container to inject the metrics panels into; this must be a unique page element (ex: *"#contributors"#*)
+
+#### gpii.qualityInfrastructure.frontEnd.createCiResultsPanel(repo, container)
+* **repo**: a string identifying the GitHub organization and repository to retrieve continuous integration metrics for (ex: *"p4a-test/nuts-and-bolts"*)
+* **container**: a DOM selector string in the jQuery style identifying a container to inject the metrics panels into; this must be a unique page element (ex: *"#ci-results"#*)
 
 ### Styling
 
@@ -32,9 +35,13 @@ A basic stylesheet can also optionally be included or studied to assist in apply
 
 ### GitHub Organization Restrictions
 
-At this time the QI back end restricts queries to the following GitHub organizations:
-- https://github.com/gpii
-- https://github.com/fluid-project
+At this time the QI backend restricts queries to the following GitHub organizations:
+* https://github.com/asterics
+* https://github.com/fluid-project
+* https://github.com/gpii
+* https://github.com/P4ALLcerthiti
+* https://github.com/teco-kit
+* https://github.com/p4a-test
 
 ### Implementation Example
 
@@ -59,6 +66,9 @@ In the document `BODY`:
 <!-- container for contributor metrics panels -->
 <div id="contributors" class="gpii-panel"></div>
 
+<!-- container for CI results metrics panels -->
+<div id="ci-results" class="gpii-panel"></div>
+
 <script>
     // The GitHub user/organization + repo to request metrics for
     var repo = "p4a-test/nuts-and-bolts"
@@ -73,6 +83,10 @@ In the document `BODY`:
     // Call the createContributorsPanel function with arguments for the
     // repo + selector for the container to inject results into
     var contributorsPanel = gpii.qualityInfrastructure.frontEnd.createContributorsPanel(repo, "#contributors");
+
+    // Call the createCiResultsPanel function with arguments for the
+    // repo + selector for the container to inject results into
+    var ciResultsPanel = gpii.qualityInfrastructure.frontEnd.createCiResultsPanel(repo, "#ci-results");
 </script>
 ```
 
