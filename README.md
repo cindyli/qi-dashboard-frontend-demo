@@ -33,16 +33,6 @@ A basic stylesheet can also optionally be included or studied to assist in apply
 
 - `https://qi.gpii.net/css/qi-frontend.css`
 
-### GitHub Organization Restrictions
-
-At this time the QI backend restricts queries to the following GitHub organizations:
-* https://github.com/asterics
-* https://github.com/fluid-project
-* https://github.com/gpii
-* https://github.com/P4ALLcerthiti
-* https://github.com/teco-kit
-* https://github.com/p4a-test
-
 ### Implementation Example
 
 The most basic means of embedding metrics display is to do the following:
