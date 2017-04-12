@@ -38,7 +38,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             summary: {
                 type: "gpii.qualityInfrastructure.frontEnd.contributorsSummaryPanel",
                 container: "{contributorsMetricsPanel}.dom.summary",
-                createOnEvent: "{contributorsMetricsPanel}.events.onServiceResponseReady",
+                createOnEvent: "{contributorsMetricsPanel}.events.onCreateGraph",
                 options: {
                     model: {
                         numberOfContributors: "{contributorsMetricsPanel}.model.summary.numberOfContributors"

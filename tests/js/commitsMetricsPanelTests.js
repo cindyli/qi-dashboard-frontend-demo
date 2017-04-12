@@ -74,7 +74,7 @@ https://raw.githubusercontent.com/fluid-project/chartAuthoring/master/LICENSE.tx
                     listener: "gpii.tests.commitsMetricsPanelTester.verifyServiceResponse",
                     args: ["{commitsMetricsPanel}"],
                     spec: {priority: "last"},
-                    event: "{commitsMetricsPanelTest commitsMetricsPanel}.events.onServiceResponseReady"
+                    event: "{commitsMetricsPanelTest commitsMetricsPanel}.events.onCreateGraph"
                 }]
             }
             ]

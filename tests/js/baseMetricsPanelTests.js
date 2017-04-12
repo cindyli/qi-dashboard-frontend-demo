@@ -277,7 +277,7 @@ https://raw.githubusercontent.com/fluid-project/chartAuthoring/master/LICENSE.tx
                     listener: "gpii.tests.baseMetricsPanelTester.verifyServiceResponse",
                     args: ["{baseMetricsPanel}"],
                     spec: {priority: "last"},
-                    event: "{baseMetricsPanelTest baseMetricsPanel}.events.onServiceResponseReady"
+                    event: "{baseMetricsPanelTest baseMetricsPanel}.events.onCreateGraph"
                 }]
             }
             ]

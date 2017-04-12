@@ -64,10 +64,13 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             graph: {
                 type: "floe.chartAuthoring.lineChart.timeSeriesSingleDataSet",
                 container: "{baseMetricsPanel}.dom.graph",
-                createOnEvent: "{baseMetricsPanel}.events.onServiceResponseReady",
+                createOnEvent: "{baseMetricsPanel}.events.onCreateGraph",
                 options: {
                     model: {
                         dataSet: "{baseMetricsPanel}.model.currentEventsDataView"
+                    },
+                    listeners: {
+                        "onChartCreated.escalate": "{baseMetricsPanel}.events.onGraphCreated.fire"
                     }
                 }
             }
@@ -75,10 +78,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         events: {
             onJSONPLoaded: null,
             onJSONPError: null,
-            onServiceResponseReady: null
+            onCreateGraph: null,
+            onGraphCreated: null
         },
         listeners: {
-            // Set various data when jsonP return is ready
+            // Set various data when jsonP data is received
             "onJSONPLoaded.setSummary": {
                 listener: "{that}.applier.change",
                 "args": ["summary", "{jsonpLoader}.model.jsonpData.summary"]
@@ -106,17 +110,21 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 priority: "after:setMetricsEndDate"
             },
             "onJSONPLoaded.fireServiceResponseReady": {
-                listener: "{that}.events.onServiceResponseReady.fire",
+                listener: "{that}.events.onCreateGraph.fire",
                 priority: "after:updateCurrentEventsDataView"
             },
-            // End of setting various data based on jsonP return
+            // End of handling the "onJSONPLoaded" event
 
-            "onServiceResponseReady.bindBackward": {
+            // Error handling
+            "onJSONPError.updateErrorMsg": "{that}.updateErrorMsg",
+            // End of handling the "onJSONPError" event
+
+            "onGraphCreated.bindBackward": {
                 "this": "{that}.dom.backControl",
                 method: "click",
                 args: "{that}.moveViewBackward"
             },
-            "onServiceResponseReady.bindForward": {
+            "onGraphCreated.bindForward": {
                 "this": "{that}.dom.forwardControl",
                 method: "click",
                 args: "{that}.moveViewForward"
@@ -151,7 +159,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                     expander: {
                         func: "{that}.getFilteredEvents"
                     }
-                }],
+                }]
+            },
+            updateErrorMsg: {
+                func: "{that}.applier.change",
+                "args": ["errorMsg", "{arguments}.0.error"]
             }
         }
     });

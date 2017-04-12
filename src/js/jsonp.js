@@ -76,7 +76,10 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 that.events.onJSONPError.fire(textStatus);
             }
         });
-
+        // that.events.onJSONPError.fire({
+        //     isError: true,
+        //     error: "Erorr: Github is unreachable."
+        // });
     };
 
 })(jQuery, fluid);

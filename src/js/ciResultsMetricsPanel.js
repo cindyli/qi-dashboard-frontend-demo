@@ -32,7 +32,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             summary: {
                 type: "gpii.qualityInfrastructure.frontEnd.ciResultsSummaryPanel",
                 container: "{ciResultsMetricsPanel}.dom.summary",
-                createOnEvent: "{ciResultsMetricsPanel}.events.onServiceResponseReady",
+                createOnEvent: "{ciResultsMetricsPanel}.events.onCreateGraph",
                 options: {
                     model: {
                         lastCiResultStatus: "{ciResultsMetricsPanel}.model.summary.lastCiResultStatus",

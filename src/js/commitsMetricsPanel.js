@@ -35,7 +35,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             summary: {
                 type: "gpii.qualityInfrastructure.frontEnd.commitsSummaryPanel",
                 container: "{commitsMetricsPanel}.dom.summary",
-                createOnEvent: "{commitsMetricsPanel}.events.onServiceResponseReady",
+                createOnEvent: "{commitsMetricsPanel}.events.onCreateGraph",
                 options: {
                     model: {
                         timeOfLastCommit: "{commitsMetricsPanel}.model.summary.timeOfLastCommit",
