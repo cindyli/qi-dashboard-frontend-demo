@@ -22,7 +22,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         endpointSuffix: ""
     };
 
-    gpii.qualityInfrastructure.frontEnd.getEndpointURL = function(endpoint, qualityInfrastructureHost, apiVersion, repo, endpointSuffix) {
+    gpii.qualityInfrastructure.frontEnd.getEndpointURL = function (endpoint, qualityInfrastructureHost, apiVersion, repo, endpointSuffix) {
         return qualityInfrastructureHost + "/" + apiVersion + "/" + repo + "/" + endpoint + endpointSuffix;
     };
 

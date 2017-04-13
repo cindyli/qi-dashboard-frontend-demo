@@ -25,11 +25,10 @@ https://raw.githubusercontent.com/fluid-project/chartAuthoring/master/LICENSE.tx
             endpointSuffix: ".json"
         };
 
-        var repo = "fluid-project/infusion",
-            commitsContainerSelector = ".gpiic-createPanelsTests-commits";
+        // var repo = "fluid-project/infusion";
+        // var commitsPanel = gpii.qualityInfrastructure.frontEnd.createCommitsPanel(repo, commitsContainerSelector);
 
-        var commitsPanel = gpii.qualityInfrastructure.frontEnd.createCommitsPanel(repo, commitsContainerSelector);
-
+        var commitsContainerSelector = ".gpiic-createPanelsTests-commits";
         var commitsContainer = $(commitsContainerSelector)[0];
 
         jqUnit.assertEquals("Commits container has expected number of children", 2, commitsContainer.childNodes.length);

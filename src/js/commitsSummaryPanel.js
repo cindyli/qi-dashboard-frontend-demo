@@ -76,7 +76,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
 
     // Given a measure in milliseonds, returns it in days
     gpii.qualityInfrastructure.frontEnd.commitsSummaryPanel.millisecondsToDays = function (milliseconds) {
-        var elapsedDays = Math.round(milliseconds / 1000 / 60 / 60 / 24);         return elapsedDays;
+        return Math.round(milliseconds / 1000 / 60 / 60 / 24);
     };
 
 })(jQuery, fluid);

@@ -188,12 +188,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             filteredEvents = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsDataByDaysBack(events, metricsEndDate, daysBack);
         }
 
-        if(filteredEvents.length !== 0) {
-            return filteredEvents;
-        } else {
-            return currentEventsDataView;
-            throw new gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataViewException("Filter would result in empty dataSet object");
-        }
+        return filteredEvents.length === 0 ? currentEventsDataView : filteredEvents;
     };
 
     gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays = function (that, rollDays) {
@@ -209,7 +204,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.moveView = function (that, daysToScroll) {
         try {
             gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays(that, daysToScroll);
-        } catch(e) {
+        } catch (e) {
             gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays(that, - daysToScroll);
         }
     };
@@ -218,11 +213,6 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         return d3.max(events, function (d) {
             return d.value;
         });
-    };
-
-    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataViewException = function (message) {
-        this.message = message;
-        this.name = "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataViewException";
     };
 
     // Tests to determine whether or not something is a Date object
@@ -244,7 +234,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     // Given eventsData and date strings in YYYY-MM-DD / Dates for an end date
     // and start date, filter the events data to only have data between (and
     // including) those dates
-    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsData = function(eventsData, earlierDate, laterDate) {
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsData = function (eventsData, earlierDate, laterDate) {
         var filteredEvents = fluid.copy(eventsData);
 
         earlierDate = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getWorkableDate(earlierDate);
@@ -264,7 +254,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     // days back, filters the eventsData to only the range from the days back
     // from the startDate
 
-    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsDataByDaysBack = function(eventsData, startDate, daysBack) {
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsDataByDaysBack = function (eventsData, startDate, daysBack) {
 
         startDate = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getWorkableDate(startDate);
 

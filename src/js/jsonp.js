@@ -59,7 +59,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
 
         // Used in testing when using fake JSONP; otherwise we rely on the
         // `success` anonymous function below
-        gpii.qualityInfrastructure.frontEnd.jsonp.storeResultStatic = function(result) {
+        gpii.qualityInfrastructure.frontEnd.jsonp.storeResultStatic = function (result) {
             gpii.qualityInfrastructure.frontEnd.jsonp.storeResult(that, result);
         };
 
