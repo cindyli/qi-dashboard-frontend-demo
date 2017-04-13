@@ -23,13 +23,17 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         selectors: {
             summary: ".gpiic-metricsPanel-summary",
             graph: ".gpiic-metricsPanel-graphContent",
+            instructions: ".gpiic-metricsPanel-instructions",
             backControl: ".gpiic-metricsPanel-backControl",
             forwardControl: ".gpiic-metricsPanel-forwardControl"
         },
         resources: {
             template: {
-                resourceText: "<div class=\"gpiic-metricsPanel-summary\"></div><div class=\"gpiic-metricsPanel-graph\">Use <a href=\"#\">Back</a> and <a href=\"#\">Forward</a> to scroll</div>"
+                resourceText: "<div class=\"gpiic-metricsPanel-summary\"></div><div class=\"gpiic-metricsPanel-graph\"></div>"
             }
+        },
+        strings: {
+            instructions: "Use <a class=\"gpiic-metricsPanel-backControl gpii-metricsPanel-backControl\" href=\"#\">Back</a> and <a class=\"gpiic-metricsPanel-forwardControl gpii-metricsPanel-forwardControl\" href=\"#\">Forward</a> to scroll"
         },
         model: {
             // events: the full events data from the service,
@@ -86,6 +90,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             "onJSONPLoaded.setSummary": {
                 listener: "{that}.applier.change",
                 "args": ["summary", "{jsonpLoader}.model.jsonpData.summary"]
+            },
+            "onJSONPLoaded.setInstructions": {
+                "this": "{that}.dom.instructions",
+                "method": "html",
+                args: ["{that}.options.strings.instructions"]
             },
             "onJSONPLoaded.setEvents": {
                 listener: "{that}.applier.change",
@@ -150,6 +159,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 funcName: "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getCompleteDataMaxValue",
                 args: ["{arguments}.0"]
             },
+            // TODO: Verify the received jsonP event data is in the expected format
             transformEventsData: "fluid.identity",   // Implemented by integrators
             getLatestDate: "fluid.identity",   // Implemented by integrators
             getFilteredEvents: "fluid.identity",   // Implemented by integrators
