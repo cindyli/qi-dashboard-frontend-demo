@@ -72,8 +72,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             success: function (result) {
                 gpii.qualityInfrastructure.frontEnd.jsonp.storeResult(that, result);
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR);
+            error: function (jqXHR) {
                 that.events.onJSONPError.fire(jqXHR.status);
             }
         });

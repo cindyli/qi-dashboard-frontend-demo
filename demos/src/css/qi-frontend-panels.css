@@ -87,6 +87,16 @@
     content: "\2192";
 }
 
+.gpii-errorGraph-message {
+    height: 85%;
+    width: 70%;
+    line-height: 2rem;
+    text-align: center;
+    color: red;
+    border: solid;
+    margin: 5%;
+}
+
 @media screen and (min-width: 40em) {
     .gpii-panel {
         display: flex;

@@ -77,13 +77,25 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                         "onChartCreated.escalate": "{baseMetricsPanel}.events.onGraphCreated.fire"
                     }
                 }
+            },
+            errorGraph: {
+                type: "gpii.qualityInfrastructure.frontEnd.errorGraph",
+                container: "{baseMetricsPanel}.dom.graph",
+                createOnEvent: "{baseMetricsPanel}.events.onCreateErrorGraph",
+                options: {
+                    statusCode: "{arguments}.0",
+                    model: {
+                        statusCode: "{that}.options.statusCode"
+                    }
+                }
             }
         },
         events: {
             onJSONPLoaded: null,
             onJSONPError: null,
             onCreateGraph: null,
-            onGraphCreated: null
+            onGraphCreated: null,
+            onCreateErrorGraph: null
         },
         listeners: {
             // Set various data when jsonP data is received
@@ -124,10 +136,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             },
             // End of handling the "onJSONPLoaded" event
 
-            // Error handling
-            "onJSONPError.updateErrorMsg": "{that}.updateErrorMsg",
-            // End of handling the "onJSONPError" event
-
+            // Binds listeners for back and forward buttons only when the graph is created properly
             "onGraphCreated.bindBackward": {
                 "this": "{that}.dom.backControl",
                 method: "click",
@@ -137,7 +146,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 "this": "{that}.dom.forwardControl",
                 method: "click",
                 args: "{that}.moveViewForward"
-            }
+            },
+
+            // Error handling
+            "onJSONPError.updateErrorMsg": "{that}.events.onCreateErrorGraph.fire"
+            // End of handling the "onJSONPError" event
         },
         modelListeners: {
             currentEventsDataViewSettings: {
