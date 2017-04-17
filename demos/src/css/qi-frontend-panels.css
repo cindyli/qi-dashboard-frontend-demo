@@ -30,6 +30,10 @@
     padding-top: 0.2rem;
 }
 
+.gpii-hidden {
+    display: none;
+}
+
 /* Scales the SVG in relation to its parent container */
 .gpii-metricsPanel-svg {
     width: 100%;

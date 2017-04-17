@@ -27,13 +27,13 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             backControl: ".gpiic-metricsPanel-backControl",
             forwardControl: ".gpiic-metricsPanel-forwardControl"
         },
+        classes: {
+            hidden: "gpii-hidden"
+        },
         resources: {
             template: {
                 resourceText: "<div class=\"gpiic-metricsPanel-summary\"></div><div class=\"gpiic-metricsPanel-graph\"></div>"
             }
-        },
-        strings: {
-            instructions: "Use <a class=\"gpiic-metricsPanel-backControl gpii-metricsPanel-backControl\" href=\"#\">Back</a> and <a class=\"gpiic-metricsPanel-forwardControl gpii-metricsPanel-forwardControl\" href=\"#\">Forward</a> to scroll"
         },
         model: {
             // events: the full events data from the service,
@@ -91,10 +91,10 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 listener: "{that}.applier.change",
                 "args": ["summary", "{jsonpLoader}.model.jsonpData.summary"]
             },
-            "onJSONPLoaded.setInstructions": {
+            "onJSONPLoaded.showInstruction": {
                 "this": "{that}.dom.instructions",
-                "method": "html",
-                args: ["{that}.options.strings.instructions"]
+                "method": "removeClass",
+                args: ["{that}.options.classes.hidden"]
             },
             "onJSONPLoaded.setEvents": {
                 listener: "{that}.applier.change",

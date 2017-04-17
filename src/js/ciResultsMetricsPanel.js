@@ -25,7 +25,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseMultiDataSetMetricsPanel"],
         resources: {
             template: {
-                resourceText: "<div class=\"gpii-metricsPanel-summary gpiic-metricsPanel-summary\"><h2>CI Builds</h2></div><div class=\"gpii-metricsPanel-graph\"><h3>Number of CI Results</h3><p class=\"gpiic-metricsPanel-instructions gpii-metricsPanel-instructions\"></p><div class=\"gpiic-metricsPanel-graphContent\"><div class=\"gpiic-metricsPanel-svg gpii-metricsPanel-svg\"></div><div class=\"gpiic-metricsPanel-legend gpii-metricsPanel-legend\"></div></div></div>"
+                resourceText: "<div class=\"gpii-metricsPanel-summary gpiic-metricsPanel-summary\"><h2>CI Builds</h2></div><div class=\"gpii-metricsPanel-graph\"><h3>Number of CI Results</h3><p class=\"gpiic-metricsPanel-instructions gpii-metricsPanel-instructions gpii-hidden\">Use <a class=\"gpiic-metricsPanel-backControl gpii-metricsPanel-backControl\" href=\"#\">Back</a> and <a class=\"gpiic-metricsPanel-forwardControl gpii-metricsPanel-forwardControl\" href=\"#\">Forward</a> to scroll</p><div class=\"gpiic-metricsPanel-graphContent\"><div class=\"gpiic-metricsPanel-svg gpii-metricsPanel-svg\"></div><div class=\"gpiic-metricsPanel-legend gpii-metricsPanel-legend\"></div></div></div>"
             }
         },
         components: {
