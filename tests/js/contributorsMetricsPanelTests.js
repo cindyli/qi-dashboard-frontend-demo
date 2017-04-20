@@ -51,7 +51,7 @@ https://raw.githubusercontent.com/fluid-project/chartAuthoring/master/LICENSE.tx
                     listener: "gpii.tests.contributorsMetricsPanelTester.verifyServiceResponse",
                     args: ["{contributorsMetricsPanel}"],
                     spec: {priority: "last"},
-                    event: "{contributorsMetricsPanelTest contributorsMetricsPanel}.events.onServiceResponseReady"
+                    event: "{contributorsMetricsPanelTest contributorsMetricsPanel}.events.onCreateGraph"
                 }]
             }
             ]

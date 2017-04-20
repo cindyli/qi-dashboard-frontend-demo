@@ -59,7 +59,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
 
         // Used in testing when using fake JSONP; otherwise we rely on the
         // `success` anonymous function below
-        gpii.qualityInfrastructure.frontEnd.jsonp.storeResultStatic = function(result) {
+        gpii.qualityInfrastructure.frontEnd.jsonp.storeResultStatic = function (result) {
             gpii.qualityInfrastructure.frontEnd.jsonp.storeResult(that, result);
         };
 
@@ -72,11 +72,10 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             success: function (result) {
                 gpii.qualityInfrastructure.frontEnd.jsonp.storeResult(that, result);
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                that.events.onJSONPError.fire(textStatus);
+            error: function (jqXHR) {
+                that.events.onJSONPError.fire(jqXHR.status);
             }
         });
-
     };
 
 })(jQuery, fluid);

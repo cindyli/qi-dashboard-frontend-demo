@@ -61,8 +61,8 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     });
 
     // Transforms events data into the style expected by the line chart component
-    gpii.qualityInfrastructure.frontEnd.baseSingleDataSetMetricsPanel.transformEventsData = function(eventsData) {
-        return fluid.transform(eventsData, function(event) {
+    gpii.qualityInfrastructure.frontEnd.baseSingleDataSetMetricsPanel.transformEventsData = function (eventsData) {
+        return fluid.transform(eventsData, function (event) {
             return {
                 "date": event.timestamp,
                 "value": event.value

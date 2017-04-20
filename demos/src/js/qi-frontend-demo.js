@@ -7,7 +7,10 @@
     gpii.qualityInfrastructure.frontEnd.demo.daysToZoom = 180;
 
     gpii.qualityInfrastructure.frontEnd.demo.getURLParamValue = function (param) {
-        var params={};window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(str,key,value){params[key] = value;});
+        var params = {};
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+            params[key] = value;
+        });
         return params[param];
     };
 
@@ -24,7 +27,7 @@
         }
     });
 
-    gpii.qualityInfrastructure.frontEnd.demo.bindViewSelectHandler = function(commitsPanel, contributorsPanel, ciResultsPanel) {
+    gpii.qualityInfrastructure.frontEnd.demo.bindViewSelectHandler = function (commitsPanel, contributorsPanel, ciResultsPanel) {
         var selectControl = $(".gpiic-demo-dataRangeSelector");
         selectControl.change(function (e) {
             var selectedValue = $(this).find(":selected").attr("value");
@@ -69,18 +72,18 @@
         panel.applier.change("currentEventsDataViewSettings.daysBack", daysToZoom);
     };
 
-    gpii.qualityInfrastructure.frontEnd.demo.animate = function(commitsPanel, contributorsPanel, ciResultsPanel, daysToScroll) {
+    gpii.qualityInfrastructure.frontEnd.demo.animate = function (commitsPanel, contributorsPanel, ciResultsPanel, daysToScroll) {
 
         var forward = false;
 
-        var changeView = function() {
+        var changeView = function () {
             var daysToRoll = forward ? daysToScroll : -daysToScroll;
             try {
                 gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays(commitsPanel, daysToRoll);
                 gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays(contributorsPanel, daysToRoll);
                 gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays(ciResultsPanel, daysToRoll);
             }
-            catch(e) {
+            catch (e) {
                 forward = forward ? false : true;
             }
         };

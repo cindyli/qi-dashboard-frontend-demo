@@ -23,12 +23,16 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         selectors: {
             summary: ".gpiic-metricsPanel-summary",
             graph: ".gpiic-metricsPanel-graphContent",
+            instructions: ".gpiic-metricsPanel-instructions",
             backControl: ".gpiic-metricsPanel-backControl",
             forwardControl: ".gpiic-metricsPanel-forwardControl"
         },
+        classes: {
+            hidden: "gpii-hidden"
+        },
         resources: {
             template: {
-                resourceText: "<div class=\"gpiic-metricsPanel-summary\"></div><div class=\"gpiic-metricsPanel-graph\">Use <a href=\"#\">Back</a> and <a href=\"#\">Forward</a> to scroll</div>"
+                resourceText: "<div class=\"gpiic-metricsPanel-summary\"></div><div class=\"gpiic-metricsPanel-graphContent\"></div>"
             }
         },
         model: {
@@ -64,10 +68,24 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             graph: {
                 type: "floe.chartAuthoring.lineChart.timeSeriesSingleDataSet",
                 container: "{baseMetricsPanel}.dom.graph",
-                createOnEvent: "{baseMetricsPanel}.events.onServiceResponseReady",
+                createOnEvent: "{baseMetricsPanel}.events.onCreateGraph",
                 options: {
                     model: {
                         dataSet: "{baseMetricsPanel}.model.currentEventsDataView"
+                    },
+                    listeners: {
+                        "onChartCreated.escalate": "{baseMetricsPanel}.events.onGraphCreated.fire"
+                    }
+                }
+            },
+            errorGraph: {
+                type: "gpii.qualityInfrastructure.frontEnd.errorGraph",
+                container: "{baseMetricsPanel}.dom.graph",
+                createOnEvent: "{baseMetricsPanel}.events.onCreateErrorGraph",
+                options: {
+                    statusCode: "{arguments}.0",
+                    model: {
+                        statusCode: "{that}.options.statusCode"
                     }
                 }
             }
@@ -75,13 +93,20 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         events: {
             onJSONPLoaded: null,
             onJSONPError: null,
-            onServiceResponseReady: null
+            onCreateGraph: null,
+            onGraphCreated: null,
+            onCreateErrorGraph: null
         },
         listeners: {
-            // Set various data when jsonP return is ready
+            // Set various data when jsonP data is received
             "onJSONPLoaded.setSummary": {
                 listener: "{that}.applier.change",
                 "args": ["summary", "{jsonpLoader}.model.jsonpData.summary"]
+            },
+            "onJSONPLoaded.showInstruction": {
+                "this": "{that}.dom.instructions",
+                "method": "removeClass",
+                args: ["{that}.options.classes.hidden"]
             },
             "onJSONPLoaded.setEvents": {
                 listener: "{that}.applier.change",
@@ -106,21 +131,26 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 priority: "after:setMetricsEndDate"
             },
             "onJSONPLoaded.fireServiceResponseReady": {
-                listener: "{that}.events.onServiceResponseReady.fire",
+                listener: "{that}.events.onCreateGraph.fire",
                 priority: "after:updateCurrentEventsDataView"
             },
-            // End of setting various data based on jsonP return
+            // End of handling the "onJSONPLoaded" event
 
-            "onServiceResponseReady.bindBackward": {
+            // Binds listeners for back and forward buttons only when the graph is created properly
+            "onGraphCreated.bindBackward": {
                 "this": "{that}.dom.backControl",
                 method: "click",
                 args: "{that}.moveViewBackward"
             },
-            "onServiceResponseReady.bindForward": {
+            "onGraphCreated.bindForward": {
                 "this": "{that}.dom.forwardControl",
                 method: "click",
                 args: "{that}.moveViewForward"
-            }
+            },
+
+            // Error handling
+            "onJSONPError.updateErrorMsg": "{that}.events.onCreateErrorGraph.fire"
+            // End of handling the "onJSONPError" event
         },
         modelListeners: {
             currentEventsDataViewSettings: {
@@ -142,6 +172,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 funcName: "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getCompleteDataMaxValue",
                 args: ["{arguments}.0"]
             },
+            // TODO: Verify the received jsonP event data is in the expected format
             transformEventsData: "fluid.identity",   // Implemented by integrators
             getLatestDate: "fluid.identity",   // Implemented by integrators
             getFilteredEvents: "fluid.identity",   // Implemented by integrators
@@ -151,7 +182,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                     expander: {
                         func: "{that}.getFilteredEvents"
                     }
-                }],
+                }]
+            },
+            updateErrorMsg: {
+                func: "{that}.applier.change",
+                "args": ["errorMsg", "{arguments}.0.error"]
             }
         }
     });
@@ -176,12 +211,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             filteredEvents = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsDataByDaysBack(events, metricsEndDate, daysBack);
         }
 
-        if(filteredEvents.length !== 0) {
-            return filteredEvents;
-        } else {
-            return currentEventsDataView;
-            throw new gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataViewException("Filter would result in empty dataSet object");
-        }
+        return filteredEvents.length === 0 ? currentEventsDataView : filteredEvents;
     };
 
     gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays = function (that, rollDays) {
@@ -197,7 +227,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.moveView = function (that, daysToScroll) {
         try {
             gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays(that, daysToScroll);
-        } catch(e) {
+        } catch (e) {
             gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.rollDays(that, - daysToScroll);
         }
     };
@@ -206,11 +236,6 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         return d3.max(events, function (d) {
             return d.value;
         });
-    };
-
-    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataViewException = function (message) {
-        this.message = message;
-        this.name = "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.updateCurrentEventsDataViewException";
     };
 
     // Tests to determine whether or not something is a Date object
@@ -232,7 +257,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     // Given eventsData and date strings in YYYY-MM-DD / Dates for an end date
     // and start date, filter the events data to only have data between (and
     // including) those dates
-    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsData = function(eventsData, earlierDate, laterDate) {
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsData = function (eventsData, earlierDate, laterDate) {
         var filteredEvents = fluid.copy(eventsData);
 
         earlierDate = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getWorkableDate(earlierDate);
@@ -252,7 +277,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     // days back, filters the eventsData to only the range from the days back
     // from the startDate
 
-    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsDataByDaysBack = function(eventsData, startDate, daysBack) {
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsDataByDaysBack = function (eventsData, startDate, daysBack) {
 
         startDate = gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.getWorkableDate(startDate);
 

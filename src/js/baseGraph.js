@@ -13,6 +13,8 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
 
     "use strict";
 
+    // The base component shared by creating graphs that handle either the single data set
+    // or the multiple data set.
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.baseGraph", {
         model: {
             dataSet: null // Must be supplied by integrators

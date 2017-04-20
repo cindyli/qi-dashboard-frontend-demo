@@ -25,7 +25,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseSingleDataSetMetricsPanel"],
         resources: {
             template: {
-                resourceText: "<div class=\"gpii-metricsPanel-summary gpiic-metricsPanel-summary\"><h2>Loading Commits Metrics...</h2></div><div class=\"gpii-metricsPanel-graph\"><h3>Number of Commits</h3><p class=\"gpii-metricsPanel-instructions\">Use <a class=\"gpiic-metricsPanel-backControl gpii-metricsPanel-backControl\" href=\"#\">Back</a> and <a class=\"gpiic-metricsPanel-forwardControl gpii-metricsPanel-forwardControl\" href=\"#\">Forward</a> to scroll</p><div class=\"gpiic-metricsPanel-graphContent\"><div class=\"gpiic-metricsPanel-svg gpii-metricsPanel-svg\"></div></div></div>"
+                resourceText: "<div class=\"gpii-metricsPanel-summary gpiic-metricsPanel-summary\"><h2>Commits</h2></div><div class=\"gpii-metricsPanel-graph\"><h3>Number of Commits</h3><p class=\"gpii-metricsPanel-instructions\">Use <a class=\"gpiic-metricsPanel-backControl gpii-metricsPanel-backControl\" href=\"#\">Back</a> and <a class=\"gpiic-metricsPanel-forwardControl gpii-metricsPanel-forwardControl\" href=\"#\">Forward</a> to scroll</p><div class=\"gpiic-metricsPanel-graphContent\"><div class=\"gpiic-metricsPanel-svg gpii-metricsPanel-svg\"></div></div></div>"
             }
         },
         selectors: {
@@ -35,7 +35,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             summary: {
                 type: "gpii.qualityInfrastructure.frontEnd.commitsSummaryPanel",
                 container: "{commitsMetricsPanel}.dom.summary",
-                createOnEvent: "{commitsMetricsPanel}.events.onServiceResponseReady",
+                createOnEvent: "{commitsMetricsPanel}.events.onCreateGraph",
                 options: {
                     model: {
                         timeOfLastCommit: "{commitsMetricsPanel}.model.summary.timeOfLastCommit",
