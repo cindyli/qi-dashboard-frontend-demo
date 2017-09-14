@@ -1,2 +1,8 @@
 .git
 .vagrant
+node_modules
+npm-debug.log
+yarn-error.log
+dist
+src/lib
+tests/lib

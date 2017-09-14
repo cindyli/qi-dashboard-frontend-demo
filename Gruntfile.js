@@ -163,7 +163,7 @@ module.exports = function (grunt) {
         },
         exec: {
             infusionInstall: {
-                command: "npm install",
+                command: "yarn install",
                 cwd: "./node_modules/infusion"
             },
             infusionBuild: {
@@ -194,7 +194,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask("installInfusionNoJquery", "Additionally install the custom version of Infusion without jQuery", ["exec:infusionBuildNoJquery", "copy:infusionNoJquery"]);
 
-    grunt.registerTask("installFrontEnd", "Install front-end dependencies from the node_modules directory after 'npm install'", ["exec:infusionInstall", "exec:infusionBuild", "copy:frontEndDependencies", "installInfusionNoJquery"]);
+    grunt.registerTask("installFrontEnd", "Install front-end dependencies from the node_modules directory after 'yarn install'", ["exec:infusionInstall", "exec:infusionBuild", "copy:frontEndDependencies", "installInfusionNoJquery"]);
 
     grunt.registerTask("dist", "Build single-file distrbituion", ["copy:cssToDist", "copy:demosToDist", "concat", "uglify", "clean:distArtifacts"]);
 };

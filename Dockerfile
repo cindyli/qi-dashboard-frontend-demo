@@ -1,28 +1,26 @@
-FROM inclusivedesign/nodejs:latest
+FROM node:8-alpine
 
-COPY . /tmp/build
+RUN apk add --no-cache nginx
 
-WORKDIR /tmp/build
+WORKDIR /app
+COPY . /app
 
-RUN yum -y install make && \
-    npm install --ignore-scripts && \
+RUN apk add --no-cache --virtual build-dependencies make git && \
+    yarn global add grunt-cli --no-progress && \
+    yarn install --no-progress --ignore-scripts --production=false && \
     grunt installFrontEnd && \
     grunt dist && \
-    cp -R ./dist /srv/www && \
-    yum -y autoremove make && \
-    cd /tmp && \
-    rm -rf /tmp/build
+    apk del build-dependencies
 
-COPY provisioning/*.yml /etc/ansible/playbooks/
-
-COPY provisioning/start.sh /usr/local/bin/start.sh
-
-WORKDIR /etc/ansible/playbooks
-
-RUN ansible-galaxy install -fr requirements.yml && \
-    ansible-playbook docker.yml --tags "install,configure" && \
-    chmod 755 /usr/local/bin/start.sh
+RUN echo $'server {\n\
+        listen                  80;\n\
+        root                    /app/dist;\n\
+        index                   index.html index.htm;\n\
+        server_name             localhost;\n\
+}' > /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
-ENTRYPOINT ["/usr/local/bin/start.sh"]
+STOPSIGNAL SIGTERM
+
+CMD ["nginx", "-g", "daemon off; pid /tmp/nginx.pid;"]
