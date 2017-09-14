@@ -6,10 +6,10 @@
   "bugs": "https://issues.gpii.net/browse/GPII/component/10800/",
   "homepage": "https://wiki.gpii.net/w/Quality_Infrastructure",
   "dependencies": {
-      "d3": "3.5.17",
-      "chartAuthoring":"https://github.com/fluid-project/chartAuthoring#6c8232a28a0066694babd1cefc66949ce0845db6",
-      "flocking": "colinbdclark/Flocking#6749bee2b7041b76f494bd188b755d568332eda0",
-      "infusion": "2.0.0-dev.20160911T222604Z.b86ecbb"
+    "d3": "3.5.17",
+    "chartAuthoring": "https://github.com/fluid-project/chartAuthoring",
+    "flocking": "colinbdclark/Flocking",
+    "infusion": "2.0.0"
   },
   "licenses": [
     {
@@ -32,7 +32,7 @@
   "repository": "https://github.com/waharnum/qi-dashboard-frontend-demo",
   "main": "",
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=8.5.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -42,6 +42,7 @@
     "grunt-contrib-concat": "1.0.1",
     "grunt-contrib-clean": "1.0.0",
     "grunt-contrib-uglify": "2.0.0",
-    "grunt-exec": "1.0.0"
+    "grunt-exec": "1.0.0",
+    "grunt-cli": "1.2.0"
   }
 }
