@@ -38,7 +38,6 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 createOnEvent: "{commitsMetricsPanel}.events.onCreateGraph",
                 options: {
                     model: {
-                        timeOfLastCommit: "{commitsMetricsPanel}.model.summary.timeOfLastCommit",
                         mostFrequentCommitterTotalCommits: "{commitsMetricsPanel}.model.summary.mostFrequentCommitterTotalCommits",
                         mostFrequentCommitter: "{commitsMetricsPanel}.model.summary.mostFrequentCommitter",
                         totalCommits: "{commitsMetricsPanel}.model.summary.totalCommits"
