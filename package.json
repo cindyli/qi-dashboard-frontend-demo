@@ -6,10 +6,10 @@
   "bugs": "https://issues.gpii.net/browse/GPII/component/10800/",
   "homepage": "https://wiki.gpii.net/w/Quality_Infrastructure",
   "dependencies": {
-      "d3": "3.5.17",
-      "chartAuthoring":"https://github.com/fluid-project/chartAuthoring#23232ccb4078f05725879ef030366f280cd90b3e",
-      "flocking": "0.2.0-dev.20170206T221943Z.fb09a52",
-      "infusion": "3.0.0-dev.20170214T161720Z.6126724"
+    "d3": "3.5.17",
+    "chartAuthoring": "https://github.com/fluid-project/chartAuthoring#23232ccb4078f05725879ef030366f280cd90b3e",
+    "flocking": "0.2.0-dev.20170206T221943Z.fb09a52",
+    "infusion": "3.0.0-dev.20180122T170655Z.350441a9b"
   },
   "licenses": [
     {
