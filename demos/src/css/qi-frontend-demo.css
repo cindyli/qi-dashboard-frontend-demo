@@ -204,7 +204,7 @@ body.highContrast {
     color: #fff;
 }
 
-.highContrast .gpii-demo-content h2,
+.highContrast #gpii-demo-repoTitle,
 .highContrast .gpii-demo-control {
     color: #fff;
 }
