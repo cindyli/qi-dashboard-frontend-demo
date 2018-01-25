@@ -137,15 +137,73 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             // End of handling the "onJSONPLoaded" event
 
             // Binds listeners for back and forward buttons only when the graph is created properly
-            "onGraphCreated.bindBackward": {
+            "onGraphCreated.allocateGraphId": {
+                listener: "fluid.set",
+                args: ["{that}", ["graphId"], "@expand:fluid.allocateGuid()"]
+            },
+            "onGraphCreated.assignGraphId": {
+                "this": "{that}.dom.graph",
+                method: "attr",
+                args: ["id", "{that}.graphId"],
+                priority: "after:allocateGraphId"
+            },
+
+            "onGraphCreated.allocateBackControlId": {
+                listener: "fluid.set",
+                args: ["{that}", ["backControlId"], "@expand:fluid.allocateGuid()"]
+            },
+            "onGraphCreated.appendBackControlDesc": {
+                listener: "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.appendDesc",
+                args: ["{that}.container", "{that}.options.strings.backControlDescription", "{that}.backControlId"],
+                priority: "after:allocateBackControlId"
+            },
+
+            "onGraphCreated.allocateForwardControlId": {
+                listener: "fluid.set",
+                args: ["{that}", ["forwardControlId"], "@expand:fluid.allocateGuid()"]
+            },
+            "onGraphCreated.appendForwardControlDesc": {
+                listener: "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.appendDesc",
+                args: ["{that}.container", "{that}.options.strings.forwardControlDescription", "{that}.forwardControlId"],
+                priority: "after:allocateForwardControlId"
+            },
+
+            // Handle the back button
+            "onGraphCreated.bindBackControlClick": {
                 "this": "{that}.dom.backControl",
                 method: "click",
                 args: "{that}.moveViewBackward"
             },
-            "onGraphCreated.bindForward": {
+            "onGraphCreated.bindBackControlAriaControls": {
+                "this": "{that}.dom.backControl",
+                method: "attr",
+                args: ["aria-controls", "{that}.graphId"],
+                priority: "after:assignGraphId"
+            },
+            "onGraphCreated.bindBackControlAriaDescribedby": {
+                "this": "{that}.dom.backControl",
+                method: "attr",
+                args: ["aria-describedby", "{that}.backControlId"],
+                priority: "after:appendBackControlDesc"
+            },
+
+            // Handle the forward button
+            "onGraphCreated.bindForwardClick": {
                 "this": "{that}.dom.forwardControl",
                 method: "click",
                 args: "{that}.moveViewForward"
+            },
+            "onGraphCreated.bindForwardAriaControls": {
+                "this": "{that}.dom.forwardControl",
+                method: "attr",
+                args: ["aria-controls", "{that}.graphId"],
+                priority: "after:assignGraphId"
+            },
+            "onGraphCreated.bindForwardControlAriaDescribedby": {
+                "this": "{that}.dom.forwardControl",
+                method: "attr",
+                args: ["aria-describedby", "{that}.forwardControlId"],
+                priority: "after:appendForwardControlDesc"
             },
 
             // Error handling
@@ -285,6 +343,10 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         daysBackDate.setDate(- daysBack);
 
         return gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsData(eventsData, daysBackDate, startDate);
+    };
+
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.appendDesc = function (containerToAppend, desc, elementId) {
+        containerToAppend.append("<p id=\"" + elementId + "\" class=\"gpii-hidden\">" + desc + "</p>");
     };
 
 })(jQuery, fluid);

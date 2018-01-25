@@ -17,7 +17,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         gradeNames: ["gpii.qualityInfrastructure.frontEnd.multiDataSetGraph"],
         model: {
             svgTitle: "CI Results line chart",
-            svgDescription: "A line chart showing statistics for CI results"
+            svgDescription: "Number of CI results over a certain period of time"
         }
     });
 
@@ -27,6 +27,10 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             template: {
                 resourceText: "<div class=\"gpii-metricsPanel-summary gpiic-metricsPanel-summary\"><h2>CI Builds</h2></div><div class=\"gpii-metricsPanel-graph\"><h3>Number of CI Results</h3><p class=\"gpiic-metricsPanel-instructions gpii-metricsPanel-instructions gpii-hidden\">Use <a class=\"gpiic-metricsPanel-backControl gpii-metricsPanel-backControl\" href=\"#\">Back</a> and <a class=\"gpiic-metricsPanel-forwardControl gpii-metricsPanel-forwardControl\" href=\"#\">Forward</a> to scroll</p><div class=\"gpiic-metricsPanel-graphContent\"><div class=\"gpiic-metricsPanel-svg gpii-metricsPanel-svg\"></div><div class=\"gpiic-metricsPanel-legend gpii-metricsPanel-legend\"></div></div></div>"
             }
+        },
+        strings: {
+            backControlDescription: "Go back in time to view previous CI results",
+            forwardControlDescription: "Go forward in time to view more recent CI results"
         },
         components: {
             summary: {

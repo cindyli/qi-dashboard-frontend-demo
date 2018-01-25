@@ -17,7 +17,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         gradeNames: ["gpii.qualityInfrastructure.frontEnd.singleDataSetGraph", "floe.chartAuthoring.lineChart.timeSeries.area"],
         model: {
             svgTitle: "Contributors line chart",
-            svgDescription: "A line chart showing statistics for contributors"
+            svgDescription: "Number of contributors over a certain period of time"
         },
         lineOptions: {
             interpolation: "cardinal"
@@ -33,6 +33,10 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         },
         selectors: {
             graph: ".gpii-metricsPanel-svg"
+        },
+        strings: {
+            backControlDescription: "Advance back in time to view previous contributors",
+            forwardControlDescription: "Advance forward in time to view more recent contributors"
         },
         components: {
             summary: {

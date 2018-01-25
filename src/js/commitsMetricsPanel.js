@@ -17,7 +17,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         gradeNames: ["gpii.qualityInfrastructure.frontEnd.singleDataSetGraph"],
         model: {
             svgTitle: "Commits line chart",
-            svgDescription: "A line chart showing statistics for commits"
+            svgDescription: "Number of commits over a certain period of time"
         }
     });
 
@@ -30,6 +30,10 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         },
         selectors: {
             graph: ".gpii-metricsPanel-svg"
+        },
+        strings: {
+            backControlDescription: "Advance back in time to view previous commits",
+            forwardControlDescription: "Advance forward in time to view more recent commits"
         },
         components: {
             summary: {
