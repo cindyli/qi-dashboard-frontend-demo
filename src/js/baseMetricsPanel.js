@@ -23,6 +23,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         selectors: {
             summary: ".gpiic-metricsPanel-summary",
             graph: ".gpiic-metricsPanel-graphContent",
+            dataTable: ".gpiic-metricsPanel-dataTable",
             instructions: ".gpiic-metricsPanel-instructions",
             backControl: ".gpiic-metricsPanel-backControl",
             forwardControl: ".gpiic-metricsPanel-forwardControl"
@@ -32,7 +33,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         },
         resources: {
             template: {
-                resourceText: "<div class=\"gpiic-metricsPanel-summary\"></div><div class=\"gpiic-metricsPanel-graphContent\"></div>"
+                resourceText: "<div class=\"gpiic-metricsPanel-summary\"></div><div class=\"gpiic-metricsPanel-graphContent\"></div><div class=\"gpiic-metricsPanel-dataTable\"></div>"
             }
         },
         model: {
@@ -78,6 +79,19 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                     }
                 }
             },
+            dataTable: {
+                type: "gpii.qualityInfrastructure.frontEnd.baseDataTable",
+                container: "{baseMetricsPanel}.dom.dataTable",
+                createOnEvent: "{baseMetricsPanel}.events.onCreateDataTable",
+                options: {
+                    model: {
+                        dataSet: "{baseMetricsPanel}.model.currentEventsDataView"
+                    },
+                    listeners: {
+                        "onDataTableCreated.escalate": "{baseMetricsPanel}.events.onDataTableCreated.fire"
+                    }
+                }
+            },
             errorGraph: {
                 type: "gpii.qualityInfrastructure.frontEnd.errorGraph",
                 container: "{baseMetricsPanel}.dom.graph",
@@ -95,6 +109,8 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             onJSONPError: null,
             onCreateGraph: null,
             onGraphCreated: null,
+            onCreateDataTable: null,
+            onDataTableCreated: null,
             onCreateErrorGraph: null
         },
         listeners: {
@@ -130,8 +146,12 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 listener: "{that}.updateCurrentEventsDataView",
                 priority: "after:setMetricsEndDate"
             },
-            "onJSONPLoaded.fireServiceResponseReady": {
+            "onJSONPLoaded.createGraph": {
                 listener: "{that}.events.onCreateGraph.fire",
+                priority: "after:updateCurrentEventsDataView"
+            },
+            "onJSONPLoaded.crateDataTable": {
+                listener: "{that}.events.onCreateDataTable.fire",
                 priority: "after:updateCurrentEventsDataView"
             },
             // End of handling the "onJSONPLoaded" event

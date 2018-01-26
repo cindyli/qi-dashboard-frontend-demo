@@ -82,7 +82,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                         func: "{that}.getLegendData"
                     }
                 }],
-                priority: "after:fireServiceResponseReady"
+                priority: "after:createGraph"
             },
             "onJSONPLoaded.fireLegendDataReady": {
                 listener: "{that}.events.onLegendDataReady.fire",
