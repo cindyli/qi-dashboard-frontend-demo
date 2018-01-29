@@ -34,7 +34,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         invokers: {
             draw: {
                 funcName: "gpii.qualityInfrastructure.frontEnd.baseDataTable.draw",
-                args: ["{that}.table", "{arguments}.0"]
+                args: ["{that}", "{arguments}.0"]
             }
         },
         listeners: {
@@ -60,11 +60,12 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         var tbody = that.table.append("tbody");
 
         // append the header row
-		thead.append('tr')
-		  .selectAll('th')
-		  .data(headers).enter()
-		  .append('th')
-		    .text(function (header) { return header; });
+        thead.append('tr')
+        .selectAll('th')
+        .data(headers)
+        .enter()
+        .append('th')
+        .text(function (header) { console.log(header);return header; });
 
         that.draw(dataSet);
         that.events.onDataTableCreated.fire();
@@ -74,30 +75,20 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         drawFunc(fluid.get(modelDataSet[0], ["data"]));
     };
 
-    gpii.qualityInfrastructure.frontEnd.baseDataTable.draw = function (table, dataSet) {
+    gpii.qualityInfrastructure.frontEnd.baseDataTable.draw = function (that, dataSet) {
         console.log("in draw", dataSet);
 
-        var rows = table.selectAll("tbody tr")
-        .data(dataSet, function (d) {return d.date;});
+        var rows = that.table.selectAll("tbody tr")
+        .data(dataSet);
+
+        rows.exit().remove();
 
         rows.enter()
         .append('tr')
         .selectAll("td")
-        .data(function (d) {return [d.date, d.value];})
+        .data(function (d) {console.log(d.date);return [d.date, d.value];})
         .enter()
         .append("td")
         .text(function(d) { return d; });
-
-        rows.exit().remove();
-
-        var cells = rows.selectAll('td')
-        .data(function (d) {return [d.date, d.value];})
-        .text(function (d) {return d;});
-
-        cells.enter()
-        .append("td")
-        .text(function(d) { return d; });
-
-        cells.exit().remove();
     };
 })(jQuery, fluid);
