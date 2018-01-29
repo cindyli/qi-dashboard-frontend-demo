@@ -57,15 +57,16 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             });
 
         var thead = that.table.append("thead");
-        var tbody = that.table.append("tbody");
+
+        that.table.append("tbody");
 
         // append the header row
-        thead.append('tr')
-        .selectAll('th')
+        thead.append("tr")
+        .selectAll("th")
         .data(headers)
         .enter()
-        .append('th')
-        .text(function (header) { console.log(header);return header; });
+        .append("th")
+        .text(function (header) { console.log(header); return header; });
 
         that.draw(dataSet);
         that.events.onDataTableCreated.fire();
@@ -84,11 +85,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         rows.exit().remove();
 
         rows.enter()
-        .append('tr')
+        .append("tr")
         .selectAll("td")
-        .data(function (d) {console.log(d.date);return [d.date, d.value];})
+        .data(function (d) {console.log(d.date); return [d.date, d.value]; })
         .enter()
         .append("td")
-        .text(function(d) { return d; });
+        .text(function (d) { return d; });
     };
 })(jQuery, fluid);
