@@ -49,27 +49,51 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         var headers = that.options.headers,
             dataSet = that.model.dataSet;
 
-        that.table = that.jQueryToD3(that.container)
-            .append("table")
-            .attr({
-                "aria-live": "polite",
-                "aria-relevant": "all"
-            });
+        // that.table = that.jQueryToD3(that.container)
+        //     .append("table")
+        //     .attr({
+        //         "aria-live": "polite",
+        //         "aria-relevant": "all"
+        //     });
+        //
+        // var thead = that.table.append("thead");
+        //
+        // that.table.append("tbody");
+        //
+        // // append the header row
+        // thead.append("tr")
+        // .selectAll("th")
+        // .data(headers)
+        // .enter()
+        // .append("th")
+        // .text(function (header) { console.log(header); return header; });
+        //
+        // that.draw(dataSet);
+        // that.events.onDataTableCreated.fire();
 
+        that.table = that.jQueryToD3(that.container).append("table");
         var thead = that.table.append("thead");
+        var tbody = that.table.append("tbody");
 
-        that.table.append("tbody");
-
-        // append the header row
         thead.append("tr")
-        .selectAll("th")
-        .data(headers)
-        .enter()
-        .append("th")
-        .text(function (header) { console.log(header); return header; });
+          .selectAll("th")
+          .data(headers)
+          .enter()
+          .append("th")
+          .text(function(header) { return header; });
 
-        that.draw(dataSet);
-        that.events.onDataTableCreated.fire();
+        // that.draw(dataSet);
+        // that.events.onDataTableCreated.fire();
+
+        tbody.selectAll("tr")
+          .data(dataSet)
+          .enter()
+          .append("tr")
+          .selectAll("td")
+          .data(function (d) {return [d.date, d.Value];})
+          .enter()
+          .append("td")
+          .text(function(d) { return d; });
     };
 
     gpii.qualityInfrastructure.frontEnd.baseDataTable.updateTable = function (drawFunc, modelDataSet) {
@@ -82,14 +106,37 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         var rows = that.table.selectAll("tbody tr")
         .data(dataSet);
 
-        rows.exit().remove();
-
         rows.enter()
-        .append("tr")
+        .append('tr')
         .selectAll("td")
-        .data(function (d) {console.log(d.date); return [d.date, d.value]; })
+        .data(function (d) {return [d.date, d.value];})
         .enter()
         .append("td")
-        .text(function (d) { return d; });
+        .text(function(d) { return d; });
+
+        rows.exit().remove();
+
+        var cells = rows.selectAll('td')
+        .data(function (d) {return [d.date, d.value];})
+        .text(function (d) {return d;});
+
+        cells.enter()
+        .append("td")
+        .text(function(d) { return d; });
+
+        cells.exit().remove();
+
+        // var rows = that.table.selectAll("tbody tr")
+        // .data(dataSet);
+        //
+        // rows.exit().remove();
+        //
+        // rows.enter()
+        // .append("tr")
+        // .selectAll("td")
+        // .data(function (d) {console.log(d.date); return [d.date, d.value]; })
+        // .enter()
+        // .append("td")
+        // .text(function (d) { return d; });
     };
 })(jQuery, fluid);
