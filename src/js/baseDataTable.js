@@ -63,7 +63,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         },
         listeners: {
             "onCreate.hideDataTable": {
-                this: "{that}.container",
+                "this": "{that}.container",
                 method: "addClass",
                 args: ["{that}.options.styles.hiddenAccessible"]
             },
