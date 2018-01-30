@@ -51,6 +51,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             },
             graph: {
                 type: "gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel.graph"
+            },
+            dataTable: {
+                options: {
+                    headerTexts: ["Date", "Number of Contributors"]
+                }
             }
         }
     });

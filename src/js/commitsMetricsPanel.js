@@ -50,6 +50,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             },
             graph: {
                 type: "gpii.qualityInfrastructure.frontEnd.commitsMetricsPanel.graph"
+            },
+            dataTable: {
+                options: {
+                    headerTexts: ["Date", "Number of Commits"]
+                }
             }
         }
     });

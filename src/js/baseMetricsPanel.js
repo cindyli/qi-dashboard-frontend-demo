@@ -156,7 +156,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             },
             // End of handling the "onJSONPLoaded" event
 
-            // Binds listeners for back and forward buttons only when the graph is created properly
+            // When the graph is created, allocates and assigned these ids to proper containers
+            // 1. graph id;
+            // 2. back control description id;
+            // 3. forward control description id;
+            // 4. data table id.
             "onGraphCreated.allocateGraphId": {
                 listener: "fluid.set",
                 args: ["{that}", ["graphId"], "@expand:fluid.allocateGuid()"]
@@ -188,7 +192,19 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 priority: "after:allocateForwardControlId"
             },
 
-            // Handle the back button
+            "onGraphCreated.allocateDataTableId": {
+                listener: "fluid.set",
+                args: ["{that}", ["dataTableId"], "@expand:fluid.allocateGuid()"]
+            },
+            "onGraphCreated.appendDataTableId": {
+                "this": "{that}.dom.dataTable",
+                method: "attr",
+                args: ["id", "{that}.dataTableId"],
+                priority: "after:allocateDataTableId"
+            },
+
+            // Handle the back button.
+            // To set aria-controls = [graph id]; aria-describedby = [back control description id]
             "onGraphCreated.bindBackControlClick": {
                 "this": "{that}.dom.backControl",
                 method: "click",
@@ -207,7 +223,8 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 priority: "after:appendBackControlDesc"
             },
 
-            // Handle the forward button
+            // Handle the forward button.
+            // To set aria-controls = [graph id]; aria-describedby = [forward control description id]
             "onGraphCreated.bindForwardClick": {
                 "this": "{that}.dom.forwardControl",
                 method: "click",
@@ -224,6 +241,13 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 method: "attr",
                 args: ["aria-describedby", "{that}.forwardControlId"],
                 priority: "after:appendForwardControlDesc"
+            },
+
+            // Set SVG with aria-labelledby = dataTableId so that screen readers can read the data table along with the svg title and description.
+            "onGraphCreated.bindSvgAriaLabelledby": {
+                listener: "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.bindSvgAriaLabelledby",
+                args: ["{that}"],
+                priority: "after:appendDataTableId"
             },
 
             // Error handling
@@ -367,6 +391,14 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
 
     gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.appendDesc = function (containerToAppend, desc, elementId) {
         containerToAppend.append("<p id=\"" + elementId + "\" class=\"gpii-hidden\">" + desc + "</p>");
+    };
+
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.bindSvgAriaLabelledby = function (that) {
+        var svg = that.graph.svg;
+        var existingLabelledby = svg.attr("aria-labelledby");
+        svg.attr({
+            "aria-labelledby": existingLabelledby + " " + that.dataTableId
+        });
     };
 
 })(jQuery, fluid);

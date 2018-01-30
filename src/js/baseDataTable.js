@@ -17,14 +17,30 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     // or the multiple data set.
     fluid.defaults("gpii.qualityInfrastructure.frontEnd.baseDataTable", {
         gradeNames: ["floe.d3ViewComponent"],
+        title: "Corresponding Data Table",
         headers: ["date", "value"],
+        headerTexts: ["Date", "Number"],
+        styles: {
+            hiddenAccessible: "gpii-hidden-accessible"
+        },
         model: {
             dataSet: null // Must be supplied by integrators
         },
+        modelRelay: {
+            target: "dataSetToRender",
+            namespace: "convertDataSet",
+            singleTransform: {
+                type: "fluid.transforms.free",
+                func: "gpii.qualityInfrastructure.frontEnd.convertDataSet",
+                args: {
+                    "dataSet": "{that}.model.dataSet"
+                }
+            }
+        },
         modelListeners: {
-            dataSet: [{
-                listener: "gpii.qualityInfrastructure.frontEnd.baseDataTable.updateTable",
-                args: ["{that}.draw", "{change}.value"],
+            dataSetToRender: [{
+                listener: "{that}.draw",
+                args: ["{change}.value"],
                 excludeSource: "init"
             }]
         },
@@ -35,9 +51,22 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             draw: {
                 funcName: "gpii.qualityInfrastructure.frontEnd.baseDataTable.draw",
                 args: ["{that}", "{arguments}.0"]
+            },
+            mapRowData: {
+                funcName: "gpii.qualityInfrastructure.frontEnd.baseDataTable.mapRowData",
+                args: ["{that}", "{arguments}.0"]
+            },
+            getData: {
+                funcName: "gpii.qualityInfrastructure.frontEnd.baseDataTable.getData",
+                args: ["{arguments}.0"]
             }
         },
         listeners: {
+            "onCreate.hideDataTable": {
+                this: "{that}.container",
+                method: "addClass",
+                args: ["{that}.options.styles.hiddenAccessible"]
+            },
             "onCreate.create": {
                 listener: "gpii.qualityInfrastructure.frontEnd.baseDataTable.create",
                 args: ["{that}"]
@@ -46,97 +75,85 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
     });
 
     gpii.qualityInfrastructure.frontEnd.baseDataTable.create = function (that) {
-        var headers = that.options.headers,
-            dataSet = that.model.dataSet;
+        var headerTexts = that.options.headerTexts,
+            dataSet = that.model.dataSetToRender,
+            dataTableContainer = that.jQueryToD3(that.container);
 
-        // that.table = that.jQueryToD3(that.container)
-        //     .append("table")
-        //     .attr({
-        //         "aria-live": "polite",
-        //         "aria-relevant": "all"
-        //     });
-        //
-        // var thead = that.table.append("thead");
-        //
-        // that.table.append("tbody");
-        //
-        // // append the header row
-        // thead.append("tr")
-        // .selectAll("th")
-        // .data(headers)
-        // .enter()
-        // .append("th")
-        // .text(function (header) { console.log(header); return header; });
-        //
-        // that.draw(dataSet);
-        // that.events.onDataTableCreated.fire();
+        dataTableContainer.append("title").text(that.options.title);
 
-        that.table = that.jQueryToD3(that.container).append("table");
+        that.table = dataTableContainer.append("table")
+            .attr({
+                "aria-live": "assertive",
+                "role": "status",
+                "aria-relevant": "all"
+            });
+
         var thead = that.table.append("thead");
         var tbody = that.table.append("tbody");
 
         thead.append("tr")
-          .selectAll("th")
-          .data(headers)
-          .enter()
-          .append("th")
-          .text(function(header) { return header; });
-
-        // that.draw(dataSet);
-        // that.events.onDataTableCreated.fire();
+            .selectAll("th")
+            .data(headerTexts)
+            .enter()
+            .append("th")
+            .text(function (header) { return header; });
 
         tbody.selectAll("tr")
-          .data(dataSet)
-          .enter()
-          .append("tr")
-          .selectAll("td")
-          .data(function (d) {return [d.date, d.Value];})
-          .enter()
-          .append("td")
-          .text(function(d) { return d; });
-    };
+            .data(dataSet)
+            .enter()
+            .append("tr")
+            .selectAll("td")
+            .data(that.mapRowData)
+            .enter()
+            .append("td")
+            .text(that.getData);
 
-    gpii.qualityInfrastructure.frontEnd.baseDataTable.updateTable = function (drawFunc, modelDataSet) {
-        drawFunc(fluid.get(modelDataSet[0], ["data"]));
+        that.events.onDataTableCreated.fire();
     };
 
     gpii.qualityInfrastructure.frontEnd.baseDataTable.draw = function (that, dataSet) {
-        console.log("in draw", dataSet);
+        var tbody = that.table.select("tbody");
+        var rows = tbody.selectAll("tr")
+            .data(dataSet);
 
-        var rows = that.table.selectAll("tbody tr")
-        .data(dataSet);
-
+        // Update rows
         rows.enter()
-        .append('tr')
-        .selectAll("td")
-        .data(function (d) {return [d.date, d.value];})
-        .enter()
-        .append("td")
-        .text(function(d) { return d; });
+            .append("tr")
+            .selectAll("td")
+            .data(that.mapRowData)
+            .enter()
+            .append("td")
+            .text(that.getData);
 
         rows.exit().remove();
 
-        var cells = rows.selectAll('td')
-        .data(function (d) {return [d.date, d.value];})
-        .text(function (d) {return d;});
+        // Update td cells
+        var cells = rows.selectAll("td")
+            .data(that.mapRowData)
+            .text(that.getData);
 
         cells.enter()
-        .append("td")
-        .text(function(d) { return d; });
+            .append("td")
+            .text(that.getData);
 
         cells.exit().remove();
+    };
 
-        // var rows = that.table.selectAll("tbody tr")
-        // .data(dataSet);
-        //
-        // rows.exit().remove();
-        //
-        // rows.enter()
-        // .append("tr")
-        // .selectAll("td")
-        // .data(function (d) {console.log(d.date); return [d.date, d.value]; })
-        // .enter()
-        // .append("td")
-        // .text(function (d) { return d; });
+    gpii.qualityInfrastructure.frontEnd.baseDataTable.mapRowData = function (that, row) {
+        var headers = that.options.headers;
+        return headers.map(function (header) {
+            return {
+                header: header,
+                value: row[header]
+            };
+        });
+    };
+
+    gpii.qualityInfrastructure.frontEnd.baseDataTable.getData = function (data) {
+        return data.value;
+    };
+
+    gpii.qualityInfrastructure.frontEnd.convertDataSet = function (model) {
+        return model.dataSet.length > 1 ? model.dataSet : fluid.get(model.dataSet[0], ["data"]);
     };
 })(jQuery, fluid);

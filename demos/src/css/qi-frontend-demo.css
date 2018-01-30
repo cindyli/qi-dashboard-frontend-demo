@@ -48,6 +48,15 @@ header {
     background-color: #fff;
 }
 
+.gpii-hidden {
+    display: none;
+}
+
+.gpii-hidden-accessible {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
 .gpii-logo {
     fill: #fff;
     color: #fff;
