@@ -23,6 +23,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         selectors: {
             summary: ".gpiic-metricsPanel-summary",
             graph: ".gpiic-metricsPanel-graphContent",
+            dataTable: ".gpiic-metricsPanel-dataTable",
             instructions: ".gpiic-metricsPanel-instructions",
             backControl: ".gpiic-metricsPanel-backControl",
             forwardControl: ".gpiic-metricsPanel-forwardControl"
@@ -32,7 +33,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         },
         resources: {
             template: {
-                resourceText: "<div class=\"gpiic-metricsPanel-summary\"></div><div class=\"gpiic-metricsPanel-graphContent\"></div>"
+                resourceText: "<div class=\"gpiic-metricsPanel-summary\"></div><div class=\"gpiic-metricsPanel-graphContent\"></div><div class=\"gpiic-metricsPanel-dataTable\"></div>"
             }
         },
         model: {
@@ -78,6 +79,19 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                     }
                 }
             },
+            dataTable: {
+                type: "gpii.qualityInfrastructure.frontEnd.baseDataTable",
+                container: "{baseMetricsPanel}.dom.dataTable",
+                createOnEvent: "{baseMetricsPanel}.events.onCreateDataTable",
+                options: {
+                    model: {
+                        dataSet: "{baseMetricsPanel}.model.currentEventsDataView"
+                    },
+                    listeners: {
+                        "onDataTableCreated.escalate": "{baseMetricsPanel}.events.onDataTableCreated.fire"
+                    }
+                }
+            },
             errorGraph: {
                 type: "gpii.qualityInfrastructure.frontEnd.errorGraph",
                 container: "{baseMetricsPanel}.dom.graph",
@@ -95,6 +109,8 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             onJSONPError: null,
             onCreateGraph: null,
             onGraphCreated: null,
+            onCreateDataTable: null,
+            onDataTableCreated: null,
             onCreateErrorGraph: null
         },
         listeners: {
@@ -130,22 +146,108 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
                 listener: "{that}.updateCurrentEventsDataView",
                 priority: "after:setMetricsEndDate"
             },
-            "onJSONPLoaded.fireServiceResponseReady": {
+            "onJSONPLoaded.createGraph": {
                 listener: "{that}.events.onCreateGraph.fire",
+                priority: "after:updateCurrentEventsDataView"
+            },
+            "onJSONPLoaded.crateDataTable": {
+                listener: "{that}.events.onCreateDataTable.fire",
                 priority: "after:updateCurrentEventsDataView"
             },
             // End of handling the "onJSONPLoaded" event
 
-            // Binds listeners for back and forward buttons only when the graph is created properly
-            "onGraphCreated.bindBackward": {
+            // When the graph is created, allocates and assigned these ids to proper containers
+            // 1. graph id;
+            // 2. back control description id;
+            // 3. forward control description id;
+            // 4. data table id.
+            "onGraphCreated.allocateGraphId": {
+                listener: "fluid.set",
+                args: ["{that}", ["graphId"], "@expand:fluid.allocateGuid()"]
+            },
+            "onGraphCreated.assignGraphId": {
+                "this": "{that}.dom.graph",
+                method: "attr",
+                args: ["id", "{that}.graphId"],
+                priority: "after:allocateGraphId"
+            },
+
+            "onGraphCreated.allocateBackControlId": {
+                listener: "fluid.set",
+                args: ["{that}", ["backControlId"], "@expand:fluid.allocateGuid()"]
+            },
+            "onGraphCreated.appendBackControlDesc": {
+                listener: "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.appendDesc",
+                args: ["{that}.container", "{that}.options.strings.backControlDescription", "{that}.backControlId"],
+                priority: "after:allocateBackControlId"
+            },
+
+            "onGraphCreated.allocateForwardControlId": {
+                listener: "fluid.set",
+                args: ["{that}", ["forwardControlId"], "@expand:fluid.allocateGuid()"]
+            },
+            "onGraphCreated.appendForwardControlDesc": {
+                listener: "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.appendDesc",
+                args: ["{that}.container", "{that}.options.strings.forwardControlDescription", "{that}.forwardControlId"],
+                priority: "after:allocateForwardControlId"
+            },
+
+            "onGraphCreated.allocateDataTableId": {
+                listener: "fluid.set",
+                args: ["{that}", ["dataTableId"], "@expand:fluid.allocateGuid()"]
+            },
+            "onGraphCreated.appendDataTableId": {
+                "this": "{that}.dom.dataTable",
+                method: "attr",
+                args: ["id", "{that}.dataTableId"],
+                priority: "after:allocateDataTableId"
+            },
+
+            // Handle the back button.
+            // To set aria-controls = [graph id]; aria-describedby = [back control description id]
+            "onGraphCreated.bindBackControlClick": {
                 "this": "{that}.dom.backControl",
                 method: "click",
                 args: "{that}.moveViewBackward"
             },
-            "onGraphCreated.bindForward": {
+            "onGraphCreated.bindBackControlAriaControls": {
+                "this": "{that}.dom.backControl",
+                method: "attr",
+                args: ["aria-controls", "{that}.graphId"],
+                priority: "after:assignGraphId"
+            },
+            "onGraphCreated.bindBackControlAriaDescribedby": {
+                "this": "{that}.dom.backControl",
+                method: "attr",
+                args: ["aria-describedby", "{that}.backControlId"],
+                priority: "after:appendBackControlDesc"
+            },
+
+            // Handle the forward button.
+            // To set aria-controls = [graph id]; aria-describedby = [forward control description id]
+            "onGraphCreated.bindForwardClick": {
                 "this": "{that}.dom.forwardControl",
                 method: "click",
                 args: "{that}.moveViewForward"
+            },
+            "onGraphCreated.bindForwardAriaControls": {
+                "this": "{that}.dom.forwardControl",
+                method: "attr",
+                args: ["aria-controls", "{that}.graphId"],
+                priority: "after:assignGraphId"
+            },
+            "onGraphCreated.bindForwardControlAriaDescribedby": {
+                "this": "{that}.dom.forwardControl",
+                method: "attr",
+                args: ["aria-describedby", "{that}.forwardControlId"],
+                priority: "after:appendForwardControlDesc"
+            },
+
+            // Set SVG with aria-labelledby = dataTableId so that screen readers can read the data table along with the svg title and description.
+            "onGraphCreated.bindSvgAriaLabelledby": {
+                listener: "gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.bindSvgAriaLabelledby",
+                args: ["{that}"],
+                priority: "after:appendDataTableId"
             },
 
             // Error handling
@@ -285,6 +387,18 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         daysBackDate.setDate(- daysBack);
 
         return gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.filterEventsData(eventsData, daysBackDate, startDate);
+    };
+
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.appendDesc = function (containerToAppend, desc, elementId) {
+        containerToAppend.append("<p id=\"" + elementId + "\" class=\"gpii-hidden\">" + desc + "</p>");
+    };
+
+    gpii.qualityInfrastructure.frontEnd.baseMetricsPanel.bindSvgAriaLabelledby = function (that) {
+        var svg = that.graph.svg;
+        var existingLabelledby = svg.attr("aria-labelledby");
+        svg.attr({
+            "aria-labelledby": existingLabelledby + " " + that.dataTableId
+        });
     };
 
 })(jQuery, fluid);

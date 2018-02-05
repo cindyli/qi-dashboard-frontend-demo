@@ -17,7 +17,7 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         gradeNames: ["gpii.qualityInfrastructure.frontEnd.singleDataSetGraph", "floe.chartAuthoring.lineChart.timeSeries.area"],
         model: {
             svgTitle: "Contributors line chart",
-            svgDescription: "A line chart showing statistics for contributors"
+            svgDescription: "Number of contributors over a certain period of time"
         },
         lineOptions: {
             interpolation: "cardinal"
@@ -28,11 +28,15 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
         gradeNames: ["gpii.qualityInfrastructure.frontEnd.baseSingleDataSetMetricsPanel"],
         resources: {
             template: {
-                resourceText: "<div class=\"gpiic-metricsPanel-summary gpii-metricsPanel-summary\"><h2>Contributors</h2></div><div class=\"gpii-metricsPanel-graph\"><h3>Amount of Contribution</h3><p class=\"gpii-metricsPanel-instructions\">Use <a class=\"gpiic-metricsPanel-backControl gpii-metricsPanel-backControl\" href=\"#\">Back</a> and <a class=\"gpiic-metricsPanel-forwardControl gpii-metricsPanel-forwardControl\" href=\"#\">Forward</a> to scroll</p><div class=\"gpiic-metricsPanel-graphContent\"><div class=\"gpiic-metricsPanel-svg gpii-metricsPanel-svg\"></div></div></div>"
+                resourceText: "<div class=\"gpiic-metricsPanel-summary gpii-metricsPanel-summary\"><h2>Contributors</h2></div><div class=\"gpii-metricsPanel-graph\"><h3>Amount of Contribution</h3><p class=\"gpii-metricsPanel-instructions\">Use <a class=\"gpiic-metricsPanel-backControl gpii-metricsPanel-backControl\" href=\"#\">Back</a> and <a class=\"gpiic-metricsPanel-forwardControl gpii-metricsPanel-forwardControl\" href=\"#\">Forward</a> to scroll</p><div class=\"gpiic-metricsPanel-graphContent\"><div class=\"gpiic-metricsPanel-svg gpii-metricsPanel-svg\"></div></div></div><div class=\"gpiic-metricsPanel-dataTable\"></div>"
             }
         },
         selectors: {
             graph: ".gpii-metricsPanel-svg"
+        },
+        strings: {
+            backControlDescription: "Advance back in time to view previous contributors",
+            forwardControlDescription: "Advance forward in time to view more recent contributors"
         },
         components: {
             summary: {
@@ -47,6 +51,11 @@ https://raw.githubusercontent.com/waharnum/qi-dashboard-frontend-demo/GPII-1681/
             },
             graph: {
                 type: "gpii.qualityInfrastructure.frontEnd.contributorsMetricsPanel.graph"
+            },
+            dataTable: {
+                options: {
+                    headerTexts: ["Date", "Number of Contributors"]
+                }
             }
         }
     });

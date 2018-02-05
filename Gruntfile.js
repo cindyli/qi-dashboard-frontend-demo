@@ -32,7 +32,8 @@ module.exports = function (grunt) {
             all: ["**/*.js"],
             buildScripts: ["Gruntfile.js"],
             options: {
-                jshintrc: true
+                jshintrc: true,
+                reporterOutput: ""
             }
         },
         jsonlint: {
