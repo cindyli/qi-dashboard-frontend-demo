@@ -3,6 +3,10 @@
     clip: rect(1px, 1px, 1px, 1px);
 }
 
+.gpii-hidden {
+    display: none;
+}
+
 .gpii-panel {
     color: #3D4557;
     min-width: 30em;
